@@ -1,3 +1,4 @@
+import '../css/Summary.css';
 import { TrueMage } from '../models/TrueMage';
 import { values } from 'lodash';
 

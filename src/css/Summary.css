@@ -1,0 +1,7 @@
+.Summary {
+  border: 1px black solid;
+  padding: 20px;
+  margin: 20px;
+  text-align: left;
+  width: fit-content;
+}
