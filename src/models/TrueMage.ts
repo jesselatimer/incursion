@@ -1,11 +1,18 @@
-import type { Foundation } from './foundations/Foundation';
+import { Choices } from './Choices';
 
 export interface TrueMage {
-  foundations: Foundation[];
+  name: string;
+  choices: Choices;
 }
 
 export class TrueMage implements TrueMage {
   constructor() {
-    this.foundations = [];
+    this.name = 'True Mage';
+    this.choices = {
+      foundations: [],
+      talents: [],
+      bonds: [],
+      threats: [],
+    };
   }
 }

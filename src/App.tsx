@@ -1,24 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Summary from './components/Summary';
+import { TrueMage } from './models/TrueMage';
 
 function App() {
+  const trueMage = new TrueMage();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header">Incursion</header>
+      <Summary trueMage={trueMage} />
     </div>
   );
 }
