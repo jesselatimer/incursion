@@ -1,12 +1,15 @@
+import { useContext } from 'react';
 import '../css/Summary.css';
-import { TrueMage } from '../models/TrueMage';
 import { values } from 'lodash';
+import { TrueMageContext } from './App';
 
-function Summary({ trueMage }: { trueMage: TrueMage }) {
+function Summary() {
+  const { trueMage } = useContext(TrueMageContext);
+
   return (
     <div className="Summary">
       <header className="Summary-header">{trueMage.name}</header>
-      {values(trueMage.choices).map((choiceList) => {
+      {/* {values(trueMage.choices).map((choiceList) => {
         return choiceList.map((choice) => {
           return (
             <div>
@@ -16,7 +19,7 @@ function Summary({ trueMage }: { trueMage: TrueMage }) {
             </div>
           );
         });
-      })}
+      })} */}
     </div>
   );
 }
