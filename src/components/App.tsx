@@ -1,13 +1,12 @@
 import React, { createContext, useState } from 'react';
-import logo from './logo.svg';
 import '../css/App.css';
 import Summary from './Summary';
 import { TrueMage } from '../models/TrueMage';
 import { POTENTIALS } from '../data/potentials';
-import { map } from 'lodash';
-import Entity from './Entity';
-import { Choice } from '../models/Choice';
-import { Choices } from '../models/Choices';
+import EntityList from './EntityList';
+import { SOURCES } from '../data/sources';
+
+const DEFAULT_TRUE_MAGE: TrueMage = { name: 'True Mage' };
 
 type TrueMageContext = {
   trueMage: TrueMage;
@@ -15,13 +14,13 @@ type TrueMageContext = {
 };
 
 export const TrueMageContext = createContext<TrueMageContext>({
-  trueMage: { name: 'True Mage' },
+  trueMage: DEFAULT_TRUE_MAGE,
 });
 
 function App() {
   // TODO: have this read from local storage
   // TODO: implement multiple users (store each user in local storage, use state to set user)
-  const [trueMage, setTrueMage] = useState({ name: 'True Mage' });
+  const [trueMage, setTrueMage] = useState<TrueMage>(DEFAULT_TRUE_MAGE);
 
   return (
     <TrueMageContext.Provider value={{ trueMage, setTrueMage }}>
@@ -29,10 +28,8 @@ function App() {
         <header className="App-header">Incursion</header>
         <Summary />
         <h2>Foundation</h2>
-        <h3>Potentials</h3>
-        {map(POTENTIALS, (potential, entityKey) => {
-          return <Entity entity={potential} entityKey={entityKey} />;
-        })}
+        <EntityList label="Potentials" entities={POTENTIALS} />
+        <EntityList label="Sources" entities={SOURCES} />
       </div>
     </TrueMageContext.Provider>
   );
