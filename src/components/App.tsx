@@ -39,7 +39,6 @@ function App() {
             <Summary />
           </Col>
           <Col>
-            {' '}
             <h2>Foundation</h2>
             <EntityList label="Potentials" entities={POTENTIALS} />
             <EntityList label="Sources" entities={SOURCES} />
