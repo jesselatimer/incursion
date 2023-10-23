@@ -9,6 +9,9 @@ function Summary() {
   return (
     <Container className="Summary">
       <h2 className="Summary-header">{trueMage.name}</h2>
+      <p>
+        <em>Summary to go here...</em>
+      </p>
       {/* {values(trueMage.choices).map((choiceList) => {
         return choiceList.map((choice) => {
           return (

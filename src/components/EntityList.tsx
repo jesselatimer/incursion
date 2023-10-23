@@ -28,15 +28,26 @@ function EntityList({
 }) {
   const [choices, setChoices] = useState<Choice[]>(DEFAULT_CHOICES);
 
+  // TODO: Figure out best way to surface changes to the summary
   return (
     <EntityListContext.Provider value={{ choices, setChoices }}>
       <h3>{label}</h3>
+      <p>Selected {label}: </p>
+      <ul>
+        {map(choices, (choice) => {
+          return (
+            <li key={'choice' + choice.entityKey}>
+              {entities[choice.entityKey].label}
+            </li>
+          );
+        })}
+      </ul>
       <Container>
         <Row>
           {map(entities, (entity, entityKey) => {
             return (
-              <Col>
-                <Entity entity={entity} entityKey={entityKey} />
+              <Col key={'col_' + entityKey}>
+                <Entity key={entityKey} entity={entity} entityKey={entityKey} />
               </Col>
             );
           })}

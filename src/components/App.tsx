@@ -2,9 +2,8 @@ import React, { createContext, useState } from 'react';
 import '../css/App.css';
 import Summary from './Summary';
 import { TrueMage } from '../models/TrueMage';
-import { POTENTIALS } from '../data/potentials';
+import { POTENTIALS, SOURCES, METHODS } from '../data/index';
 import EntityList from './EntityList';
-import { SOURCES } from '../data/sources';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -40,8 +39,10 @@ function App() {
           </Col>
           <Col>
             <h2>Foundation</h2>
+            {/* TODO: Figure out levels, especially in regards to Potentials */}
             <EntityList label="Potentials" entities={POTENTIALS} />
             <EntityList label="Sources" entities={SOURCES} />
+            <EntityList label="Methods" entities={METHODS} />
           </Col>
         </Row>
       </Container>
