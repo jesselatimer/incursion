@@ -5,6 +5,10 @@ import { TrueMage } from '../models/TrueMage';
 import { POTENTIALS } from '../data/potentials';
 import EntityList from './EntityList';
 import { SOURCES } from '../data/sources';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const DEFAULT_TRUE_MAGE: TrueMage = { name: 'True Mage' };
 
@@ -24,13 +28,24 @@ function App() {
 
   return (
     <TrueMageContext.Provider value={{ trueMage, setTrueMage }}>
-      <div className="App">
-        <header className="App-header">Incursion</header>
-        <Summary />
-        <h2>Foundation</h2>
-        <EntityList label="Potentials" entities={POTENTIALS} />
-        <EntityList label="Sources" entities={SOURCES} />
-      </div>
+      <Navbar expand="lg" className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="#home">Incursion</Navbar.Brand>
+        </Container>
+      </Navbar>
+      <Container>
+        <Row>
+          <Col sm={3}>
+            <Summary />
+          </Col>
+          <Col>
+            {' '}
+            <h2>Foundation</h2>
+            <EntityList label="Potentials" entities={POTENTIALS} />
+            <EntityList label="Sources" entities={SOURCES} />
+          </Col>
+        </Row>
+      </Container>
     </TrueMageContext.Provider>
   );
 }

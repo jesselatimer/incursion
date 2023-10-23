@@ -1,26 +1,26 @@
 import { useContext } from 'react';
-import '../css/Summary.css';
 import { values } from 'lodash';
 import { TrueMageContext } from './App';
+import Container from 'react-bootstrap/Container';
 
 function Summary() {
   const { trueMage } = useContext(TrueMageContext);
 
   return (
-    <div className="Summary">
-      <header className="Summary-header">{trueMage.name}</header>
+    <Container className="Summary">
+      <h2 className="Summary-header">{trueMage.name}</h2>
       {/* {values(trueMage.choices).map((choiceList) => {
         return choiceList.map((choice) => {
           return (
-            <div>
+            <Container>
               <strong>
                 {choice.entityKey}: {choice.value}
               </strong>
-            </div>
+            </Container>
           );
         });
       })} */}
-    </div>
+    </Container>
   );
 }
 

@@ -5,6 +5,7 @@ export interface Entity {
   label: string;
   description: string;
   subtype: FOUNDATION_TYPE;
+  imageUrl?: string;
   pointType?: PointType;
 }
 

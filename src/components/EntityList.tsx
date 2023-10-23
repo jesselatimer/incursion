@@ -1,10 +1,12 @@
 import React, { createContext, useState } from 'react';
 import '../css/App.css';
-import { POTENTIALS } from '../data/potentials';
 import { map } from 'lodash';
 import Entity from './Entity';
 import { Choice } from '../models/Choice';
 import type { EntityKey, Entity as EntityType } from '../models/Entity';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const DEFAULT_CHOICES: Choice[] = [];
 
@@ -29,9 +31,17 @@ function EntityList({
   return (
     <EntityListContext.Provider value={{ choices, setChoices }}>
       <h3>{label}</h3>
-      {map(entities, (entity, entityKey) => {
-        return <Entity entity={entity} entityKey={entityKey} />;
-      })}
+      <Container>
+        <Row>
+          {map(entities, (entity, entityKey) => {
+            return (
+              <Col>
+                <Entity entity={entity} entityKey={entityKey} />
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
     </EntityListContext.Provider>
   );
 }
