@@ -1,12 +1,11 @@
-import { FOUNDATION_TYPE } from './Foundation';
-import { PointType } from './PointType';
+import { Category } from './Category';
 
 export interface Entity {
   label: string;
   description: string;
-  subtype: FOUNDATION_TYPE;
+  subCategory: string; // TODO: better type safety
+  category: Category;
   imageUrl?: string;
-  pointType?: PointType;
 }
 
 export type EntityKey = string;
