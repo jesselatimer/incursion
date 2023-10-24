@@ -48,7 +48,6 @@ function App() {
             <Summary categoryChoices={categoryChoices} />
           </Col>
           <Col>
-            <h2>Foundation</h2>
             {/* TODO: Figure out levels, especially in regards to Potentials */}
             {map(
               entitiesByCategory,

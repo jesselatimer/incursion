@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/App.css';
-import { map } from 'lodash';
+import { groupBy, map } from 'lodash';
 import Entity from './Entity';
 import { Choice } from '../models/Choice';
 import type { Entity as EntityType } from '../models/Entity';
@@ -17,22 +17,29 @@ function EntityList({
   entities: EntityType[];
   choices: Choice[];
 }) {
-  // TODO: group by subCategory
+  const entitiesBySubCategory = groupBy(entities, 'subCategory');
   return (
     <Container>
-      <h3>{label}</h3>
+      <h2>{label}</h2>
       <Container>
         <Row>
-          {map(entities, (entity) => {
+          {map(entitiesBySubCategory, (entities, subCategory) => {
             return (
-              <Col key={'col_' + entity.key}>
-                <Entity
-                  key={entity.key}
-                  entity={entity}
-                  entityKey={entity.key}
-                  choices={choices}
-                />
-              </Col>
+              <Row key={subCategory + 'Row'}>
+                <h3>{subCategory}</h3>
+                {map(entities, (entity) => {
+                  return (
+                    <Col key={entity.key + 'Col'}>
+                      <Entity
+                        key={entity.key}
+                        entity={entity}
+                        entityKey={entity.key}
+                        choices={choices}
+                      />
+                    </Col>
+                  );
+                })}
+              </Row>
             );
           })}
         </Row>
