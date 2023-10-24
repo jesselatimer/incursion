@@ -1,7 +1,6 @@
-import { EntityKey } from '../models/Entity';
-import { PointType } from '../models/PointType';
+import { PointType, PointTypeKey } from '../models/PointType';
 
-export const POINT_TYPES: Record<EntityKey, PointType> = {
+export const POINT_TYPES: Record<PointTypeKey, PointType> = {
   foundation_points: {
     label: 'Foundation Points',
     description: 'Used to purchase Potential, Sources, and Methods',

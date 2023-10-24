@@ -9,6 +9,35 @@ export const POTENTIALS: Record<EntityKey, Entity> = {
       'The amount of aether you can put into one spell. The base rate of tax per circe used to cast spells.',
     category: CATEGORIES.foundations,
     subCategory: 'Potentials',
+    levels: [
+      {
+        pointCost: 0,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+    ],
   },
   capacity: {
     key: 'capacity',
@@ -17,5 +46,34 @@ export const POTENTIALS: Record<EntityKey, Entity> = {
       'Increases the amount of aether you can channel before being totally taxed. (Details depend on Source.)',
     category: CATEGORIES.foundations,
     subCategory: 'Potentials',
+    levels: [
+      {
+        pointCost: 0,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+      {
+        pointCost: 2,
+      },
+    ],
   },
 };

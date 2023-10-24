@@ -6,6 +6,11 @@ export interface Entity {
   description: string;
   subCategory: string; // TODO: better type safety
   category: Category;
+  levels: {
+    pointCost: number;
+    description?: string;
+    label?: string;
+  }[];
   imageUrl?: string;
 }
 

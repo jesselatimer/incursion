@@ -10,6 +10,11 @@ export const SOURCES: Record<EntityKey, Entity> = {
     category: CATEGORIES.foundations,
     subCategory: 'Sources',
     imageUrl: '/images/arcane_font.jpg',
+    levels: [
+      {
+        pointCost: 0,
+      },
+    ],
   },
   bonds_of_spirit: {
     key: 'bonds_of_spirit',
@@ -19,5 +24,10 @@ export const SOURCES: Record<EntityKey, Entity> = {
     category: CATEGORIES.foundations,
     subCategory: 'Sources',
     imageUrl: '/images/bonds_of_spirit.jpg',
+    levels: [
+      {
+        pointCost: 0,
+      },
+    ],
   },
 };

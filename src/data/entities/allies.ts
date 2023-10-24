@@ -10,5 +10,10 @@ export const ALLIES: Record<EntityKey, Entity> = {
     category: CATEGORIES.bonds,
     subCategory: 'Allies',
     imageUrl: '/images/the_soldier_of_fortune.jpg',
+    levels: [
+      {
+        pointCost: 1,
+      },
+    ],
   },
 };

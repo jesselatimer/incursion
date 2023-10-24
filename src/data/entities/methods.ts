@@ -11,6 +11,11 @@ export const METHODS: Record<EntityKey, Entity> = {
     subCategory: 'Methods',
     category: CATEGORIES.foundations,
     imageUrl: '/images/artificer.jpg',
+    levels: [
+      {
+        pointCost: 0,
+      },
+    ],
   },
   lightweaver: {
     key: 'lightweaver',
@@ -20,5 +25,10 @@ export const METHODS: Record<EntityKey, Entity> = {
     subCategory: 'Methods',
     category: CATEGORIES.foundations,
     imageUrl: '/images/lightweaver.jpg',
+    levels: [
+      {
+        pointCost: 0,
+      },
+    ],
   },
 };

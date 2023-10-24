@@ -12,6 +12,7 @@ import { Category, CategoryKey } from '../models/Category';
 import { CATEGORIES } from '../data';
 import { Entity } from '../models/Entity';
 
+// TODO: implement react router so we can have these on multiple pages
 function Page({
   categoryChoices,
 }: {
