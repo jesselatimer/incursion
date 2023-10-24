@@ -1,4 +1,4 @@
-import {} from './allies';
+import { ALLIES } from './allies';
 import {} from './artifacts';
 import {} from './contacts';
 import { METHODS } from './methods';
@@ -8,4 +8,9 @@ import { SOURCES } from './sources';
 import {} from './talents';
 import {} from './threats';
 
-export const ALL_ENTITIES = { ...POTENTIALS, ...SOURCES, ...METHODS };
+export const ALL_ENTITIES = {
+  ...ALLIES,
+  ...POTENTIALS,
+  ...SOURCES,
+  ...METHODS,
+};
