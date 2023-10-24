@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { groupBy, map } from 'lodash';
 import { Choice } from '../models/Choice';
-import { CategoryKey } from '../models/Category';
+import { Category, CategoryKey } from '../models/Category';
 import { CATEGORIES } from '../data';
 import { Entity } from '../models/Entity';
 
@@ -37,8 +37,9 @@ function Page({
           <Col>
             {/* TODO: Figure out levels, especially in regards to Potentials */}
             {map(
-              entitiesByCategory,
-              (entities: Entity[], categoryKey: CategoryKey) => {
+              CATEGORIES,
+              (categories: Category[], categoryKey: CategoryKey) => {
+                const entities = entitiesByCategory[categoryKey];
                 const category = CATEGORIES[categoryKey];
                 return (
                   <EntityList

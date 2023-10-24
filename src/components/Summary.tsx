@@ -6,7 +6,7 @@ import { CategoryKey } from '../models/Category';
 import { map } from 'lodash';
 import { CATEGORIES } from '../data/categories';
 import { ALL_ENTITIES } from '../data/entities';
-import { Badge, Col, Image, Row, Stack } from 'react-bootstrap';
+import { Col, Image, Row, Stack } from 'react-bootstrap';
 
 function Summary({
   categoryChoices,
