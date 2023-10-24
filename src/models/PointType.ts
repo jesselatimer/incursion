@@ -4,12 +4,8 @@ import { Entity } from './Entity';
 export type PointTypeKey = string;
 
 export interface PointType {
+  key: string;
   label: string;
   description: string;
   startingValue: number;
-  pointCalculator?: (
-    entity: Entity,
-    value: number,
-    choices: Choice[]
-  ) => number;
 }

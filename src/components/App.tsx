@@ -3,9 +3,15 @@ import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
 import { CategoryKey } from '../models/Category';
-import { DEFAULT_TRUE_MAGE } from '../data';
+import {
+  CATEGORIES,
+  DEFAULT_TRUE_MAGE,
+  POINT_CALCULATORS,
+  POINT_TYPES,
+} from '../data';
 import Page from './Page';
 import ValidationToast from './ValidationToast';
+import { ALL_ENTITIES } from '../data/entities';
 
 type TrueMageContext = {
   trueMage: TrueMage;
@@ -25,7 +31,26 @@ export const SetChoicesContext = createContext<SetChoicesContext>(
 );
 
 const validateNewChoices = (newChoices: Choice[], categoryKey: CategoryKey) => {
-  return false;
+  console.log('validateNewChoices');
+  console.log('newChoices', newChoices);
+  const category = CATEGORIES[categoryKey];
+  console.log('category', category);
+  const pointType = category.pointType;
+  console.log('pointType', pointType);
+  if (!pointType) return true;
+
+  // const pointCalculator = POINT_CALCULATORS[pointType.key];
+  let usedPoints = 0;
+  for (const choice of newChoices) {
+    const entity = ALL_ENTITIES[choice.entityKey];
+    const levels = entity.levels.slice(0, choice.value + 1); // TODO ensure getting correct values here
+    console.log('levels' + entity.label, levels);
+    for (const level of levels) {
+      usedPoints += level.pointCost;
+    }
+  }
+  // TODO: add point calculator here, may need to rework
+  return usedPoints <= pointType.startingValue;
 };
 
 function App() {

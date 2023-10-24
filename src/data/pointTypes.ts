@@ -2,18 +2,24 @@ import { PointType, PointTypeKey } from '../models/PointType';
 
 export const POINT_TYPES: Record<PointTypeKey, PointType> = {
   foundation_points: {
+    key: 'foundation_points',
     label: 'Foundation Points',
     description: 'Used to purchase Potential, Sources, and Methods',
-    startingValue: 21,
+    // startingValue: 21,
+    startingValue: 1,
   },
   talent_points: {
+    key: 'talent_points',
     label: 'Talent Points',
     description: 'Used to purchase Talents',
-    startingValue: 40,
+    // startingValue: 40,
+    startingValue: 1,
   },
   bond_points: {
+    key: 'bond_points',
     label: 'Bond Points',
     description: 'Used to purchase Allies, Contacts, Artifacts, and Pacts',
-    startingValue: 4,
+    // startingValue: 4,
+    startingValue: 1,
   },
 };
