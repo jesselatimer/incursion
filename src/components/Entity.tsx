@@ -1,26 +1,35 @@
 import { Entity as EntityModel, EntityKey } from '../models/Entity';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { EntityListContext } from './EntityList';
-import { useContext } from 'react';
+import { CategoryKey } from '../models/Category';
+import { Choice } from '../models/Choice';
 
 function Entity({
   entity,
   entityKey,
+  choices,
+  handleCategoryChoicesChange,
 }: {
   entity: EntityModel;
   entityKey: EntityKey;
+  choices: Choice[];
+  handleCategoryChoicesChange: (
+    newChoices: Choice[],
+    categoryKey: CategoryKey
+  ) => void;
 }) {
-  const { choices, setChoices } = useContext(EntityListContext);
   // TODO: get correct value once implemented
-  const onClickSelect = setChoices
-    ? () => setChoices([...choices, { entityKey, value: 1 }])
-    : () => alert('Cannot set choices for ' + entityKey);
+  const onClickSelect = () =>
+    handleCategoryChoicesChange(
+      [...choices, { entityKey, value: 1 }],
+      entity.category.key
+    );
 
-  const onClickUnselect = setChoices
-    ? () =>
-        setChoices(choices.filter((choice) => choice.entityKey !== entityKey))
-    : () => alert('Cannot set choices for ' + entityKey);
+  const onClickUnselect = () =>
+    handleCategoryChoicesChange(
+      choices.filter((choice) => choice.entityKey !== entityKey),
+      entity.category.key
+    );
 
   const isChosen = Boolean(
     choices.find((choice) => choice.entityKey === entityKey)
