@@ -1,14 +1,13 @@
 import { Toast, ToastContainer } from 'react-bootstrap';
+import { ValidationState } from './App';
 
 function ValidationToast({
   showValidationError,
   setShowValidationError,
 }: {
-  showValidationError: boolean;
-  setShowValidationError: (showValidationError: boolean) => void;
+  showValidationError: ValidationState;
+  setShowValidationError: (showValidationError: ValidationState) => void;
 }) {
-  console.log('inside the toast');
-  console.log('showValidationError', showValidationError);
   return (
     <ToastContainer
       containerPosition="fixed"
@@ -16,12 +15,17 @@ function ValidationToast({
       style={{ zIndex: 1 }}
     >
       <Toast
-        onClose={() => setShowValidationError(false)}
-        show={showValidationError}
+        onClose={() => setShowValidationError({ show: false })}
+        show={showValidationError.show}
         delay={3000}
         autohide
       >
-        <Toast.Body>Not enough points to make selection</Toast.Body>
+        <Toast.Body>
+          Not enough points to make selection. Current points:
+          {showValidationError.show
+            ? ` ${showValidationError.currentPoints}/${showValidationError.maxPoints}`
+            : ''}
+        </Toast.Body>
       </Toast>
     </ToastContainer>
   );
