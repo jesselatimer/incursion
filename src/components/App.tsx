@@ -58,7 +58,7 @@ function App() {
       <Container>
         <Row>
           <Col sm={3}>
-            <Summary />
+            <Summary categoryChoices={categoryChoices} />
           </Col>
           <Col>
             <h2>Foundation</h2>
@@ -69,6 +69,7 @@ function App() {
                 const category = CATEGORIES[categoryKey];
                 return (
                   <EntityList
+                    key={categoryKey + 'EntityList'}
                     label={category.label}
                     entities={entities}
                     choices={categoryChoices[categoryKey] || []}
