@@ -2,7 +2,7 @@ import { Entity as EntityModel, EntityKey } from '../models/Entity';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
-import { SetChoicesContext } from './ContextProvider';
+import { SetChoicesContext } from './App';
 import { useContext } from 'react';
 
 function Entity({

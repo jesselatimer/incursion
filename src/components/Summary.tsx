@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { TrueMageContext } from './ContextProvider';
+import { TrueMageContext } from './App';
 import Container from 'react-bootstrap/Container';
 import { Choice } from '../models/Choice';
 import { CategoryKey } from '../models/Category';
