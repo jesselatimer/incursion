@@ -1,32 +1,26 @@
 import { Entity as EntityModel, EntityKey } from '../models/Entity';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { CategoryKey } from '../models/Category';
 import { Choice } from '../models/Choice';
+import { SetChoicesContext } from './App';
+import { useContext } from 'react';
 
 function Entity({
   entity,
   entityKey,
   choices,
-  handleCategoryChoicesChange,
 }: {
   entity: EntityModel;
   entityKey: EntityKey;
   choices: Choice[];
-  handleCategoryChoicesChange: (
-    newChoices: Choice[],
-    categoryKey: CategoryKey
-  ) => void;
 }) {
+  const setChoices = useContext(SetChoicesContext);
   // TODO: get correct value once implemented
   const onClickSelect = () =>
-    handleCategoryChoicesChange(
-      [...choices, { entityKey, value: 1 }],
-      entity.category.key
-    );
+    setChoices([...choices, { entityKey, value: 1 }], entity.category.key);
 
   const onClickUnselect = () =>
-    handleCategoryChoicesChange(
+    setChoices(
       choices.filter((choice) => choice.entityKey !== entityKey),
       entity.category.key
     );

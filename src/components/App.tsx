@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useCallback, useMemo, useState } from 'react';
 import '../css/App.css';
 import Summary from './Summary';
 import { TrueMage } from '../models/TrueMage';
@@ -14,73 +14,83 @@ import { CategoryKey } from '../models/Category';
 import { CATEGORIES } from '../data';
 import { Entity } from '../models/Entity';
 
+// TODO: these should live somewhere else
 const DEFAULT_TRUE_MAGE: TrueMage = { name: 'True Mage' };
 type TrueMageContext = {
   trueMage: TrueMage;
-  setTrueMage?: (trueMage: TrueMage) => void;
+  setTrueMage: (trueMage: TrueMage) => void;
 };
 export const TrueMageContext = createContext<TrueMageContext>({
   trueMage: DEFAULT_TRUE_MAGE,
+  setTrueMage: (_trueMage) => {},
 });
 
+type SetChoicesContext = (
+  newChoices: Choice[],
+  categoryKey: CategoryKey
+) => void;
+export const SetChoicesContext = createContext<SetChoicesContext>(
+  (_newChoices, _categoryKey) => {}
+);
+
 function App() {
+  const entitiesByCategory = useMemo(
+    () => groupBy(ALL_ENTITIES, (entity) => entity.category.key),
+    [ALL_ENTITIES]
+  );
+
   // TODO: have this read from local storage
   // TODO: implement multiple users (store each user in local storage, use state to set user)
   const [trueMage, setTrueMage] = useState<TrueMage>(DEFAULT_TRUE_MAGE);
-
-  const [categoryChoices, setCategoryChoices] = React.useState<
+  const [categoryChoices, setAllChoicesByCategory] = React.useState<
     Record<CategoryKey, Choice[]>
   >({});
-  // TODO: use hooks for these to prevent redefining
 
-  const handleCategoryChoicesChange = (
-    newChoices: Choice[],
-    categoryKey: CategoryKey
-  ) => {
-    let newCategoryChoices = { ...categoryChoices };
-    newCategoryChoices[categoryKey] = newChoices;
+  // TODO: this can be in a useContext
+  const setChoices = useCallback(
+    (newChoices: Choice[], categoryKey: CategoryKey) => {
+      let newCategoryChoices = { ...categoryChoices };
+      newCategoryChoices[categoryKey] = newChoices;
 
-    setCategoryChoices(newCategoryChoices);
-  };
-
-  const entitiesByCategory = groupBy(
-    ALL_ENTITIES,
-    (entity) => entity.category.key
+      setAllChoicesByCategory(newCategoryChoices);
+    },
+    [categoryChoices, setAllChoicesByCategory]
   );
 
   return (
     <TrueMageContext.Provider value={{ trueMage, setTrueMage }}>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <SetChoicesContext.Provider value={setChoices}>
+        <Navbar expand="lg" className="bg-body-tertiary">
+          <Container>
+            <Navbar.Brand href="#home">Incursion</Navbar.Brand>
+          </Container>
+        </Navbar>
         <Container>
-          <Navbar.Brand href="#home">Incursion</Navbar.Brand>
+          <Row>
+            <Col sm={3}>
+              <Summary categoryChoices={categoryChoices} />
+            </Col>
+            <Col>
+              <h2>Foundation</h2>
+              {/* TODO: Figure out levels, especially in regards to Potentials */}
+              {map(
+                entitiesByCategory,
+                (entities: Entity[], categoryKey: CategoryKey) => {
+                  const category = CATEGORIES[categoryKey];
+                  return (
+                    <EntityList
+                      key={categoryKey + 'EntityList'}
+                      label={category.label}
+                      entities={entities}
+                      choices={categoryChoices[categoryKey] || []}
+                    />
+                  );
+                }
+              )}
+            </Col>
+          </Row>
         </Container>
-      </Navbar>
-      <Container>
-        <Row>
-          <Col sm={3}>
-            <Summary categoryChoices={categoryChoices} />
-          </Col>
-          <Col>
-            <h2>Foundation</h2>
-            {/* TODO: Figure out levels, especially in regards to Potentials */}
-            {map(
-              entitiesByCategory,
-              (entities: Entity[], categoryKey: CategoryKey) => {
-                const category = CATEGORIES[categoryKey];
-                return (
-                  <EntityList
-                    key={categoryKey + 'EntityList'}
-                    label={category.label}
-                    entities={entities}
-                    choices={categoryChoices[categoryKey] || []}
-                    handleCategoryChoicesChange={handleCategoryChoicesChange}
-                  />
-                );
-              }
-            )}
-          </Col>
-        </Row>
-      </Container>
+      </SetChoicesContext.Provider>
     </TrueMageContext.Provider>
   );
 }
