@@ -3,7 +3,7 @@ import { TrueMageContext } from './App';
 import Container from 'react-bootstrap/Container';
 import { Choice } from '../models/Choice';
 import { CategoryKey } from '../models/Category';
-import { map } from 'lodash';
+import { groupBy, map } from 'lodash';
 import { CATEGORIES } from '../data/categories';
 import { ALL_ENTITIES } from '../data/entities';
 import { Col, Image, Row, Stack } from 'react-bootstrap';
@@ -18,15 +18,16 @@ function Summary({
   return (
     <Container className="Summary">
       <h2 className="Summary-header">{trueMage.name}</h2>
-      <p>
-        <em>Summary to go here...</em>
-      </p>
-      {map(categoryChoices, (choices, categoryKey) => {
+      {map(CATEGORIES, (category) => {
+        const choices = categoryChoices[category.key];
+        if (!choices?.length) return null;
+        const choicesByEntityKey = groupBy(choices, 'entityKey');
         return (
-          <Container key={categoryKey + 'SummaryContainer'}>
-            <h3>{CATEGORIES[categoryKey].label}</h3>
-            {choices.map((choice) => {
-              const entity = ALL_ENTITIES[choice.entityKey];
+          <Container key={category.key + 'SummaryContainer'}>
+            <h3>{CATEGORIES[category.key].label}</h3>
+            {map(ALL_ENTITIES, (entity, entityKey) => {
+              const choice = (choicesByEntityKey[entityKey] || [])[0];
+              if (!choice) return null;
               return (
                 <Row key={choice.entityKey + 'SummaryRow'}>
                   <Col sm={4}>
