@@ -6,7 +6,7 @@ export const POINT_TYPES: Record<PointTypeKey, PointType> = {
     label: 'Foundation Points',
     description: 'Used to purchase Potential, Sources, and Methods',
     // startingValue: 21,
-    startingValue: 1,
+    startingValue: 21,
   },
   talent_points: {
     key: 'talent_points',

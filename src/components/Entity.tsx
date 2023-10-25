@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
 import { SetChoicesContext } from './App';
-import { useContext } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 
 function Entity({
   entity,
@@ -15,19 +15,46 @@ function Entity({
   choices: Choice[];
 }) {
   const setChoices = useContext(SetChoicesContext);
-  // TODO: get correct value once implemented
-  const onClickSelect = () =>
-    setChoices([...choices, { entityKey, value: 1 }], entity.category.key);
+  const choice = useMemo(
+    () => choices.find((choice) => choice.entityKey === entityKey),
+    [choices]
+  );
+  const isMaxLevel = useMemo(() => {
+    if (!choice) return false;
+    return choice.value >= entity.levels.length;
+  }, [choice]);
 
-  const onClickUnselect = () =>
+  const onClickSelect = useCallback(() => {
+    let value = 1;
+    if (choice) value = choice.value + 1;
     setChoices(
-      choices.filter((choice) => choice.entityKey !== entityKey),
+      [
+        ...choices.filter((choice) => choice.entityKey !== entityKey),
+        { entityKey, value },
+      ],
       entity.category.key
     );
+  }, [setChoices, choices, choice]);
 
-  const isChosen = Boolean(
-    choices.find((choice) => choice.entityKey === entityKey)
-  );
+  const onClickUnselect = useCallback(() => {
+    if (choice && choice.value > 1) {
+      setChoices(
+        [
+          ...choices.filter((choice) => choice.entityKey !== entityKey),
+          {
+            entityKey,
+            value: choice.value - 1,
+          },
+        ],
+        entity.category.key
+      );
+    } else {
+      setChoices(
+        choices.filter((choice) => choice.entityKey !== entityKey),
+        entity.category.key
+      );
+    }
+  }, [setChoices, choices, choice]);
 
   return (
     <Card>
@@ -42,13 +69,17 @@ function Entity({
       <Card.Body>
         <Card.Title>{entity.label}</Card.Title>
         <Card.Text>{entity.description}</Card.Text>
-        {isChosen ? (
-          <Button onClick={onClickUnselect} variant="secondary">
-            Unselect
-          </Button>
-        ) : (
-          <Button onClick={onClickSelect}>Select</Button>
+        <Card.Text>
+          Level: {choice ? choice.value : 0}/{entity.levels.length}
+        </Card.Text>
+        {isMaxLevel ? null : (
+          <Button onClick={onClickSelect}>Increase level</Button>
         )}
+        {choice ? (
+          <Button onClick={onClickUnselect} variant="secondary">
+            Decrease level
+          </Button>
+        ) : null}
       </Card.Body>
     </Card>
   );
