@@ -20,6 +20,6 @@ export const POINT_TYPES: Record<PointTypeKey, PointType> = {
     label: 'Bond Points',
     description: 'Used to purchase Allies, Contacts, Artifacts, and Pacts',
     // startingValue: 4,
-    startingValue: 1,
+    startingValue: 3,
   },
 };

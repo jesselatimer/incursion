@@ -7,7 +7,7 @@ const basePointCalculator = (choices: Choice[]) => {
   let usedPoints = 0;
   for (const choice of choices) {
     const entity = ALL_ENTITIES[choice.entityKey];
-    const levels = entity.levels.slice(0, choice.value); // TODO ensure getting correct values here
+    const levels = entity.levels.slice(0, choice.value);
     console.log('levels' + entity.label, levels);
     for (const level of levels) {
       usedPoints += level.pointCost;
@@ -24,7 +24,10 @@ export const calculatePoints = (
   const basePoints = basePointCalculator(choices);
   console.log('basePoints', basePoints);
   const pointCalculator = POINT_CALCULATORS[pointTypeKey];
-  const addedPoints = pointCalculator(choices);
+  let addedPoints = 0;
+  if (pointCalculator) {
+    addedPoints = pointCalculator(choices);
+  }
   console.log('addedPoints', addedPoints);
   return basePoints + addedPoints;
 };
