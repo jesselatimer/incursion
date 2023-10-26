@@ -4,6 +4,8 @@ import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
 import { SetChoicesContext } from './App';
 import { useCallback, useContext, useMemo } from 'react';
+import { map } from 'lodash';
+import { calculatePoints } from '../utils/calculatePoints';
 
 function Entity({
   entity,
@@ -14,46 +16,41 @@ function Entity({
   entityKey: EntityKey;
   choices: Choice[];
 }) {
+  // TODO: rename "value" to "level"
   const setChoices = useContext(SetChoicesContext);
-  const choice = useMemo(
-    () => choices.find((choice) => choice.entityKey === entityKey),
-    [choices]
-  );
-  const isMaxLevel = useMemo(() => {
-    if (!choice) return false;
-    return choice.value >= entity.levels.length;
-  }, [choice]);
+  const { choice, chosenLevel, usesPoints, pointsUsed, pointsRemaining } =
+    useMemo(() => {
+      const choice = choices.find((choice) => choice.entityKey === entityKey);
+      const pointType = entity.category.pointType;
+      const usesPoints = pointType !== null;
+      const pointsUsed = calculatePoints(choices, pointType?.key);
+      return {
+        choice,
+        chosenLevel: choice?.value || 0,
+        usesPoints,
+        pointsUsed,
+        pointsRemaining: usesPoints ? pointType.startingValue - pointsUsed : 0,
+      };
+    }, [choices]);
 
-  const onClickSelect = useCallback(() => {
-    let value = 1;
-    if (choice) value = choice.value + 1;
-    setChoices(
-      [
-        ...choices.filter((choice) => choice.entityKey !== entityKey),
-        { entityKey, value },
-      ],
-      entity.category.key
-    );
-  }, [setChoices, choices, choice]);
-
-  const onClickUnselect = useCallback(() => {
-    if (choice && choice.value > 1) {
+  const onClickSelect = useCallback(
+    (value: number) => {
       setChoices(
         [
           ...choices.filter((choice) => choice.entityKey !== entityKey),
-          {
-            entityKey,
-            value: choice.value - 1,
-          },
+          { entityKey, value },
         ],
         entity.category.key
       );
-    } else {
-      setChoices(
-        choices.filter((choice) => choice.entityKey !== entityKey),
-        entity.category.key
-      );
-    }
+    },
+    [setChoices, choices, choice]
+  );
+
+  const onClickUnselect = useCallback(() => {
+    setChoices(
+      choices.filter((choice) => choice.entityKey !== entityKey),
+      entity.category.key
+    );
   }, [setChoices, choices, choice]);
 
   return (
@@ -72,14 +69,59 @@ function Entity({
         <Card.Text>
           Level: {choice ? choice.value : 0}/{entity.levels.length}
         </Card.Text>
-        {isMaxLevel ? null : (
-          <Button onClick={onClickSelect}>Increase level</Button>
-        )}
-        {choice ? (
-          <Button onClick={onClickUnselect} variant="secondary">
-            Decrease level
-          </Button>
-        ) : null}
+        {map(entity.levels, (level, i) => {
+          const thisLevel = i + 1;
+          const pointsUsedAfterPurchasingLevel = calculatePoints(
+            [
+              ...choices.filter((c) => c.entityKey !== entity.key),
+              { entityKey: entity.key, value: thisLevel },
+            ],
+            entity.category.pointType!.key
+          );
+          const pointsUsedWithoutThisChoice = calculatePoints(
+            [...choices.filter((c) => c.entityKey !== entity.key)],
+            entity.category.pointType!.key
+          );
+          const canBePurchased = usesPoints
+            ? pointsRemaining >= pointsUsedAfterPurchasingLevel - pointsUsed
+            : true;
+          return (
+            <Card>
+              {level.label && <Card.Title>{level.label}</Card.Title>}
+              {level.description && <Card.Text>{level.description}</Card.Text>}
+              {thisLevel === chosenLevel ? (
+                <Button onClick={() => onClickUnselect()} variant="success">
+                  Selected
+                  {usesPoints && (
+                    <span>
+                      {' '}
+                      {/* Show the number of points they'd gain back by unselecting */}
+                      ({pointsUsedWithoutThisChoice - pointsUsed} points)
+                    </span>
+                  )}
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => onClickSelect(i + 1)}
+                  variant={canBePurchased ? 'primary' : 'warning'}
+                  style={canBePurchased ? {} : { pointerEvents: 'none' }}
+                >
+                  Level {thisLevel}
+                  {usesPoints && (
+                    <span>
+                      {' '}
+                      {/* Show the number of points they gain by choosing this level */}
+                      (
+                      {pointsUsedAfterPurchasingLevel -
+                        pointsUsedWithoutThisChoice}{' '}
+                      points)
+                    </span>
+                  )}
+                </Button>
+              )}
+            </Card>
+          );
+        })}
       </Card.Body>
     </Card>
   );

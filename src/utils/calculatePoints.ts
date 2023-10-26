@@ -3,7 +3,7 @@ import { ALL_ENTITIES } from '../data/entities';
 import { PointTypeKey } from '../models/PointType';
 import { POINT_CALCULATORS } from '../data';
 
-const basePointCalculator = (choices: Choice[]) => {
+export const calculateBasePoints = (choices: Choice[]) => {
   let usedPoints = 0;
   for (const choice of choices) {
     const entity = ALL_ENTITIES[choice.entityKey];
@@ -19,9 +19,10 @@ const basePointCalculator = (choices: Choice[]) => {
 
 export const calculatePoints = (
   choices: Choice[],
-  pointTypeKey: PointTypeKey
+  pointTypeKey?: PointTypeKey
 ) => {
-  const basePoints = basePointCalculator(choices);
+  if (!pointTypeKey) return 0;
+  const basePoints = calculateBasePoints(choices);
   console.log('basePoints', basePoints);
   const pointCalculator = POINT_CALCULATORS[pointTypeKey];
   let addedPoints = 0;

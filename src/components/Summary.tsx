@@ -27,14 +27,12 @@ function Summary({
         if (!choices?.length) return null;
         const choicesByEntityKey = groupBy(choices, 'entityKey');
         const pointType = category.pointType;
-        const pointsUsed = pointType
-          ? calculatePoints(choices, pointType.key)
-          : null;
+        const pointsUsed = calculatePoints(choices, pointType?.key);
         return (
           <Container key={category.key + 'SummaryContainer'}>
             ---------
             <h3>-{CATEGORIES[category.key].label}</h3>
-            {pointsUsed !== null ? (
+            {pointType ? (
               <p>
                 {pointType?.label}: {pointsUsed}/{pointType?.startingValue}
               </p>
