@@ -95,8 +95,8 @@ function Entity({
                   {usesPoints && (
                     <span>
                       {' '}
-                      {/* Show the number of points they'd gain back by unselecting */}
-                      ({pointsUsedWithoutThisChoice - pointsUsed} points)
+                      {/* Show the number of points they used to purchase this level */}
+                      ({pointsUsed - pointsUsedWithoutThisChoice} points)
                     </span>
                   )}
                 </Button>
