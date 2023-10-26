@@ -30,31 +30,26 @@ function Page({
           <Navbar.Brand href="#home">Incursion</Navbar.Brand>
         </Container>
       </Navbar>
-      <Container>
-        <Row>
-          <Col sm={3}>
-            <Summary categoryChoices={categoryChoices} />
-          </Col>
-          <Col>
-            {/* TODO: Figure out levels, especially in regards to Potentials */}
-            {map(
-              CATEGORIES,
-              (categories: Category[], categoryKey: CategoryKey) => {
-                const entities = entitiesByCategory[categoryKey];
-                const category = CATEGORIES[categoryKey];
-                return (
-                  <EntityList
-                    key={categoryKey + 'EntityList'}
-                    label={category.label}
-                    entities={entities}
-                    choices={categoryChoices[categoryKey] || []}
-                  />
-                );
-              }
-            )}
-          </Col>
-        </Row>
-      </Container>
+      <>
+        <Summary categoryChoices={categoryChoices} />
+        <div style={{ marginLeft: '25%' }}>
+          {map(
+            CATEGORIES,
+            (categories: Category[], categoryKey: CategoryKey) => {
+              const entities = entitiesByCategory[categoryKey];
+              const category = CATEGORIES[categoryKey];
+              return (
+                <EntityList
+                  key={categoryKey + 'EntityList'}
+                  label={category.label}
+                  entities={entities}
+                  choices={categoryChoices[categoryKey] || []}
+                />
+              );
+            }
+          )}
+        </div>
+      </>
     </>
   );
 }
