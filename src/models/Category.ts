@@ -6,5 +6,5 @@ export interface Category {
   key: string;
   label: string;
   pointType: PointType | null;
-  subCategories?: string[];
+  subCategories: string[];
 }

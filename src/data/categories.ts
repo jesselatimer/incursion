@@ -11,6 +11,7 @@ export const CATEGORIES: Record<CategoryKey, Category> = {
   talents: {
     key: 'talents',
     label: 'Talents',
+    subCategories: ['Talents'],
     pointType: POINT_TYPES.talent_points,
   },
   bonds: {
@@ -22,6 +23,7 @@ export const CATEGORIES: Record<CategoryKey, Category> = {
   threats: {
     key: 'threats',
     label: 'Threats',
+    subCategories: ['Talents'],
     pointType: null,
   },
 };
