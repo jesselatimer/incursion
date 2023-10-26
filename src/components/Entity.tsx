@@ -54,7 +54,7 @@ function Entity({
   }, [setChoices, choices, choice]);
 
   return (
-    <Card>
+    <Card border={choice ? 'light' : 'secondary'}>
       {/* TODO: add a max and min width */}
       <Card.Img
         variant="top"
@@ -85,40 +85,51 @@ function Entity({
           const canBePurchased = usesPoints
             ? pointsRemaining >= pointsUsedAfterPurchasingLevel - pointsUsed
             : true;
+          const pointsToShow =
+            thisLevel === chosenLevel
+              ? pointsUsed - pointsUsedWithoutThisChoice
+              : pointsUsedAfterPurchasingLevel - pointsUsedWithoutThisChoice;
+          const onClick =
+            thisLevel === chosenLevel
+              ? () => onClickUnselect()
+              : () => onClickSelect(i + 1);
           return (
-            <Card>
-              {level.label && <Card.Title>{level.label}</Card.Title>}
-              {level.description && <Card.Text>{level.description}</Card.Text>}
-              {thisLevel === chosenLevel ? (
-                <Button onClick={() => onClickUnselect()} variant="success">
-                  Selected
-                  {usesPoints && (
-                    <span>
-                      {' '}
-                      {/* Show the number of points they used to purchase this level */}
-                      ({pointsUsed - pointsUsedWithoutThisChoice} points)
-                    </span>
-                  )}
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => onClickSelect(i + 1)}
-                  variant={canBePurchased ? 'primary' : 'warning'}
-                  style={canBePurchased ? {} : { pointerEvents: 'none' }}
-                >
-                  Level {thisLevel}
-                  {usesPoints && (
-                    <span>
-                      {' '}
-                      {/* Show the number of points they gain by choosing this level */}
-                      (
-                      {pointsUsedAfterPurchasingLevel -
-                        pointsUsedWithoutThisChoice}{' '}
-                      points)
-                    </span>
-                  )}
-                </Button>
-              )}
+            <Card
+              border={
+                canBePurchased
+                  ? thisLevel <= chosenLevel
+                    ? 'secondary'
+                    : 'secondary'
+                  : 'dark'
+              }
+              bg={
+                canBePurchased
+                  ? thisLevel <= chosenLevel
+                    ? 'light'
+                    : 'dark'
+                  : 'warning'
+              }
+              text={
+                canBePurchased
+                  ? thisLevel <= chosenLevel
+                    ? 'dark'
+                    : 'light'
+                  : 'dark'
+              }
+              onClick={onClick}
+              style={
+                canBePurchased
+                  ? { cursor: 'pointer', marginBottom: '10px' }
+                  : { pointerEvents: 'none', marginBottom: '10px' }
+              }
+            >
+              <Card.Body>
+                <Card.Title>{level.label || `Level ${thisLevel}`}</Card.Title>
+                {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
+                {level.description && (
+                  <Card.Text>{level.description}</Card.Text>
+                )}
+              </Card.Body>
             </Card>
           );
         })}
