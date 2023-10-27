@@ -1,8 +1,7 @@
 import { Entity as EntityModel, EntityKey } from '../models/Entity';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
-import { SetChoicesContext } from './App';
+import { REQUIRED_ENTITY_KEYS, SetChoicesContext } from './App';
 import { useCallback, useContext, useMemo } from 'react';
 import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
@@ -47,11 +46,27 @@ function Entity({
   );
 
   const onClickUnselect = useCallback(() => {
-    setChoices(
-      choices.filter((choice) => choice.entityKey !== entityKey),
-      entity.category.key
-    );
-  }, [setChoices, choices, choice]);
+    if (
+      REQUIRED_ENTITY_KEYS[entity.category.key]?.includes(entity.key) &&
+      chosenLevel > 1
+    ) {
+      setChoices(
+        [
+          ...choices.filter((choice) => choice.entityKey !== entityKey),
+          {
+            entityKey: entity.key,
+            value: 1,
+          },
+        ],
+        entity.category.key
+      );
+    } else {
+      setChoices(
+        choices.filter((choice) => choice.entityKey !== entityKey),
+        entity.category.key
+      );
+    }
+  }, [setChoices, choices, choice, chosenLevel]);
 
   return (
     <Card border={choice ? 'light' : 'secondary'}>
@@ -95,6 +110,7 @@ function Entity({
               : () => onClickSelect(i + 1);
           return (
             <Card
+              key={entityKey + thisLevel + 'SummaryCard'}
               border={
                 canBePurchased
                   ? thisLevel <= chosenLevel

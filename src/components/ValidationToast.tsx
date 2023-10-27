@@ -21,10 +21,7 @@ function ValidationToast({
         autohide
       >
         <Toast.Body>
-          Not enough points to make selection. Current points:
-          {showValidationError.show
-            ? ` ${showValidationError.currentPoints}/${showValidationError.maxPoints}`
-            : ''}
+          {showValidationError.show && showValidationError.message}
         </Toast.Body>
       </Toast>
     </ToastContainer>

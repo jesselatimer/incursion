@@ -7,6 +7,8 @@ import { CATEGORIES, DEFAULT_TRUE_MAGE } from '../data';
 import Page from './Page';
 import ValidationToast from './ValidationToast';
 import { calculatePoints } from '../utils/calculatePoints';
+import { every } from 'lodash';
+import { EntityKey } from '../models/Entity';
 
 type TrueMageContext = {
   trueMage: TrueMage;
@@ -31,9 +33,12 @@ export type ValidationState =
     }
   | {
       show: true;
-      currentPoints: number;
-      maxPoints: number;
+      message: string;
     };
+
+export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
+  foundations: ['power', 'capacity'],
+};
 
 function App() {
   // TODO: have this read from local storage
@@ -41,7 +46,12 @@ function App() {
   const [trueMage, setTrueMage] = useState<TrueMage>(DEFAULT_TRUE_MAGE);
   const [categoryChoices, setAllChoicesByCategory] = useState<
     Record<CategoryKey, Choice[]>
-  >({});
+  >({
+    foundations: [
+      { entityKey: 'power', value: 1 },
+      { entityKey: 'capacity', value: 1 },
+    ],
+  });
   const [showValidationError, setShowValidationError] =
     useState<ValidationState>({
       show: false,
@@ -53,6 +63,21 @@ function App() {
       const pointType = category.pointType;
       if (!pointType) return true;
 
+      const chosenEntityKeys = new Set(
+        newChoices.map((choice) => choice.entityKey)
+      );
+      const includesRequiredChoices = every(
+        REQUIRED_ENTITY_KEYS[category.key] || [],
+        (key) => chosenEntityKeys.has(key)
+      );
+      if (!includesRequiredChoices) {
+        setShowValidationError({
+          show: true,
+          message: `Cannot remove required choice.`,
+        });
+        return false;
+      }
+
       const usedPoints = calculatePoints(newChoices, pointType.key);
 
       if (usedPoints > pointType.startingValue) {
@@ -62,8 +87,11 @@ function App() {
         );
         setShowValidationError({
           show: true,
-          currentPoints: oldPoints,
-          maxPoints: pointType.startingValue,
+          message: `Not enough points to make selection. Current points: ${
+            showValidationError.show
+              ? ` ${oldPoints}/${pointType.startingValue}`
+              : ''
+          }`,
         });
         return false;
       }

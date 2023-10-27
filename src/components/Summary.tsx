@@ -46,9 +46,9 @@ function Summary({
               <Card.Title>{CATEGORIES[category.key].label}</Card.Title>
               <Card.Text>
                 {Boolean(pointType) && (
-                  <p>
+                  <>
                     {pointType?.label}: {pointsUsed}/{pointType?.startingValue}
-                  </p>
+                  </>
                 )}
               </Card.Text>
             </Card.Header>
@@ -99,7 +99,9 @@ function Summary({
                                 }}
                               >
                                 {entity.label}
-                                {choice.value > 1 ? `: ${choice.value}` : ''}
+                                {entity.levels.length > 1
+                                  ? `: ${choice.value}`
+                                  : ''}
                               </strong>
                             </Stack>
                           </Col>
