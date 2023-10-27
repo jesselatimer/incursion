@@ -47,7 +47,7 @@ function Summary({
               <Card.Text>
                 {Boolean(pointType) && (
                   <>
-                    {pointType?.label}: {pointsUsed}/{pointType?.startingValue}
+                    {pointType?.label}: {pointsUsed}/{pointType?.maxPoints}
                   </>
                 )}
               </Card.Text>
@@ -100,7 +100,7 @@ function Summary({
                               >
                                 {entity.label}
                                 {entity.levels.length > 1
-                                  ? `: ${choice.value}`
+                                  ? `: ${choice.level}`
                                   : ''}
                               </strong>
                             </Stack>

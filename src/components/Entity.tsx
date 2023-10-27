@@ -15,7 +15,6 @@ function Entity({
   entityKey: EntityKey;
   choices: Choice[];
 }) {
-  // TODO: rename "value" to "level"
   const setChoices = useContext(SetChoicesContext);
   const { choice, chosenLevel, usesPoints, pointsUsed, pointsRemaining } =
     useMemo(() => {
@@ -25,19 +24,19 @@ function Entity({
       const pointsUsed = calculatePoints(choices, pointType?.key);
       return {
         choice,
-        chosenLevel: choice?.value || 0,
+        chosenLevel: choice?.level || 0,
         usesPoints,
         pointsUsed,
-        pointsRemaining: usesPoints ? pointType.startingValue - pointsUsed : 0,
+        pointsRemaining: usesPoints ? pointType.maxPoints - pointsUsed : 0,
       };
     }, [choices]);
 
   const onClickSelect = useCallback(
-    (value: number) => {
+    (level: number) => {
       setChoices(
         [
           ...choices.filter((choice) => choice.entityKey !== entityKey),
-          { entityKey, value },
+          { entityKey, level },
         ],
         entity.category.key
       );
@@ -55,7 +54,7 @@ function Entity({
           ...choices.filter((choice) => choice.entityKey !== entityKey),
           {
             entityKey: entity.key,
-            value: 1,
+            level: 1,
           },
         ],
         entity.category.key
@@ -82,14 +81,14 @@ function Entity({
         <Card.Title>{entity.label}</Card.Title>
         <Card.Text>{entity.description}</Card.Text>
         <Card.Text>
-          Level: {choice ? choice.value : 0}/{entity.levels.length}
+          Level: {choice ? choice.level : 0}/{entity.levels.length}
         </Card.Text>
         {map(entity.levels, (level, i) => {
           const thisLevel = i + 1;
           const pointsUsedAfterPurchasingLevel = calculatePoints(
             [
               ...choices.filter((c) => c.entityKey !== entity.key),
-              { entityKey: entity.key, value: thisLevel },
+              { entityKey: entity.key, level: thisLevel },
             ],
             entity.category.pointType!.key
           );

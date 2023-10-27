@@ -5,19 +5,19 @@ export const POINT_TYPES: Record<PointTypeKey, PointType> = {
     key: 'foundation_points',
     label: 'Foundation Points',
     description: 'Used to purchase Potential, Sources, and Methods',
-    startingValue: 21,
+    maxPoints: 21,
   },
   talent_points: {
     key: 'talent_points',
     label: 'Talent Points',
     description: 'Used to purchase Talents',
-    startingValue: 40,
+    maxPoints: 40,
   },
   bond_points: {
     key: 'bond_points',
     label: 'Bond Points',
     description: 'Used to purchase Allies, Contacts, Artifacts, and Pacts',
-    // startingValue: 4,
-    startingValue: 3,
+    // maxPoints: 4,
+    maxPoints: 3,
   },
 };

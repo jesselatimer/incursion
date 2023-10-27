@@ -4,5 +4,5 @@ export interface PointType {
   key: string;
   label: string;
   description: string;
-  startingValue: number;
+  maxPoints: number;
 }

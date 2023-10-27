@@ -48,8 +48,8 @@ function App() {
     Record<CategoryKey, Choice[]>
   >({
     foundations: [
-      { entityKey: 'power', value: 1 },
-      { entityKey: 'capacity', value: 1 },
+      { entityKey: 'power', level: 1 },
+      { entityKey: 'capacity', level: 1 },
     ],
   });
   const [showValidationError, setShowValidationError] =
@@ -80,7 +80,7 @@ function App() {
 
       const usedPoints = calculatePoints(newChoices, pointType.key);
 
-      if (usedPoints > pointType.startingValue) {
+      if (usedPoints > pointType.maxPoints) {
         const oldPoints = calculatePoints(
           categoryChoices[categoryKey] || [],
           pointType.key
@@ -89,7 +89,7 @@ function App() {
           show: true,
           message: `Not enough points to make selection. Current points: ${
             showValidationError.show
-              ? ` ${oldPoints}/${pointType.startingValue}`
+              ? ` ${oldPoints}/${pointType.maxPoints}`
               : ''
           }`,
         });
