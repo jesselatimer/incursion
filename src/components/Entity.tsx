@@ -69,7 +69,6 @@ function Entity({
 
   return (
     <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
-      {/* TODO: add a max and min width */}
       <Card.Img
         variant="top"
         src={
