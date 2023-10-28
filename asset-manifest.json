@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/incursion/static/css/main.47a316c1.css",
+    "main.js": "/incursion/static/js/main.cc3a344d.js",
+    "static/js/787.92f8e6fd.chunk.js": "/incursion/static/js/787.92f8e6fd.chunk.js",
+    "index.html": "/incursion/index.html",
+    "main.47a316c1.css.map": "/incursion/static/css/main.47a316c1.css.map",
+    "main.cc3a344d.js.map": "/incursion/static/js/main.cc3a344d.js.map",
+    "787.92f8e6fd.chunk.js.map": "/incursion/static/js/787.92f8e6fd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.47a316c1.css",
+    "static/js/main.cc3a344d.js"
+  ]
+}
