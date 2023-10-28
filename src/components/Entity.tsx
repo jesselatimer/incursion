@@ -68,7 +68,7 @@ function Entity({
   }, [setChoices, choices, choice, chosenLevel]);
 
   return (
-    <Card border={choice ? 'light' : 'secondary'}>
+    <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
       {/* TODO: add a max and min width */}
       <Card.Img
         variant="top"
@@ -79,7 +79,7 @@ function Entity({
       />
       <Card.Body>
         <Card.Title>{entity.label}</Card.Title>
-        <Card.Text>{entity.description}</Card.Text>
+        <Card.Text dangerouslySetInnerHTML={{ __html: entity.description }} />
         <Card.Text>
           Level: {choice ? choice.level : 0}/{entity.levels.length}
         </Card.Text>
@@ -142,7 +142,9 @@ function Entity({
                 <Card.Title>{level.label || `Level ${thisLevel}`}</Card.Title>
                 {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
                 {level.description && (
-                  <Card.Text>{level.description}</Card.Text>
+                  <Card.Text
+                    dangerouslySetInnerHTML={{ __html: level.description }}
+                  />
                 )}
               </Card.Body>
             </Card>
