@@ -8,7 +8,7 @@ export const TALENTS: Record<EntityKey, Entity> = {
     description: `In a grand ceremony you have been inducted into a particular aristocracy. Paths and ways press upon your senses, a portal from &ldquo;here&rdquo; to &ldquo;there&rdquo; everywhere you lay your eyes. It is dizzying, but the spells you can call up from those strange maps are worth it. Door Lord lets you cast spells to make doors; first through walls, then to fantastic places.</span></p><p class="c3"><span class="c1">Inherent: You gain a kind of instinct and memory for doors; you have an impression of where the closest ones are, especially if you&rsquo;re touching a wall they go through; you&rsquo;ll never push a pull door or vice versa; you guess right more often than not on whether a door is locked, if the key is nearby you can find it easily, and if it&rsquo;s electronic lock, you have an impression of where the control is; if you have a key you can tell if the door it goes to is nearby. You can guess much better than chance if somebody is about to come through or just went through a door.</span></p><p class="c3"><span class="c1">Spells:</span></p><ul class="c13 lst-kix_ml4x5anxggaq-0 start"><li class="c0 li-bullet-0"><span class="c1">You can cast divination spells that are built on your inherent door instincts, but are longer range and more accurate and specific.</span></li><li class="c0 li-bullet-0"><span class="c1">You may create temporary doors through solid barriers. By default they look like a faintly exotic door from your own memory or imagination, but if you&rsquo;re skilled at molding aether, you can make it look like any type of portal; it is not possible to camouflage its existence as a door. No matter how long the door&rsquo;s passage should be, even if it&rsquo;s through a mountain, it never looks or feels more than a foot or so deep. Costs are based on how thick and strong the wall or barrier is; it&rsquo;s more expensive to make portals through barriers that aren&rsquo;t proper manmade walls. Costs raise exponentially for thickness. Duration is increased greatly when you&rsquo;re touching your door, so it is low cost to make a door that exists only long enough for you to go through it; but a typical energy expenditure will last half an hour.`,
     category: CATEGORIES.talents,
     subCategory: 'Talents',
-    imageUrl: '/images/door_lord.jpg',
+    imageUrl: 'images/door_lord.jpg',
     levels: [
       {
         pointCost: 2,
@@ -31,7 +31,7 @@ export const TALENTS: Record<EntityKey, Entity> = {
       'The heat of the forge, the beat of the hammer and tongs, echoes in your skin. This Talent lets you cast spells to physically transform yourself to a more durable form. Inherent: Your skin becomes a bit tougher, especially to heat, but less sensitive; you tan more easily (even if you were previously an albino!), and are unlikely to get sunburned.',
     category: CATEGORIES.talents,
     subCategory: 'Talents',
-    imageUrl: '/images/brass_skin.jpg',
+    imageUrl: 'images/brass_skin.jpg',
     levels: [
       {
         pointCost: 5,
