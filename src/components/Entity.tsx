@@ -122,14 +122,14 @@ function Entity({
                   ? thisLevel <= chosenLevel
                     ? 'light'
                     : 'dark'
-                  : 'warning'
+                  : 'danger'
               }
               text={
                 canBePurchased
                   ? thisLevel <= chosenLevel
                     ? 'dark'
                     : 'light'
-                  : 'dark'
+                  : 'light'
               }
               onClick={onClick}
               style={
