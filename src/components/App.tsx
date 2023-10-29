@@ -96,7 +96,6 @@ function App() {
               : ''
           }`,
         });
-        return false;
       }
       return true;
     },

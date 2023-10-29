@@ -46,9 +46,13 @@ function Summary({
               <Card.Title>{CATEGORIES[category.key].label}</Card.Title>
               <Card.Text>
                 {Boolean(pointType) && (
-                  <>
+                  <p
+                    style={
+                      pointsUsed > pointType!.maxPoints ? { color: 'red' } : {}
+                    }
+                  >
                     {pointType?.label}: {pointsUsed}/{pointType?.maxPoints}
-                  </>
+                  </p>
                 )}
               </Card.Text>
             </Card.Header>

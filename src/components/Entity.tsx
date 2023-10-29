@@ -108,6 +108,8 @@ function Entity({
                   ? thisLevel <= chosenLevel
                     ? 'secondary'
                     : 'secondary'
+                  : thisLevel <= chosenLevel
+                  ? 'danger'
                   : 'dark'
               }
               bg={
@@ -115,6 +117,8 @@ function Entity({
                   ? thisLevel <= chosenLevel
                     ? 'light'
                     : 'dark'
+                  : thisLevel <= chosenLevel
+                  ? 'light'
                   : 'danger'
               }
               text={
@@ -122,14 +126,12 @@ function Entity({
                   ? thisLevel <= chosenLevel
                     ? 'dark'
                     : 'light'
+                  : thisLevel <= chosenLevel
+                  ? 'danger'
                   : 'light'
               }
               onClick={onClick}
-              style={
-                canBePurchased
-                  ? { cursor: 'pointer', marginBottom: '10px' }
-                  : { pointerEvents: 'none', marginBottom: '10px' }
-              }
+              style={{ cursor: 'pointer', marginBottom: '10px' }}
             >
               <Card.Body>
                 <Card.Title>{level.label || `Level ${thisLevel}`}</Card.Title>
