@@ -1,0 +1,3 @@
+# Untitled
+
+Methods are how you shape magic. This includes what you need to physically do, how your magic can be restricted, what is necessary to improve control, and often special abilities and side effects. Each Method has categories of spells it benefits and those it penalizes; this affects both how easy those spells are to control (ie, amount of skill required for advanced effects), and a fractional effective power increase/decrease. Some Methods include special powers, or an intuitive understanding of some types of tricks, that you could perform without having to explicitly learn them.

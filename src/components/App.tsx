@@ -3,7 +3,7 @@ import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
 import { CategoryKey } from '../models/Category';
-import { CATEGORIES, DEFAULT_TRUE_MAGE } from '../data';
+import { CATEGORIES, DEFAULT_TRUE_MAGE, getDataFromImport } from '../data';
 import Page from './Page';
 import ValidationToast from './ValidationToast';
 import { calculatePoints } from '../utils/calculatePoints';
@@ -39,6 +39,9 @@ export type ValidationState =
 export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
   foundations: ['power', 'capacity'],
 };
+
+const dataFromImport = getDataFromImport();
+console.log('getDataFromImport', dataFromImport);
 
 function App() {
   // TODO: have this read from local storage
