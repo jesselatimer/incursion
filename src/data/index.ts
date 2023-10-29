@@ -8,6 +8,8 @@ export * from './trueMage';
 export * from './categories';
 export * from './pointTypes';
 
+// TODO: move all this
+
 export const getDataFromImport = async () => {
   const categoriesByKey: Record<CategoryKey, Category> =
     await parseCsv<Category>(
