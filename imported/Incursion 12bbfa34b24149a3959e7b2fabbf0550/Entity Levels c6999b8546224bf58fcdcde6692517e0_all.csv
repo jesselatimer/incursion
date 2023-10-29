@@ -1,0 +1,24 @@
+﻿level,key,Entities,entityKey,pointCost
+1,door_lord_1,door_lord (Entities%20ec7305ac1c814f7290ef03a1b62b6549/door_lord%20b5a40ef013b84aeea5009b4ddbb66f6d.csv),door_lord,4
+2,door_lord_2,door_lord (Entities%20ec7305ac1c814f7290ef03a1b62b6549/door_lord%20b5a40ef013b84aeea5009b4ddbb66f6d.csv),door_lord,4
+3,door_lord_3,door_lord (Entities%20ec7305ac1c814f7290ef03a1b62b6549/door_lord%20b5a40ef013b84aeea5009b4ddbb66f6d.csv),door_lord,4
+1,the_scholar_of_ages_1,the_scholar_of_ages (Entities%20ec7305ac1c814f7290ef03a1b62b6549/the_scholar_of_ages%200a90f0c6e4424ec7836bd414f2ba75bd.csv),the_scholar_of_ages,2
+,power_1,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,power_2,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,power_3,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,power_4,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,power_5,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,power_6,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,power_7,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,power_8,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,power_9,power (Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.csv),power,
+,capacity_1,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,capacity_2,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,capacity_3,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,capacity_4,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,capacity_5,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,capacity_6,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,capacity_7,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,capacity_8,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,capacity_9,capacity (Entities%20ec7305ac1c814f7290ef03a1b62b6549/capacity%2014d337686178447b856b29dbca3360f6.csv),capacity,
+,arcane_font_1,arcane_font (Entities%20ec7305ac1c814f7290ef03a1b62b6549/arcane_font%20cf32b08ba44d4b64ac27cba749fffa53.csv),arcane_font,

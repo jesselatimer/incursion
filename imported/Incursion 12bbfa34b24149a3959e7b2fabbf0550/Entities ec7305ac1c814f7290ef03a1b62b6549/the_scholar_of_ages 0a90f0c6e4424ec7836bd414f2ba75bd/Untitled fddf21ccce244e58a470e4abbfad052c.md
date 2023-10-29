@@ -1,0 +1,7 @@
+# Untitled
+
+This grizzled old man of indistinct ethnicity tells you he is a thousand years old (whether you believe him or not is up to you, but he sure does seem to have an intimate knowledge of history). Whatever else, he is certainly a polymath of rare talent. He has a clearly supernatural memory, and has used it to accumulate a stock of knowledge both broad and deep. He is a competent teacher and can tutor you in science, mathematics, philosophy, history, engineering, the humanities, medicine, or nearly anything else. Though he looks old, he is as spry as a youth, strong and enduring, and seems immune to disease. Though most of his knowledge is intellectual rather than practiced, he’s quite competent at martial arts, and will train you in that as well.
+
+Thaumaturgy: *Inner Medicine*
+
+Ambrocio draws aether through Dan'Tien, and casts magic through a combination of small paper talismans and meditation. His magic is primarily that of protection and fortification, though his stock of magical tricks is as broad as the rest of his learning, and his grasp on the theory is sound enough that he can probably adapt and teach you many regardless of your specific Method. Additionally, his martial arts have supernatural aspects, though it's unclear how much of that is the martial art itself, and how much is due to his preternatural strength and agility.
