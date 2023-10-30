@@ -105,6 +105,7 @@ function Entity({
   >({});
 
   //Get markdown file
+  // TODO: pull this out into its own file
   useEffect(() => {
     const fetchMarkdown = async (
       locations: string[],
@@ -136,9 +137,7 @@ function Entity({
       callback(descriptionStringsByLocation);
     };
 
-    // @ts-ignore TODO: remove me
     fetchMarkdown([entity.pathToSelf], (descriptionStringsByLocation) =>
-      // @ts-ignore TODO: remove me
       setEntityDescription(descriptionStringsByLocation[entity.pathToSelf])
     );
 
@@ -149,7 +148,6 @@ function Entity({
       'pathToSelf'
     );
     fetchMarkdown(
-      // @ts-ignore TODO: remove me
       map(entityLevelsByLocation, (el) => el.pathToSelf),
       (descriptionStringsByLocation) => {
         const descriptionStringsByEntityLevelKey: Record<
@@ -252,6 +250,7 @@ function Entity({
                 {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
                 {Boolean(entityLevelDescriptions[entityLevel.key]) && (
                   <Card.Text>
+                    {/* TODO: have our own markdown file that does this by default */}
                     <ReactMarkdown
                       components={{
                         h1() {

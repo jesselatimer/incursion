@@ -7,7 +7,8 @@ export type EntityKey = string;
 export interface Entity {
   key: EntityKey;
   label: string;
-  description: string;
+  pathToSelf: string; // A relic of Notion import, points to the .md file associated with record
+  description: string; // TODO: how should I handle this? Fetch description much earlier and assign?
   subCategory: SubCategoryKey;
   category: CategoryKey; // TODO: have both category and subcategory?
   entityLevels: EntityLevelKey[];
