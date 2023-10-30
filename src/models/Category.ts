@@ -1,10 +1,11 @@
-import { PointType } from './PointType';
+import { PointTypeKey } from './PointType';
+import { SubCategoryKey } from './SubCategory';
 
 export type CategoryKey = string;
 
 export interface Category {
   key: string;
   label: string;
-  pointType: PointType | null;
-  subCategories: string[];
+  pointType: PointTypeKey | null;
+  subCategories: SubCategoryKey[];
 }

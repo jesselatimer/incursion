@@ -1,8 +1,8 @@
 import { reduce } from 'lodash';
 import { Choice } from '../models/Choice';
-import { ALL_ENTITIES } from './entities';
 import { PointCalculator } from '../models/PointCalculator';
 import { PointTypeKey } from '../models/PointType';
+import { Entity, EntityKey } from '../models/Entity';
 
 const FOUNDATION_POINTS_PER_METHOD_AND_SOURCE: Record<number, number> = {
   2: 0,
@@ -16,11 +16,14 @@ const FOUNDATION_POINTS_PER_METHOD_AND_SOURCE: Record<number, number> = {
 };
 
 export const POINT_CALCULATORS: Record<PointTypeKey, PointCalculator> = {
-  foundation_points: (choices: Choice[]): number => {
+  foundation_points: (
+    choices: Choice[],
+    entitiesByKey: Record<EntityKey, Entity>
+  ): number => {
     const numberOfChoices = reduce(
       choices,
       (num, choice) => {
-        const currentEntity = ALL_ENTITIES[choice.entityKey];
+        const currentEntity = entitiesByKey[choice.entityKey];
         if (['Methods', 'Sources'].includes(currentEntity.subCategory || ''))
           return num + 1;
         return num;

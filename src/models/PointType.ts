@@ -1,7 +1,7 @@
 export type PointTypeKey = string;
 
 export interface PointType {
-  key: string;
+  key: PointTypeKey;
   label: string;
   description: string;
   maxPoints: number;

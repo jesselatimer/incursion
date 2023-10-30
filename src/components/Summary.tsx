@@ -1,11 +1,9 @@
 import { useContext, useMemo } from 'react';
-import { TrueMageContext } from './App';
+import { DataContext, TrueMageContext } from './App';
 import Container from 'react-bootstrap/Container';
 import { Choice } from '../models/Choice';
 import { CategoryKey } from '../models/Category';
 import { groupBy, map } from 'lodash';
-import { CATEGORIES } from '../data/categories';
-import { ALL_ENTITIES } from '../data/entities';
 import { Card, Col, Image, Row, Stack } from 'react-bootstrap';
 import { calculatePoints } from '../utils/calculatePoints';
 
@@ -14,10 +12,13 @@ function Summary({
 }: {
   categoryChoices: Record<CategoryKey, Choice[]>;
 }) {
+  const { categoriesByKey, entitiesByKey, entityLevelsByKey, pointTypesByKey } =
+    useContext(DataContext);
+
   const { trueMage } = useContext(TrueMageContext);
   const entitiesBySubCategory = useMemo(
-    () => groupBy(ALL_ENTITIES, 'subCategory'),
-    [ALL_ENTITIES]
+    () => groupBy(entitiesByKey, 'subCategory'),
+    []
   );
   return (
     <Container
@@ -31,28 +32,34 @@ function Summary({
       }}
     >
       <h2 className="Summary-header">{trueMage.name}</h2>
-      {map(CATEGORIES, (category) => {
+      {map(categoriesByKey, (category, categoryKey) => {
         const choices = categoryChoices[category.key];
         if (!choices?.length) return null;
         const choicesByEntityKey = groupBy(choices, 'entityKey');
-        const pointType = category.pointType;
-        const pointsUsed = calculatePoints(choices, pointType?.key);
+        const pointTypeKey = category.pointType;
+        const pointType = pointTypeKey ? pointTypesByKey[pointTypeKey] : null;
+        const pointsUsed = calculatePoints(
+          choices,
+          entitiesByKey,
+          entityLevelsByKey,
+          pointType?.key
+        );
         return (
           <Card
             key={category.key + 'SummaryContainer'}
             style={{ marginTop: '10px' }}
           >
             <Card.Header>
-              <Card.Title>{CATEGORIES[category.key].label}</Card.Title>
+              <Card.Title>{category.label}</Card.Title>
               <Card.Text>
                 {Boolean(pointType) && (
-                  <p
+                  <span
                     style={
                       pointsUsed > pointType!.maxPoints ? { color: 'red' } : {}
                     }
                   >
                     {pointType?.label}: {pointsUsed}/{pointType?.maxPoints}
-                  </p>
+                  </span>
                 )}
               </Card.Text>
             </Card.Header>
@@ -100,7 +107,7 @@ function Summary({
                                 }}
                               >
                                 {entity.label}
-                                {entity.levels.length > 1
+                                {entity.entityLevels.length > 1
                                   ? `: ${choice.level}`
                                   : ''}
                               </strong>

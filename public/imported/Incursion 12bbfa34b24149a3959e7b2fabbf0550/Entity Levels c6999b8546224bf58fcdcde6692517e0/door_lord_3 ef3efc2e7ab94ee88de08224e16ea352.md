@@ -1,6 +1,6 @@
 # door_lord_3
 
-Entities: door_lord (../Entities%20ec7305ac1c814f7290ef03a1b62b6549/door_lord%20b5a40ef013b84aeea5009b4ddbb66f6d.md)
+Entity: door_lord (../Entities%20ec7305ac1c814f7290ef03a1b62b6549/door_lord%20b5a40ef013b84aeea5009b4ddbb66f6d.md)
 entityKey: door_lord
 level: 3
 pointCost: 4

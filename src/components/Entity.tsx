@@ -1,7 +1,7 @@
 import { Entity as EntityModel, EntityKey } from '../models/Entity';
 import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
-import { REQUIRED_ENTITY_KEYS, SetChoicesContext } from './App';
+import { DataContext, REQUIRED_ENTITY_KEYS, SetChoicesContext } from './App';
 import { useCallback, useContext, useMemo } from 'react';
 import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
@@ -15,21 +15,42 @@ function Entity({
   entityKey: EntityKey;
   choices: Choice[];
 }) {
+  const dataByKey = useContext(DataContext);
+  const { categoriesByKey, pointTypesByKey, entitiesByKey, entityLevelsByKey } =
+    dataByKey;
+
   const setChoices = useContext(SetChoicesContext);
-  const { choice, chosenLevel, usesPoints, pointsUsed, pointsRemaining } =
-    useMemo(() => {
-      const choice = choices.find((choice) => choice.entityKey === entityKey);
-      const pointType = entity.category.pointType;
-      const usesPoints = pointType !== null;
-      const pointsUsed = calculatePoints(choices, pointType?.key);
-      return {
-        choice,
-        chosenLevel: choice?.level || 0,
-        usesPoints,
-        pointsUsed,
-        pointsRemaining: usesPoints ? pointType.maxPoints - pointsUsed : 0,
-      };
-    }, [choices]);
+  const {
+    choice,
+    category,
+    pointType,
+    chosenLevel,
+    usesPoints,
+    pointsUsed,
+    pointsRemaining,
+  } = useMemo(() => {
+    const choice = choices.find((choice) => choice.entityKey === entityKey);
+    const category = categoriesByKey[entity.category];
+    const pointType = category.pointType
+      ? pointTypesByKey[category.pointType]
+      : null;
+    const usesPoints = pointType !== null;
+    const pointsUsed = calculatePoints(
+      choices,
+      entitiesByKey,
+      entityLevelsByKey,
+      pointType?.key
+    );
+    return {
+      choice,
+      category,
+      pointType,
+      chosenLevel: choice?.level || 0,
+      usesPoints,
+      pointsUsed,
+      pointsRemaining: usesPoints ? pointType.maxPoints - pointsUsed : 0,
+    };
+  }, [choices, dataByKey]);
 
   const onClickSelect = useCallback(
     (level: number) => {
@@ -38,15 +59,15 @@ function Entity({
           ...choices.filter((choice) => choice.entityKey !== entityKey),
           { entityKey, level },
         ],
-        entity.category.key
+        category.key
       );
     },
-    [setChoices, choices, choice]
+    [setChoices, choices, choice, dataByKey]
   );
 
   const onClickUnselect = useCallback(() => {
     if (
-      REQUIRED_ENTITY_KEYS[entity.category.key]?.includes(entity.key) &&
+      REQUIRED_ENTITY_KEYS[category.key]?.includes(entity.key) &&
       chosenLevel > 1
     ) {
       setChoices(
@@ -57,76 +78,82 @@ function Entity({
             level: 1,
           },
         ],
-        entity.category.key
+        category.key
       );
     } else {
       setChoices(
         choices.filter((choice) => choice.entityKey !== entityKey),
-        entity.category.key
+        category.key
       );
     }
-  }, [setChoices, choices, choice, chosenLevel]);
+  }, [setChoices, choices, choice, chosenLevel, dataByKey]);
 
   return (
     <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
       <Card.Img variant="top" src={`/incursion/images/${entityKey}.jpg`} />
       <Card.Body>
         <Card.Title>{entity.label}</Card.Title>
+        {/* TODO: fix entity description */}
         <Card.Text dangerouslySetInnerHTML={{ __html: entity.description }} />
         <Card.Text>
-          Level: {choice ? choice.level : 0}/{entity.levels.length}
+          Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
         </Card.Text>
-        {map(entity.levels, (level, i) => {
-          const thisLevel = i + 1;
+        {map(entity.entityLevels, (levelKey) => {
+          const entityLevel = entityLevelsByKey[levelKey];
+          console.log(entityLevel);
           const pointsUsedAfterPurchasingLevel = calculatePoints(
             [
               ...choices.filter((c) => c.entityKey !== entity.key),
-              { entityKey: entity.key, level: thisLevel },
+              { entityKey: entity.key, level: entityLevel.level },
             ],
-            entity.category.pointType!.key
+            entitiesByKey,
+            entityLevelsByKey,
+            pointType!.key
           );
           const pointsUsedWithoutThisChoice = calculatePoints(
             [...choices.filter((c) => c.entityKey !== entity.key)],
-            entity.category.pointType!.key
+            entitiesByKey,
+            entityLevelsByKey,
+            pointType!.key
           );
           const canBePurchased = usesPoints
             ? pointsRemaining >= pointsUsedAfterPurchasingLevel - pointsUsed
             : true;
           const pointsToShow =
-            thisLevel === chosenLevel
+            entityLevel.level === chosenLevel
               ? pointsUsed - pointsUsedWithoutThisChoice
               : pointsUsedAfterPurchasingLevel - pointsUsedWithoutThisChoice;
           const onClick =
-            thisLevel === chosenLevel
+            entityLevel.level === chosenLevel
               ? () => onClickUnselect()
-              : () => onClickSelect(i + 1);
+              : () => onClickSelect(entityLevel.level);
           return (
             <Card
-              key={entityKey + thisLevel + 'SummaryCard'}
+              key={entityKey + entityLevel.level + 'SummaryCard'}
               border={
                 canBePurchased
-                  ? thisLevel <= chosenLevel
+                  ? entityLevel.level <= chosenLevel
                     ? 'secondary'
                     : 'secondary'
-                  : thisLevel <= chosenLevel
+                  : entityLevel.level <= chosenLevel
                   ? 'danger'
                   : 'dark'
               }
               bg={
                 canBePurchased
-                  ? thisLevel <= chosenLevel
+                  ? entityLevel.level <= chosenLevel
                     ? 'light'
                     : 'dark'
-                  : thisLevel <= chosenLevel
+                  : entityLevel.level <= chosenLevel
                   ? 'light'
                   : 'danger'
               }
               text={
                 canBePurchased
-                  ? thisLevel <= chosenLevel
+                  ? entityLevel.level <= chosenLevel
                     ? 'dark'
                     : 'light'
-                  : thisLevel <= chosenLevel
+                  : entityLevel.level <= chosenLevel
                   ? 'danger'
                   : 'light'
               }
@@ -134,11 +161,14 @@ function Entity({
               style={{ cursor: 'pointer', marginBottom: '10px' }}
             >
               <Card.Body>
-                <Card.Title>{level.label || `Level ${thisLevel}`}</Card.Title>
+                <Card.Title>{`Level ${entityLevel.level}`}</Card.Title>
                 {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
-                {level.description && (
+                {/* TODO: fix description */}
+                {entityLevel.description && (
                   <Card.Text
-                    dangerouslySetInnerHTML={{ __html: level.description }}
+                    dangerouslySetInnerHTML={{
+                      __html: entityLevel.description,
+                    }}
                   />
                 )}
               </Card.Body>

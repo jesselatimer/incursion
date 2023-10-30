@@ -1,14 +1,23 @@
-import React, { createContext, useCallback, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+} from 'react';
 import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
-import { CategoryKey } from '../models/Category';
-import { CATEGORIES, DEFAULT_TRUE_MAGE, getDataFromImport } from '../data';
+import { Category, CategoryKey } from '../models/Category';
+import { DEFAULT_TRUE_MAGE, getDataFromImport } from '../data';
 import Page from './Page';
 import ValidationToast from './ValidationToast';
 import { calculatePoints } from '../utils/calculatePoints';
 import { every } from 'lodash';
-import { EntityKey } from '../models/Entity';
+import { Entity, EntityKey } from '../models/Entity';
+import { SubCategory, SubCategoryKey } from '../models/SubCategory';
+import { EntityLevel, EntityLevelKey } from '../models/EntityLevel';
+import { PointType, PointTypeKey } from '../models/PointType';
 
 type TrueMageContext = {
   trueMage: TrueMage;
@@ -18,6 +27,22 @@ export const TrueMageContext = createContext<TrueMageContext>({
   trueMage: DEFAULT_TRUE_MAGE,
   setTrueMage: (_trueMage) => {},
 });
+
+type DataContext = {
+  categoriesByKey: Record<CategoryKey, Category>;
+  subCategoriesByKey: Record<SubCategoryKey, SubCategory>;
+  entitiesByKey: Record<EntityKey, Entity>;
+  entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
+  pointTypesByKey: Record<PointTypeKey, PointType>;
+};
+const defaultDataContext: DataContext = {
+  categoriesByKey: {},
+  subCategoriesByKey: {},
+  entitiesByKey: {},
+  entityLevelsByKey: {},
+  pointTypesByKey: {},
+};
+export const DataContext = createContext<DataContext>(defaultDataContext);
 
 type SetChoicesContext = (
   newChoices: Choice[],
@@ -40,10 +65,19 @@ export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
   foundations: ['power', 'capacity'],
 };
 
-const dataFromImport = getDataFromImport();
-console.log('getDataFromImport', dataFromImport);
-
 function App() {
+  const [dataByKey, setDataByKey] = useState(defaultDataContext);
+  useEffect(() => {
+    async function getData() {
+      console.log('starting getData');
+      const data = await getDataFromImport();
+      console.log('after import data', data);
+      setDataByKey(data);
+    }
+
+    getData();
+  }, []);
+
   // TODO: have this read from local storage
   // TODO: implement multiple users (store each user in local storage, use state to set user)
   const [trueMage, setTrueMage] = useState<TrueMage>(DEFAULT_TRUE_MAGE);
@@ -55,6 +89,7 @@ function App() {
       { entityKey: 'capacity', level: 1 },
     ],
   });
+
   const [showValidationError, setShowValidationError] =
     useState<ValidationState>({
       show: false,
@@ -62,9 +97,10 @@ function App() {
 
   const validateNewChoices = useCallback(
     (newChoices: Choice[], categoryKey: CategoryKey) => {
-      const category = CATEGORIES[categoryKey];
-      const pointType = category.pointType;
-      if (!pointType) return true;
+      const category = dataByKey.categoriesByKey[categoryKey];
+      const pointTypeKey = category.pointType;
+      if (!pointTypeKey) return true;
+      const pointType = dataByKey.pointTypesByKey[pointTypeKey];
 
       const chosenEntityKeys = new Set(
         newChoices.map((choice) => choice.entityKey)
@@ -81,11 +117,18 @@ function App() {
         return false;
       }
 
-      const usedPoints = calculatePoints(newChoices, pointType.key);
+      const usedPoints = calculatePoints(
+        newChoices,
+        dataByKey.entitiesByKey,
+        dataByKey.entityLevelsByKey,
+        pointType.key
+      );
 
       if (usedPoints > pointType.maxPoints) {
         const oldPoints = calculatePoints(
           categoryChoices[categoryKey] || [],
+          dataByKey.entitiesByKey,
+          dataByKey.entityLevelsByKey,
           pointType.key
         );
         setShowValidationError({
@@ -99,7 +142,7 @@ function App() {
       }
       return true;
     },
-    [CATEGORIES, categoryChoices]
+    [dataByKey, categoryChoices]
   );
 
   const setChoices = useCallback(
@@ -114,20 +157,27 @@ function App() {
 
       setAllChoicesByCategory(newCategoryChoices);
     },
-    [categoryChoices, setAllChoicesByCategory, setShowValidationError]
+    [
+      dataByKey,
+      categoryChoices,
+      setAllChoicesByCategory,
+      setShowValidationError,
+    ]
   );
 
   return (
     <TrueMageContext.Provider value={{ trueMage, setTrueMage }}>
-      <SetChoicesContext.Provider value={setChoices}>
-        <div style={{ position: 'relative' }}>
-          <Page categoryChoices={categoryChoices} />
-          <ValidationToast
-            showValidationError={showValidationError}
-            setShowValidationError={setShowValidationError}
-          />
-        </div>
-      </SetChoicesContext.Provider>
+      <DataContext.Provider value={dataByKey}>
+        <SetChoicesContext.Provider value={setChoices}>
+          <div style={{ position: 'relative' }}>
+            <Page categoryChoices={categoryChoices} />
+            <ValidationToast
+              showValidationError={showValidationError}
+              setShowValidationError={setShowValidationError}
+            />
+          </div>
+        </SetChoicesContext.Provider>
+      </DataContext.Provider>
     </TrueMageContext.Provider>
   );
 }

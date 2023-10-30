@@ -1,4 +1,4 @@
 export interface Choice {
   entityKey: string;
-  level: number;
+  level: number; // TODO: should be entity level key?
 }
