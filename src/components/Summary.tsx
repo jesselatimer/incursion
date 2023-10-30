@@ -12,13 +12,19 @@ function Summary({
 }: {
   categoryChoices: Record<CategoryKey, Choice[]>;
 }) {
-  const { categoriesByKey, entitiesByKey, entityLevelsByKey, pointTypesByKey } =
-    useContext(DataContext);
+  const dataByKey = useContext(DataContext);
+  const {
+    categoriesByKey,
+    entitiesByKey,
+    entityLevelsByKey,
+    pointTypesByKey,
+    subCategoriesByKey,
+  } = dataByKey;
 
   const { trueMage } = useContext(TrueMageContext);
   const entitiesBySubCategory = useMemo(
     () => groupBy(entitiesByKey, 'subCategory'),
-    []
+    [dataByKey]
   );
   return (
     <Container
@@ -44,6 +50,7 @@ function Summary({
           entityLevelsByKey,
           pointType?.key
         );
+        console.log('category', category);
         return (
           <Card
             key={category.key + 'SummaryContainer'}
@@ -65,8 +72,9 @@ function Summary({
             </Card.Header>
             <Card.Body>
               {/* Mapping over all subcategories to preserve order */}
-              {map(category.subCategories, (subCategory) => {
-                const currentEntities = entitiesBySubCategory[subCategory];
+              {map(category.subCategories, (subCategoryKey) => {
+                const subCategory = subCategoriesByKey[subCategoryKey];
+                const currentEntities = entitiesBySubCategory[subCategoryKey];
                 if (!currentEntities?.length) return null;
                 const chosenEntities = currentEntities.filter(
                   (e) => !!choicesByEntityKey[e.key]
@@ -77,7 +85,7 @@ function Summary({
                     key={subCategory + 'Summary'}
                     style={{ marginBottom: '10px' }}
                   >
-                    <h4>{subCategory}</h4>
+                    <h4>{subCategory.label}</h4>
                     {/* Mapping over all entities to preserve order */}
                     {map(currentEntities, (entity) => {
                       const choice = (choicesByEntityKey[entity.key] || [])[0];
