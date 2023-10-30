@@ -1,13 +1,13 @@
 # Incursion
 
-[Setting](Incursion%2012bbfa34b24149a3959e7b2fabbf0550/Setting%2061b4b535ec174572a4419910929e7022.md)
+[Setting](Setting%2061b4b535ec174572a4419910929e7022.md)
 
-[Entities](Incursion%2012bbfa34b24149a3959e7b2fabbf0550/Entities%20ec7305ac1c814f7290ef03a1b62b6549.csv)
+[Entities](Entities%20ec7305ac1c814f7290ef03a1b62b6549.csv)
 
-[Entity Levels](Incursion%2012bbfa34b24149a3959e7b2fabbf0550/Entity%20Levels%20c6999b8546224bf58fcdcde6692517e0.csv)
+[Entity Levels](Entity%20Levels%20c6999b8546224bf58fcdcde6692517e0.csv)
 
-[Categories](Incursion%2012bbfa34b24149a3959e7b2fabbf0550/Categories%20209902f319f64b48bc9cca434d7e449b.csv)
+[Categories](Categories%20209902f319f64b48bc9cca434d7e449b.csv)
 
-[Subcategories](Incursion%2012bbfa34b24149a3959e7b2fabbf0550/Subcategories%2074b3bfb500de4b19982b9aced3f3123d.csv)
+[Subcategories](Subcategories%2074b3bfb500de4b19982b9aced3f3123d.csv)
 
-[PointType](Incursion%2012bbfa34b24149a3959e7b2fabbf0550/PointType%205a48b198234543278cf43279915248ce.csv)
+[PointType](PointType%205a48b198234543278cf43279915248ce.csv)
