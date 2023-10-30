@@ -1,6 +1,0 @@
-# power_5
-
-Entity: power (../Entities%20ec7305ac1c814f7290ef03a1b62b6549/power%2017a2e14c8e0641d8a62391f7325773da.md)
-entityKey: power
-level: 5
-pointCost: 2
