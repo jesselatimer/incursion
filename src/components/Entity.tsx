@@ -1,16 +1,9 @@
 import { Entity as EntityModel, EntityKey } from '../models/Entity';
-import ReactMarkdown from 'react-markdown';
+import Markdown from './Markdown';
 import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
 import { DataContext, REQUIRED_ENTITY_KEYS, SetChoicesContext } from './App';
-import {
-  ReactElement,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { forEach, keyBy, map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
 import { EntityLevelKey } from '../models/EntityLevel';
@@ -170,15 +163,7 @@ function Entity({
         <Card.Title>{entity.label}</Card.Title>
         {Boolean(entityDescription) && (
           <Card.Text>
-            <ReactMarkdown
-              components={{
-                h1() {
-                  return null;
-                },
-              }}
-            >
-              {entityDescription}
-            </ReactMarkdown>
+            <Markdown>{entityDescription}</Markdown>
           </Card.Text>
         )}
         <Card.Text>
@@ -250,16 +235,9 @@ function Entity({
                 {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
                 {Boolean(entityLevelDescriptions[entityLevel.key]) && (
                   <Card.Text>
-                    {/* TODO: have our own markdown file that does this by default */}
-                    <ReactMarkdown
-                      components={{
-                        h1() {
-                          return null;
-                        },
-                      }}
-                    >
+                    <Markdown>
                       {entityLevelDescriptions[entityLevel.key]}
-                    </ReactMarkdown>
+                    </Markdown>
                   </Card.Text>
                 )}
               </Card.Body>
