@@ -1,9 +1,13 @@
+import { z } from 'zod';
+
 export type PointTypeKey = string;
 
-export interface PointType {
-  key: PointTypeKey;
-  label: string;
-  pathToSelf: string; // A relic of Notion import, points to the .md file associated with record
-  description: string;
-  maxPoints: number;
-}
+export const PointTypeSchema = z.object({
+  key: z.string(),
+  label: z.string(),
+  pathToSelf: z.string(), // A relic of Notion import, points to the .md file associated with record
+  description: z.string(),
+  maxPoints: z.number(),
+});
+
+export type PointType = z.infer<typeof PointTypeSchema>;
