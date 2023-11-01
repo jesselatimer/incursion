@@ -116,7 +116,6 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
         const resultsByKey = await reduce(
           results.data,
           async (acc, result) => {
-            console.log('result', result);
             if (callback) result = callback(result);
             if (typeof result.Self !== 'string') {
               throw new Error('No Self');

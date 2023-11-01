@@ -50,7 +50,6 @@ function Summary({
           entityLevelsByKey,
           pointType?.key
         );
-        console.log('category', category);
         return (
           <Card
             key={category.key + 'SummaryContainer'}
@@ -82,7 +81,7 @@ function Summary({
                 if (chosenEntities.length === 0) return null;
                 return (
                   <div
-                    key={subCategory + 'Summary'}
+                    key={subCategory.label + 'Summary'}
                     style={{ marginBottom: '10px' }}
                   >
                     <h4>{subCategory.label}</h4>

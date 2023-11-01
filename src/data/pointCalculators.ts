@@ -24,7 +24,7 @@ export const POINT_CALCULATORS: Record<PointTypeKey, PointCalculator> = {
       choices,
       (num, choice) => {
         const currentEntity = entitiesByKey[choice.entityKey];
-        if (['Methods', 'Sources'].includes(currentEntity.subCategory || ''))
+        if (['methods', 'sources'].includes(currentEntity.subCategory || ''))
           return num + 1;
         return num;
       },

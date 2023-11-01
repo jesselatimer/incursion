@@ -52,7 +52,10 @@ function EntityList({
                   const entity = (currentEntitiesByKey[entityKey] || [])[0];
                   if (!entity) return null;
                   return (
-                    <Col key={entity.key + 'Col'} style={{ maxWidth: '400px' }}>
+                    <Col
+                      key={entity.key + 'Col'}
+                      style={{ maxWidth: '400px', minWidth: '300px' }}
+                    >
                       <Entity
                         key={entity.key}
                         entity={entity}

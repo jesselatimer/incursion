@@ -70,9 +70,7 @@ function App() {
   const [dataByKey, setDataByKey] = useState(defaultDataContext);
   useEffect(() => {
     async function getData() {
-      console.log('starting getData');
       const data = await getDataFromImport();
-      console.log('after import data', data);
       setDataByKey(data);
     }
 
