@@ -4,9 +4,8 @@ import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
 import { DataContext, REQUIRED_ENTITY_KEYS, SetChoicesContext } from './App';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { forEach, keyBy, map } from 'lodash';
+import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
-import { EntityLevelKey } from '../models/EntityLevel';
 
 function Entity({
   entity,
@@ -90,80 +89,14 @@ function Entity({
     }
   }, [setChoices, choices, choice, chosenLevel, dataByKey]);
 
-  const [entityDescription, setEntityDescription] = useState<string | null>(
-    null
-  );
-  const [entityLevelDescriptions, setEntityLevelDescriptions] = useState<
-    Record<EntityLevelKey, string>
-  >({});
-
-  //Get markdown file
-  // TODO: pull this out into its own file
-  useEffect(() => {
-    const fetchMarkdown = async (
-      locations: string[],
-      callback: (descriptionStringsByLocation: Record<string, string>) => void
-    ) => {
-      const descriptionStringsByLocation: Record<string, string> = {};
-      for (const location of locations) {
-        console.log('MD location: ', location);
-        try {
-          const self = await fetch(`/incursion/imported/${location}`);
-          const selfString = await self.text();
-          if (selfString) {
-            const regex = /\[\]\(.+\.md/g;
-            const matches = selfString.match(regex);
-            if (matches?.length) {
-              const pathToDescription = matches[0].slice(3);
-              console.log('pathToDescription', pathToDescription);
-              const description = await fetch(
-                `/incursion/imported/${pathToDescription}`
-              );
-              const descriptionString = await description.text();
-              descriptionStringsByLocation[location] = descriptionString;
-            }
-          }
-        } catch (e) {
-          console.log("Markdown file: couldn't read =>", location, e);
-        }
-      }
-      callback(descriptionStringsByLocation);
-    };
-
-    fetchMarkdown([entity.pathToSelf], (descriptionStringsByLocation) =>
-      setEntityDescription(descriptionStringsByLocation[entity.pathToSelf])
-    );
-
-    const entityLevelsByLocation = keyBy(
-      entity.entityLevels.map(
-        (entityLevelKey) => entityLevelsByKey[entityLevelKey]
-      ),
-      'pathToSelf'
-    );
-    fetchMarkdown(
-      map(entityLevelsByLocation, (el) => el.pathToSelf),
-      (descriptionStringsByLocation) => {
-        const descriptionStringsByEntityLevelKey: Record<
-          EntityLevelKey,
-          string
-        > = {};
-        forEach(descriptionStringsByLocation, (description, location) => {
-          const entityLevel = entityLevelsByLocation[location];
-          descriptionStringsByEntityLevelKey[entityLevel.key] = description;
-        });
-        setEntityLevelDescriptions(descriptionStringsByEntityLevelKey);
-      }
-    );
-  }, []);
-
   return (
     <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
       <Card.Img variant="top" src={`/incursion/images/${entityKey}.jpg`} />
       <Card.Body>
         <Card.Title>{entity.label}</Card.Title>
-        {Boolean(entityDescription) && (
+        {Boolean(entity.description) && (
           <Card.Text>
-            <Markdown>{entityDescription}</Markdown>
+            <Markdown>{entity.description}</Markdown>
           </Card.Text>
         )}
         <Card.Text>
@@ -233,11 +166,9 @@ function Entity({
               <Card.Body>
                 <Card.Title>{`Level ${entityLevel.level}`}</Card.Title>
                 {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
-                {Boolean(entityLevelDescriptions[entityLevel.key]) && (
+                {Boolean(entityLevel.description) && (
                   <Card.Text>
-                    <Markdown>
-                      {entityLevelDescriptions[entityLevel.key]}
-                    </Markdown>
+                    <Markdown>{entityLevel.description}</Markdown>
                   </Card.Text>
                 )}
               </Card.Body>

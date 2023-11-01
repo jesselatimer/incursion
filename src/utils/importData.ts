@@ -112,9 +112,9 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
       delimiter: ',',
       header: true,
       complete: async function (results) {
-        const resultsByKey = reduce(
+        const resultsByKey = await reduce(
           results.data,
-          (acc, result) => {
+          async (acc, result) => {
             console.log('result', result);
             if (callback) result = callback(result);
             if (typeof result.Self !== 'string') {
@@ -124,21 +124,21 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
             if (!selfPaths || selfPaths.length < 1) {
               throw new Error('Cannot parse Self');
             }
-            // TODO: move the description lookup here
             const pathToSelf = `${selfPaths[0].slice(1, -1)}.md`;
-            console.log('pathToSelf', pathToSelf);
+            const description = await fetchMarkdown(pathToSelf);
             const parsedResult = parser.parse({
               ...result,
-              pathToSelf,
-              description: '',
+              description,
             });
             if (!parsedResult.key) {
               throw new Error('key not found');
             }
-            acc[parsedResult.key] = parsedResult;
-            return acc;
+            return {
+              ...(await acc),
+              [parsedResult.key]: parsedResult,
+            };
           },
-          {} as Record<string, z.infer<SchemaType>>
+          Promise.resolve({} as Record<string, z.infer<SchemaType>>)
         );
         resolve(resultsByKey);
       },
@@ -147,4 +147,26 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
       },
     });
   });
+}
+
+async function fetchMarkdown(pathToSelf: string): Promise<string | undefined> {
+  try {
+    const self = await fetch(`/incursion/imported/${pathToSelf}`);
+    const selfString = await self.text();
+    if (selfString) {
+      const regex = /\[\]\(.+\.md/g;
+      const matches = selfString.match(regex);
+      if (matches?.length) {
+        const pathToDescription = matches[0].slice(3);
+        const description = await fetch(
+          `/incursion/imported/${pathToDescription}`
+        );
+        const descriptionString = await description.text();
+        return descriptionString;
+      }
+    }
+  } catch (e) {
+    console.log("Markdown file: couldn't read =>", pathToSelf, e);
+    throw e;
+  }
 }
