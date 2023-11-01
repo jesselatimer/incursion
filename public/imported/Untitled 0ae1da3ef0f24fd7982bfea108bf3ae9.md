@@ -1,0 +1,9 @@
+# Untitled
+
+With a cry of "Eureka!" thaumaturgy came to you as an arcane axiom; perfect, clear, completely impossible to explain to anyone else. As a Wizard, you will build your own scientific discipline on this foundation, and manipulate aether via a personal code of mystical words and gestures. Each Wizard's practice is unique, but shares principles with others’, allowing collaborative research. Intellectual rigor, scientific curiosity, and scholarly diligence are not just key traits, but the only way to improve your aether control; direct practice helps you improve almost not at all. You must encode your theories into eldritch symbols, words, and movements. Casting magic requires obviously magical words and gestures in a loud clear voice and movement of most of your body; but dexterity and vocal control are unimportant compared to understanding what you're doing. As you craft your own discipline, you can expend time and effort to make it possible to cast more stealthily, even the point of purely mental casting, but not only is this at a penalty, it requires years you won't spend advancing your overall control. On the flip side, you can add the ability to improve your casting by taking your time with props, tools, and consumables (crystals, inscribing a magical circle, wands, reading from a book, burning powders, etc).
+
+Wizardry stands above all other methods when it comes to tricks: not only does it offer a large advantage in control, but you can exceed the normal limits on maximum aether input to a trick (though still not to the level of spells). Wizards also have an advantage in both creating and penetrating magical defenses (eg, via Absolute Atmosphere or Warp and Weft), as they impose their underlying principles on the other spell.
+
+*Wizards: no sense of right and wrong!*
+
+—Anyone with a brain (but originally KC Greene)

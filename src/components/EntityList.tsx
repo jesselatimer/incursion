@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useContext } from 'react';
 import { DataContext } from './App';
+import Markdown from './Markdown';
 
 function EntityList({
   entities,
@@ -30,7 +31,9 @@ function EntityList({
   return (
     <Container>
       <h2>{category.label}</h2>
-      {/* TODO: add category description */}
+      {Boolean(category.description) && (
+        <Markdown>{category.description}</Markdown>
+      )}
       <Container>
         <Row>
           {/* Mapping over all subcategories to preserve order */}
@@ -41,7 +44,9 @@ function EntityList({
             return (
               <Row key={subCategory.label + 'Row'}>
                 <h3>{subCategory.label}</h3>
-                {/* TODO: subcategory description */}
+                {Boolean(subCategory.description) && (
+                  <Markdown>{subCategory.description}</Markdown>
+                )}
                 {/* Mapping over all entities to preserve order */}
                 {map(entitiesByKey, (_, entityKey) => {
                   const entity = (currentEntitiesByKey[entityKey] || [])[0];

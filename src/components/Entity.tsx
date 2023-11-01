@@ -91,7 +91,7 @@ function Entity({
 
   return (
     <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
-      <Card.Img variant="top" src={`/incursion/images/${entityKey}.jpg`} />
+      <Card.Img variant="top" src={entity.imageUrl} />
       <Card.Body>
         <Card.Title>{entity.label}</Card.Title>
         {Boolean(entity.description) && (

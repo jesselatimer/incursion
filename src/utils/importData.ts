@@ -41,6 +41,7 @@ export const getDataFromImport = async () => {
     (rowEntity) => {
       return {
         ...rowEntity,
+        imageUrl: `/incursion/imported/${rowEntity.Image}`,
         entityLevels:
           rowEntity.entityLevels && typeof rowEntity.entityLevels === 'string'
             ? rowEntity.entityLevels.split(',')
