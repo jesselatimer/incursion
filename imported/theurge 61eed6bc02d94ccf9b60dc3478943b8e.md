@@ -1,7 +1,7 @@
 # theurge
 
 label: Theurge
-Image: _476fa924-c4ff-4d1f-bebe-35f1be0ecc5f.jpeg
+Image: theurge.jpg
 EntityLevels: theurge_1 (theurge_1%20231e9179d98e4809b4bcde16c6783144.md)
 Category: foundations (foundations%204d9ce68d973b4b4aa9877956db31ca34.md)
 SubCategory: methods (methods%204783ae6cf00d424da9ec2183f6e950ce.md)

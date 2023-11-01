@@ -1,7 +1,7 @@
 # necrophage
 
 label: Necrophage
-Image: _d2b8a1e2-f47c-498b-b8d4-35e40c030d37.jpeg
+Image: necrophage.jpg
 EntityLevels: necrophage_1 (necrophage_1%20bbb6f5de1ca8421a8ff746253c7db8ba.md)
 Category: foundations (foundations%204d9ce68d973b4b4aa9877956db31ca34.md)
 SubCategory: sources (sources%2037fffd6f6188401f85401aa882584deb.md)

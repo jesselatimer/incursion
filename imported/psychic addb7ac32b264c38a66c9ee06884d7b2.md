@@ -1,7 +1,7 @@
 # psychic
 
 label: Psychic
-Image: _e8a85842-e172-4905-bfea-7adf540493e4.jpeg
+Image: psychic.jpg
 EntityLevels: psychic_1 (psychic_1%2010154e9f699645628cc1f542daffbf4c.md)
 Category: foundations (foundations%204d9ce68d973b4b4aa9877956db31ca34.md)
 SubCategory: methods (methods%204783ae6cf00d424da9ec2183f6e950ce.md)
