@@ -100,10 +100,7 @@ function Summary({
                           }}
                         >
                           <Col sm={3} style={{ padding: 0 }}>
-                            <Image
-                              src={`/incursion/images/${entity.key}.jpg`}
-                              thumbnail
-                            />
+                            <Image src={entity.imageUrl} thumbnail />
                           </Col>
                           <Col sm={9}>
                             <Stack direction="vertical">
