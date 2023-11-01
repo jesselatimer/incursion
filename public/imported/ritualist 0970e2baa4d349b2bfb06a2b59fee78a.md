@@ -1,7 +1,7 @@
 # ritualist
 
 label: Ritualist
-Image: _27de4543-7053-4c4f-b62a-7935624ecde0.jpeg
+Image: ritualist.jpg
 EntityLevels: ritualist_1 (ritualist_1%20273a120179f84302b7628255f439ffc5.md)
 Category: foundations (foundations%204d9ce68d973b4b4aa9877956db31ca34.md)
 SubCategory: methods (methods%204783ae6cf00d424da9ec2183f6e950ce.md)
