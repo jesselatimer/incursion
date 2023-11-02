@@ -3,13 +3,30 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  LoaderFunction,
+  LoaderFunctionArgs,
+  ParamParseKey,
+  Params,
+  RouterProvider,
+} from 'react-router-dom';
 import Page from './components/Page';
 import { getDataFromImport } from './utils/importData';
 
 async function loader() {
   return await getDataFromImport();
 }
+
+const pathNames = { categoryKey: '/category/:categoryKey' } as const;
+export interface PageArgs extends LoaderFunctionArgs {
+  params: Params<ParamParseKey<typeof pathNames.categoryKey>>;
+}
+
+export const pageLoader: LoaderFunction = ({ params }: PageArgs) => {
+  console.log('pageLoader', params);
+  return params || {};
+};
 
 const router = createBrowserRouter([
   {
@@ -19,8 +36,9 @@ const router = createBrowserRouter([
     loader,
     children: [
       {
-        path: 'test',
+        path: pathNames.categoryKey,
         element: <Page />,
+        loader: pageLoader,
       },
     ],
   },
