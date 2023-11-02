@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import { Category, CategorySchema } from '../models/Category';
+import { Category, CategoryKey, CategorySchema } from '../models/Category';
 import { PointType, PointTypeKey, PointTypeSchema } from '../models/PointType';
 import { EntityKey, Entity, EntitySchema } from '../models/Entity';
 import {
@@ -15,7 +15,15 @@ import {
 import { ZodType, z } from 'zod';
 import { reduce } from 'lodash';
 
-export const getDataFromImport = async () => {
+export type DataByKey = {
+  categoriesByKey: Record<CategoryKey, Category>;
+  subCategoriesByKey: Record<SubCategoryKey, SubCategory>;
+  entitiesByKey: Record<EntityKey, Entity>;
+  entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
+  pointTypesByKey: Record<PointTypeKey, PointType>;
+};
+
+export const getDataFromImport = async (): Promise<DataByKey> => {
   const categoriesByKey: Record<string, Category> = await parseCsv<
     typeof CategorySchema
   >(

@@ -2,7 +2,11 @@ import { Entity as EntityModel, EntityKey } from '../models/Entity';
 import Markdown from './Markdown';
 import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
-import { DataContext, REQUIRED_ENTITY_KEYS, SetChoicesContext } from './App';
+import {
+  DataContext,
+  REQUIRED_ENTITY_KEYS,
+  CategoryChoicesContext,
+} from './App';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
@@ -20,7 +24,7 @@ function Entity({
   const { categoriesByKey, pointTypesByKey, entitiesByKey, entityLevelsByKey } =
     dataByKey;
 
-  const setChoices = useContext(SetChoicesContext);
+  const { setChoices } = useContext(CategoryChoicesContext);
   const {
     choice,
     category,

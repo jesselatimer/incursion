@@ -3,13 +3,35 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Page from './components/Page';
+import { getDataFromImport } from './utils/importData';
+
+async function loader() {
+  return await getDataFromImport();
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    // errorElement: <ErrorPage />,
+    loader,
+    children: [
+      {
+        path: 'test',
+        element: <Page />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

@@ -1,17 +1,10 @@
-import {
-  createContext,
-  useCallback,
-  useMemo,
-  useState,
-  useEffect,
-} from 'react';
+import { createContext, useCallback, useState } from 'react';
 import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
 import { Category, CategoryKey } from '../models/Category';
 import { DEFAULT_TRUE_MAGE } from '../data';
-import { getDataFromImport } from '../utils/importData';
-import Page from './Page';
+import { DataByKey } from '../utils/importData';
 import ValidationToast from './ValidationToast';
 import { calculatePoints } from '../utils/calculatePoints';
 import { every } from 'lodash';
@@ -19,6 +12,7 @@ import { Entity, EntityKey } from '../models/Entity';
 import { SubCategory, SubCategoryKey } from '../models/SubCategory';
 import { EntityLevel, EntityLevelKey } from '../models/EntityLevel';
 import { PointType, PointTypeKey } from '../models/PointType';
+import { Outlet, useLoaderData } from 'react-router-dom';
 
 type TrueMageContext = {
   trueMage: TrueMage;
@@ -45,13 +39,15 @@ const defaultDataContext: DataContext = {
 };
 export const DataContext = createContext<DataContext>(defaultDataContext);
 
-type SetChoicesContext = (
-  newChoices: Choice[],
-  categoryKey: CategoryKey
-) => void;
-export const SetChoicesContext = createContext<SetChoicesContext>(
-  (_newChoices, _categoryKey) => {}
-);
+type CategoryChoicesContext = {
+  setChoices: (newChoices: Choice[], categoryKey: CategoryKey) => void;
+  categoryChoices: Record<CategoryKey, Choice[]>;
+};
+
+export const CategoryChoicesContext = createContext<CategoryChoicesContext>({
+  setChoices: (_newChoices, _categoryKey) => {},
+  categoryChoices: {},
+});
 
 export type ValidationState =
   | {
@@ -67,15 +63,7 @@ export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
 };
 
 function App() {
-  const [dataByKey, setDataByKey] = useState(defaultDataContext);
-  useEffect(() => {
-    async function getData() {
-      const data = await getDataFromImport();
-      setDataByKey(data);
-    }
-
-    getData();
-  }, []);
+  const dataByKey = useLoaderData() as DataByKey;
 
   // TODO: have this read from local storage
   // TODO: implement multiple users (store each user in local storage, use state to set user)
@@ -167,15 +155,17 @@ function App() {
   return (
     <TrueMageContext.Provider value={{ trueMage, setTrueMage }}>
       <DataContext.Provider value={dataByKey}>
-        <SetChoicesContext.Provider value={setChoices}>
+        <CategoryChoicesContext.Provider
+          value={{ setChoices, categoryChoices }}
+        >
           <div style={{ position: 'relative' }}>
-            <Page categoryChoices={categoryChoices} />
+            <Outlet />
             <ValidationToast
               showValidationError={showValidationError}
               setShowValidationError={setShowValidationError}
             />
           </div>
-        </SetChoicesContext.Provider>
+        </CategoryChoicesContext.Provider>
       </DataContext.Provider>
     </TrueMageContext.Provider>
   );

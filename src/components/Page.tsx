@@ -4,16 +4,11 @@ import EntityList from './EntityList';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { groupBy, map } from 'lodash';
-import { Choice } from '../models/Choice';
 import { Category, CategoryKey } from '../models/Category';
-import { DataContext } from './App';
+import { CategoryChoicesContext, DataContext } from './App';
 
-// TODO: implement react router so we can have these on multiple pages
-function Page({
-  categoryChoices,
-}: {
-  categoryChoices: Record<CategoryKey, Choice[]>;
-}) {
+function Page() {
+  const { categoryChoices } = useContext(CategoryChoicesContext);
   const { entitiesByKey, categoriesByKey } = useContext(DataContext);
 
   const entitiesByCategory = useMemo(
