@@ -13,6 +13,8 @@ import { SubCategory, SubCategoryKey } from '../models/SubCategory';
 import { EntityLevel, EntityLevelKey } from '../models/EntityLevel';
 import { PointType, PointTypeKey } from '../models/PointType';
 import { Outlet, useLoaderData } from 'react-router-dom';
+import Summary from './Summary';
+import Navbar from './Navbar';
 
 type TrueMageContext = {
   trueMage: TrueMage;
@@ -159,7 +161,11 @@ function App() {
           value={{ setChoices, categoryChoices }}
         >
           <div style={{ position: 'relative' }}>
-            <Outlet />
+            <Navbar />
+            <>
+              <Summary categoryChoices={categoryChoices} />
+              <Outlet />
+            </>
             <ValidationToast
               showValidationError={showValidationError}
               setShowValidationError={setShowValidationError}

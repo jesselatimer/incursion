@@ -3,8 +3,7 @@ import Summary from './Summary';
 import EntityList from './EntityList';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-import { filter, groupBy, map } from 'lodash';
-import { Category, CategoryKey } from '../models/Category';
+import { filter } from 'lodash';
 import { CategoryChoicesContext, DataContext } from './App';
 import { useLoaderData } from 'react-router-dom';
 import { PageArgs } from '..';
@@ -19,25 +18,17 @@ function Page() {
     [entitiesByKey, categoryKey]
   );
 
+  // TODO: set up links
+  // TODO: move summary and navbar out of this component
   if (!categoryKey) return null;
   return (
-    <>
-      <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
-          <Navbar.Brand href="#home">Incursion</Navbar.Brand>
-        </Container>
-      </Navbar>
-      <>
-        <Summary categoryChoices={categoryChoices} />
-        <div style={{ marginLeft: '25%' }}>
-          <EntityList
-            key={categoryKey + 'EntityList'}
-            entities={entities}
-            choices={categoryChoices[categoryKey] || []}
-          />
-        </div>
-      </>
-    </>
+    <div style={{ marginLeft: '25%' }}>
+      <EntityList
+        key={categoryKey + 'EntityList'}
+        entities={entities}
+        choices={categoryChoices[categoryKey] || []}
+      />
+    </div>
   );
 }
 
