@@ -30,21 +30,26 @@ export const entityListLoader: LoaderFunction = ({
   return params || {};
 };
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      // errorElement: <ErrorPage />,
+      loader,
+      children: [
+        {
+          path: pathNames.categoryKey,
+          element: <EntityList />,
+          loader: entityListLoader,
+        },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <App />,
-    // errorElement: <ErrorPage />,
-    loader,
-    children: [
-      {
-        path: pathNames.categoryKey,
-        element: <EntityList />,
-        loader: entityListLoader,
-      },
-    ],
-  },
-]);
+    basename: `/incursion`,
+  }
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
