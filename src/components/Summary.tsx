@@ -107,18 +107,20 @@ function Summary({
                               <Image src={entity.imageUrl} thumbnail />
                             </Col>
                             <Col sm={9}>
-                              <strong
-                                style={{
-                                  whiteSpace: 'nowrap',
-                                  overflow: 'hidden',
-                                  textOverflow: 'ellipsis',
-                                }}
-                              >
-                                {entity.label}
-                                {entity.entityLevels.length > 1
-                                  ? `: ${choice.level}`
-                                  : ''}
-                              </strong>
+                              <Stack direction="vertical">
+                                <strong
+                                  style={{
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                  }}
+                                >
+                                  {entity.label}
+                                  {entity.entityLevels.length > 1
+                                    ? `: ${choice.level}`
+                                    : ''}
+                                </strong>
+                              </Stack>
                             </Col>
                           </Row>
                         );
