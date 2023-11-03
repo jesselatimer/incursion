@@ -15,6 +15,7 @@ import { PointType, PointTypeKey } from '../models/PointType';
 import { Outlet, useLoaderData } from 'react-router-dom';
 import Summary from './Summary';
 import Navbar from './Navbar';
+import { Col, Container, Row } from 'react-bootstrap';
 
 type TrueMageContext = {
   trueMage: TrueMage;
@@ -162,10 +163,14 @@ function App() {
         >
           <div style={{ position: 'relative' }}>
             <Navbar />
-            <>
-              <Summary categoryChoices={categoryChoices} />
-              <Outlet />
-            </>
+            <Row style={{ padding: '20px' }}>
+              <Col>
+                <Outlet />
+              </Col>
+              <Col xs={4} style={{ maxWidth: '350px' }}>
+                <Summary categoryChoices={categoryChoices} />
+              </Col>
+            </Row>
             <ValidationToast
               showValidationError={showValidationError}
               setShowValidationError={setShowValidationError}

@@ -11,7 +11,7 @@ import {
   Params,
   RouterProvider,
 } from 'react-router-dom';
-import Page from './components/Page';
+import EntityList from './components/EntityList';
 import { getDataFromImport } from './utils/importData';
 
 async function loader() {
@@ -19,12 +19,14 @@ async function loader() {
 }
 
 const pathNames = { categoryKey: '/category/:categoryKey' } as const;
-export interface PageArgs extends LoaderFunctionArgs {
+export interface EntityListArgs extends LoaderFunctionArgs {
   params: Params<ParamParseKey<typeof pathNames.categoryKey>>;
 }
 
-export const pageLoader: LoaderFunction = ({ params }: PageArgs) => {
-  console.log('pageLoader', params);
+export const entityListLoader: LoaderFunction = ({
+  params,
+}: EntityListArgs) => {
+  console.log('entityListLoader', params);
   return params || {};
 };
 
@@ -37,8 +39,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: pathNames.categoryKey,
-        element: <Page />,
-        loader: pageLoader,
+        element: <EntityList />,
+        loader: entityListLoader,
       },
     ],
   },

@@ -1,28 +1,30 @@
 import '../css/App.css';
-import { groupBy, map } from 'lodash';
+import { filter, groupBy, map } from 'lodash';
 import Entity from './Entity';
-import { Choice } from '../models/Choice';
-import type { Entity as EntityType } from '../models/Entity';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useContext } from 'react';
-import { DataContext } from './App';
+import { useContext, useMemo } from 'react';
+import { CategoryChoicesContext, DataContext } from './App';
 import Markdown from './Markdown';
+import { useLoaderData } from 'react-router-dom';
+import { EntityListArgs } from '..';
 
-function EntityList({
-  entities,
-  choices,
-}: {
-  entities: EntityType[];
-  choices: Choice[];
-}) {
+function EntityList() {
   const { subCategoriesByKey, categoriesByKey, entitiesByKey } =
     useContext(DataContext);
+  const { categoryChoices } = useContext(CategoryChoicesContext);
+  const { categoryKey } = useLoaderData() as EntityListArgs['params'];
+
+  const entities = useMemo(
+    () => filter(entitiesByKey, (entity) => entity.category === categoryKey),
+    [categoryKey]
+  );
 
   if (!entities?.length) return null;
+  if (!categoryKey) return null;
 
-  const categoryKey = entities[0].category;
+  const choices = categoryChoices[categoryKey] || [];
   const category = categoriesByKey[categoryKey];
   const entitiesBySubCategory = groupBy(entities, 'subCategory');
   const subCategories = category.subCategories.map(

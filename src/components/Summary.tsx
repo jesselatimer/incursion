@@ -27,82 +27,86 @@ function Summary({
     [dataByKey]
   );
   return (
-    <Container
-      className="SummaryFixed"
-      style={{
-        position: 'fixed',
-        maxWidth: '25%',
-        maxHeight: 'calc(100% - 56px)',
-        overflow: 'scroll',
-        padding: '20px',
-      }}
-    >
+    <>
       <h2 className="Summary-header">{trueMage.name}</h2>
-      {map(categoriesByKey, (category, categoryKey) => {
-        const choices = categoryChoices[category.key];
-        if (!choices?.length) return null;
-        const choicesByEntityKey = groupBy(choices, 'entityKey');
-        const pointTypeKey = category.pointType;
-        const pointType = pointTypeKey ? pointTypesByKey[pointTypeKey] : null;
-        const pointsUsed = calculatePoints(
-          choices,
-          entitiesByKey,
-          entityLevelsByKey,
-          pointType?.key
-        );
-        return (
-          <Card
-            key={category.key + 'SummaryContainer'}
-            style={{ marginTop: '10px' }}
-          >
-            <Card.Header>
-              <Card.Title>{category.label}</Card.Title>
-              <Card.Text>
-                {Boolean(pointType) && (
-                  <span
-                    style={
-                      pointsUsed > pointType!.maxPoints ? { color: 'red' } : {}
-                    }
-                  >
-                    {pointType?.label}: {pointsUsed}/{pointType?.maxPoints}
-                  </span>
-                )}
-              </Card.Text>
-            </Card.Header>
-            <Card.Body>
-              {/* Mapping over all subcategories to preserve order */}
-              {map(category.subCategories, (subCategoryKey) => {
-                const subCategory = subCategoriesByKey[subCategoryKey];
-                const currentEntities = entitiesBySubCategory[subCategoryKey];
-                if (!currentEntities?.length) return null;
-                const chosenEntities = currentEntities.filter(
-                  (e) => !!choicesByEntityKey[e.key]
-                );
-                if (chosenEntities.length === 0) return null;
-                return (
-                  <div
-                    key={subCategory.label + 'Summary'}
-                    style={{ marginBottom: '10px' }}
-                  >
-                    <h4>{subCategory.label}</h4>
-                    {/* Mapping over all entities to preserve order */}
-                    {map(currentEntities, (entity) => {
-                      const choice = (choicesByEntityKey[entity.key] || [])[0];
-                      if (!choice) return null;
-                      return (
-                        <Row
-                          key={choice.entityKey + 'SummaryRow'}
-                          style={{
-                            alignItems: 'center',
-                            paddingBottom: '5px',
-                            paddingTop: '5px',
-                          }}
-                        >
-                          <Col sm={3} style={{ padding: 0 }}>
-                            <Image src={entity.imageUrl} thumbnail />
-                          </Col>
-                          <Col sm={9}>
-                            <Stack direction="vertical">
+      <Container
+        className="SummaryFixed"
+        style={{
+          position: 'sticky',
+          maxHeight: '100vh',
+          overflow: 'scroll',
+          padding: '0',
+          top: '0',
+        }}
+      >
+        {map(categoriesByKey, (category, categoryKey) => {
+          const choices = categoryChoices[category.key];
+          if (!choices?.length) return null;
+          const choicesByEntityKey = groupBy(choices, 'entityKey');
+          const pointTypeKey = category.pointType;
+          const pointType = pointTypeKey ? pointTypesByKey[pointTypeKey] : null;
+          const pointsUsed = calculatePoints(
+            choices,
+            entitiesByKey,
+            entityLevelsByKey,
+            pointType?.key
+          );
+          return (
+            <Card
+              key={category.key + 'SummaryContainer'}
+              style={{ marginTop: '10px' }}
+            >
+              <Card.Header>
+                <Card.Title>{category.label}</Card.Title>
+                <Card.Text>
+                  {Boolean(pointType) && (
+                    <span
+                      style={
+                        pointsUsed > pointType!.maxPoints
+                          ? { color: 'red' }
+                          : {}
+                      }
+                    >
+                      {pointType?.label}: {pointsUsed}/{pointType?.maxPoints}
+                    </span>
+                  )}
+                </Card.Text>
+              </Card.Header>
+              <Card.Body>
+                {/* Mapping over all subcategories to preserve order */}
+                {map(category.subCategories, (subCategoryKey) => {
+                  const subCategory = subCategoriesByKey[subCategoryKey];
+                  const currentEntities = entitiesBySubCategory[subCategoryKey];
+                  if (!currentEntities?.length) return null;
+                  const chosenEntities = currentEntities.filter(
+                    (e) => !!choicesByEntityKey[e.key]
+                  );
+                  if (chosenEntities.length === 0) return null;
+                  return (
+                    <div
+                      key={subCategory.label + 'Summary'}
+                      style={{ marginBottom: '10px' }}
+                    >
+                      <h4>{subCategory.label}</h4>
+                      {/* Mapping over all entities to preserve order */}
+                      {map(currentEntities, (entity) => {
+                        const choice = (choicesByEntityKey[entity.key] ||
+                          [])[0];
+                        if (!choice) return null;
+                        return (
+                          <Row
+                            key={choice.entityKey + 'SummaryRow'}
+                            style={{
+                              alignItems: 'center',
+                              paddingBottom: '5px',
+                              paddingTop: '5px',
+                              margin: '0',
+                            }}
+                          >
+                            <Col sm={3} style={{ padding: 0 }}>
+                              <Image src={entity.imageUrl} thumbnail />
+                            </Col>
+                            <Col sm={9}>
                               <strong
                                 style={{
                                   whiteSpace: 'nowrap',
@@ -115,19 +119,19 @@ function Summary({
                                   ? `: ${choice.level}`
                                   : ''}
                               </strong>
-                            </Stack>
-                          </Col>
-                        </Row>
-                      );
-                    })}
-                  </div>
-                );
-              })}
-            </Card.Body>
-          </Card>
-        );
-      })}
-    </Container>
+                            </Col>
+                          </Row>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </Card.Body>
+            </Card>
+          );
+        })}
+      </Container>
+    </>
   );
 }
 
