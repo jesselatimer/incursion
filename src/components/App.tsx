@@ -67,29 +67,27 @@ export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
   foundations: ['power', 'capacity'],
 };
 
+let initialChoices: Record<CategoryKey, Choice[]> = {
+  foundations: [
+    { entityKey: 'power', level: 1 },
+    { entityKey: 'capacity', level: 1 },
+  ],
+};
+const choicesFromStorageJson = localStorage.getItem(DEFAULT_TRUE_MAGE.name);
+if (choicesFromStorageJson) {
+  const choicesFromStorage: Record<CategoryKey, Choice[]> = JSON.parse(
+    choicesFromStorageJson
+  );
+  initialChoices = choicesFromStorage;
+}
+
 function App() {
   const dataByKey = useLoaderData() as DataByKey;
 
   // TODO: implement multiple users (store each user in local storage, use state to set user)
   const [trueMage, setTrueMage] = useState<TrueMage>(DEFAULT_TRUE_MAGE);
-  const [categoryChoices, setAllChoicesByCategory] = useState<
-    Record<CategoryKey, Choice[]>
-  >({
-    foundations: [
-      { entityKey: 'power', level: 1 },
-      { entityKey: 'capacity', level: 1 },
-    ],
-  });
-
-  useEffect(() => {
-    const choicesFromStorageJson = localStorage.getItem(trueMage.name);
-    if (choicesFromStorageJson) {
-      const choicesFromStorage: Record<CategoryKey, Choice[]> = JSON.parse(
-        choicesFromStorageJson
-      );
-      setAllChoicesByCategory(choicesFromStorage);
-    }
-  }, []);
+  const [categoryChoices, setAllChoicesByCategory] =
+    useState<Record<CategoryKey, Choice[]>>(initialChoices);
 
   const [showValidationError, setShowValidationError] =
     useState<ValidationState>({
