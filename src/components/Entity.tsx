@@ -124,13 +124,13 @@ function Entity({
                 ],
                 entitiesByKey,
                 entityLevelsByKey,
-                pointType!.key
+                pointType?.key
               );
               const pointsUsedWithoutThisChoice = calculatePoints(
                 [...choices.filter((c) => c.entityKey !== entity.key)],
                 entitiesByKey,
                 entityLevelsByKey,
-                pointType!.key
+                pointType?.key
               );
               const canBePurchased = usesPoints
                 ? pointsRemaining >= pointsUsedAfterPurchasingLevel - pointsUsed

@@ -53,7 +53,7 @@ function EntityPreview({
     ],
     entitiesByKey,
     entityLevelsByKey,
-    pointType!.key
+    pointType?.key
   );
   const canBePurchased = usesPoints
     ? pointsRemaining >= pointsUsedAfterPurchasing - pointsUsed

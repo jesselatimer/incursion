@@ -88,12 +88,15 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     (entityLevel) => {
       return {
         ...entityLevel,
-        // @ts-ignore fixing type
-        level: parseInt(entityLevel.level),
+        level:
+          entityLevel.level && typeof entityLevel.level === 'string'
+            ? parseInt(entityLevel.level)
+            : undefined,
         pointCost:
-          entityLevel.pointCost !== undefined
-            ? // @ts-ignore fixing type
-              parseInt(entityLevel.pointCost)
+          entityLevel.pointCost && typeof entityLevel.pointCost === 'string'
+            ? entityLevel.pointCost === ''
+              ? undefined
+              : parseInt(entityLevel.pointCost)
             : undefined,
       };
     }
