@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
@@ -70,7 +70,6 @@ export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
 function App() {
   const dataByKey = useLoaderData() as DataByKey;
 
-  // TODO: have this read from local storage
   // TODO: implement multiple users (store each user in local storage, use state to set user)
   const [trueMage, setTrueMage] = useState<TrueMage>(DEFAULT_TRUE_MAGE);
   const [categoryChoices, setAllChoicesByCategory] = useState<
@@ -81,6 +80,16 @@ function App() {
       { entityKey: 'capacity', level: 1 },
     ],
   });
+
+  useEffect(() => {
+    const choicesFromStorageJson = localStorage.getItem(trueMage.name);
+    if (choicesFromStorageJson) {
+      const choicesFromStorage: Record<CategoryKey, Choice[]> = JSON.parse(
+        choicesFromStorageJson
+      );
+      setAllChoicesByCategory(choicesFromStorage);
+    }
+  }, []);
 
   const [showValidationError, setShowValidationError] =
     useState<ValidationState>({
@@ -147,6 +156,7 @@ function App() {
       let newCategoryChoices = { ...categoryChoices };
       newCategoryChoices[categoryKey] = newChoices;
 
+      localStorage.setItem(trueMage.name, JSON.stringify(newCategoryChoices));
       setAllChoicesByCategory(newCategoryChoices);
     },
     [
