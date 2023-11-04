@@ -14,6 +14,7 @@ import {
 import EntityList from './components/EntityList';
 import { getDataFromImport } from './utils/importData';
 import Setting from './components/Setting';
+import Welcome from './components/Welcome';
 
 async function loader() {
   return await getDataFromImport();
@@ -39,6 +40,10 @@ const router = createBrowserRouter(
       // errorElement: <ErrorPage />,
       loader,
       children: [
+        {
+          path: '/',
+          element: <Welcome />,
+        },
         {
           path: pathNames.categoryKey,
           element: <EntityList />,
