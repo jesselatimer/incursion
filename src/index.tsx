@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom';
 import EntityList from './components/EntityList';
 import { getDataFromImport } from './utils/importData';
+import Setting from './components/Setting';
 
 async function loader() {
   return await getDataFromImport();
@@ -42,6 +43,10 @@ const router = createBrowserRouter(
           path: pathNames.categoryKey,
           element: <EntityList />,
           loader: entityListLoader,
+        },
+        {
+          path: '/setting',
+          element: <Setting />,
         },
       ],
     },

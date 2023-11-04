@@ -21,6 +21,7 @@ export type DataByKey = {
   entitiesByKey: Record<EntityKey, Entity>;
   entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
   pointTypesByKey: Record<PointTypeKey, PointType>;
+  setting: string;
 };
 
 export const getDataFromImport = async (): Promise<DataByKey> => {
@@ -102,12 +103,18 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     }
   );
 
+  const setting = await fetch(
+    '/incursion/imported/Setting 61b4b535ec174572a4419910929e7022.md'
+  );
+  const settingText = await setting.text();
+
   return {
     categoriesByKey,
     subCategoriesByKey,
     entitiesByKey,
     entityLevelsByKey,
     pointTypesByKey,
+    setting: settingText,
   };
 };
 

@@ -32,6 +32,7 @@ type DataContext = {
   entitiesByKey: Record<EntityKey, Entity>;
   entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
   pointTypesByKey: Record<PointTypeKey, PointType>;
+  setting: string;
 };
 const defaultDataContext: DataContext = {
   categoriesByKey: {},
@@ -39,6 +40,7 @@ const defaultDataContext: DataContext = {
   entitiesByKey: {},
   entityLevelsByKey: {},
   pointTypesByKey: {},
+  setting: '',
 };
 export const DataContext = createContext<DataContext>(defaultDataContext);
 

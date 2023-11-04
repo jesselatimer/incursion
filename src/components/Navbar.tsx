@@ -13,7 +13,9 @@ export default function Navbar() {
       className="bg-body-tertiary"
       style={{ padding: '20px 30px' }}
     >
-      <ReactNavbar.Brand href={'/'}>Incursion</ReactNavbar.Brand>
+      <Link to={'/'} className="navbar-brand">
+        Incursion
+      </Link>
       <ReactNavbar.Toggle aria-controls="basic-ReactNavbar-nav" />
       <ReactNavbar.Collapse id="basic-ReactNavbar-nav">
         <Nav className="me-auto">
