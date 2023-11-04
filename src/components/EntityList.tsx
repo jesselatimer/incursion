@@ -1,6 +1,5 @@
-import '../css/App.css';
 import { filter, groupBy, map } from 'lodash';
-import Entity from './Entity';
+import EntityPreview from './EntityPreview';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -58,10 +57,9 @@ function EntityList() {
                       key={entity.key + 'Col'}
                       style={{ maxWidth: '400px', minWidth: '300px' }}
                     >
-                      <Entity
+                      <EntityPreview
                         key={entity.key}
                         entity={entity}
-                        entityKey={entity.key}
                         choices={choices}
                       />
                     </Col>

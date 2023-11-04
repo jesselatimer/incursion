@@ -1,4 +1,4 @@
-import { Entity as EntityModel, EntityKey } from '../models/Entity';
+import { Entity as EntityModel } from '../models/Entity';
 import Markdown from './Markdown';
 import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
@@ -7,22 +7,26 @@ import {
   REQUIRED_ENTITY_KEYS,
   CategoryChoicesContext,
 } from './App';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
+import { Modal } from 'react-bootstrap';
 
 function Entity({
   entity,
-  entityKey,
   choices,
+  showModal,
+  setShowModal,
 }: {
   entity: EntityModel;
-  entityKey: EntityKey;
   choices: Choice[];
+  showModal: boolean;
+  setShowModal: (showModal: boolean) => void;
 }) {
   const dataByKey = useContext(DataContext);
   const { categoriesByKey, pointTypesByKey, entitiesByKey, entityLevelsByKey } =
     dataByKey;
+  const entityKey = entity.key;
 
   const { setChoices } = useContext(CategoryChoicesContext);
   const {
@@ -94,93 +98,101 @@ function Entity({
   }, [setChoices, choices, choice, chosenLevel, dataByKey]);
 
   return (
-    <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
-      <Card.Img variant="top" src={entity.imageUrl} />
-      <Card.Body>
-        <Card.Title>{entity.label}</Card.Title>
-        {Boolean(entity.description) && (
-          <Card.Text>
-            <Markdown>{entity.description}</Markdown>
-          </Card.Text>
-        )}
-        <Card.Text>
-          Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
-        </Card.Text>
-        {map(entity.entityLevels, (levelKey) => {
-          const entityLevel = entityLevelsByKey[levelKey];
-          const pointsUsedAfterPurchasingLevel = calculatePoints(
-            [
-              ...choices.filter((c) => c.entityKey !== entity.key),
-              { entityKey: entity.key, level: entityLevel.level },
-            ],
-            entitiesByKey,
-            entityLevelsByKey,
-            pointType!.key
-          );
-          const pointsUsedWithoutThisChoice = calculatePoints(
-            [...choices.filter((c) => c.entityKey !== entity.key)],
-            entitiesByKey,
-            entityLevelsByKey,
-            pointType!.key
-          );
-          const canBePurchased = usesPoints
-            ? pointsRemaining >= pointsUsedAfterPurchasingLevel - pointsUsed
-            : true;
-          const pointsToShow =
-            entityLevel.level === chosenLevel
-              ? pointsUsed - pointsUsedWithoutThisChoice
-              : pointsUsedAfterPurchasingLevel - pointsUsedWithoutThisChoice;
-          const onClick =
-            entityLevel.level === chosenLevel
-              ? () => onClickUnselect()
-              : () => onClickSelect(entityLevel.level);
-          return (
-            <Card
-              key={entityKey + entityLevel.level + 'SummaryCard'}
-              border={
-                canBePurchased
-                  ? entityLevel.level <= chosenLevel
-                    ? 'secondary'
-                    : 'secondary'
-                  : entityLevel.level <= chosenLevel
-                  ? 'danger'
-                  : 'dark'
-              }
-              bg={
-                canBePurchased
-                  ? entityLevel.level <= chosenLevel
-                    ? 'light'
-                    : 'dark'
-                  : entityLevel.level <= chosenLevel
-                  ? 'light'
-                  : 'danger'
-              }
-              text={
-                canBePurchased
-                  ? entityLevel.level <= chosenLevel
-                    ? 'dark'
-                    : 'light'
-                  : entityLevel.level <= chosenLevel
-                  ? 'danger'
-                  : 'light'
-              }
-              onClick={onClick}
-              style={{ cursor: 'pointer', marginBottom: '10px' }}
-            >
-              <Card.Body>
-                <Card.Title>{`Level ${entityLevel.level}`}</Card.Title>
-                {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
-                {Boolean(entityLevel.description) && (
-                  <Card.Text>
-                    <Markdown>{entityLevel.description}</Markdown>
-                  </Card.Text>
-                )}
-              </Card.Body>
-            </Card>
-          );
-        })}
-      </Card.Body>
-    </Card>
+    <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+      <Modal.Body style={{ padding: '0' }}>
+        <Card
+          border={choice ? 'light' : 'secondary'}
+          text={choice ? 'light' : ''}
+        >
+          <Card.Img variant="top" src={entity.imageUrl} />
+          <Card.Body>
+            <Card.Title>{entity.label}</Card.Title>
+            {Boolean(entity.description) && (
+              <Card.Text>
+                <Markdown>{entity.description}</Markdown>
+              </Card.Text>
+            )}
+            <Card.Text>
+              Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
+            </Card.Text>
+            {map(entity.entityLevels, (levelKey) => {
+              const entityLevel = entityLevelsByKey[levelKey];
+              const pointsUsedAfterPurchasingLevel = calculatePoints(
+                [
+                  ...choices.filter((c) => c.entityKey !== entity.key),
+                  { entityKey: entity.key, level: entityLevel.level },
+                ],
+                entitiesByKey,
+                entityLevelsByKey,
+                pointType!.key
+              );
+              const pointsUsedWithoutThisChoice = calculatePoints(
+                [...choices.filter((c) => c.entityKey !== entity.key)],
+                entitiesByKey,
+                entityLevelsByKey,
+                pointType!.key
+              );
+              const canBePurchased = usesPoints
+                ? pointsRemaining >= pointsUsedAfterPurchasingLevel - pointsUsed
+                : true;
+              const pointsToShow =
+                entityLevel.level === chosenLevel
+                  ? pointsUsed - pointsUsedWithoutThisChoice
+                  : pointsUsedAfterPurchasingLevel -
+                    pointsUsedWithoutThisChoice;
+              const onClick =
+                entityLevel.level === chosenLevel
+                  ? () => onClickUnselect()
+                  : () => onClickSelect(entityLevel.level);
+              return (
+                <Card
+                  key={entityKey + entityLevel.level + 'EntityCard'}
+                  border={
+                    canBePurchased
+                      ? entityLevel.level <= chosenLevel
+                        ? 'secondary'
+                        : 'secondary'
+                      : entityLevel.level <= chosenLevel
+                      ? 'danger'
+                      : 'dark'
+                  }
+                  bg={
+                    canBePurchased
+                      ? entityLevel.level <= chosenLevel
+                        ? 'light'
+                        : 'dark'
+                      : entityLevel.level <= chosenLevel
+                      ? 'light'
+                      : 'danger'
+                  }
+                  text={
+                    canBePurchased
+                      ? entityLevel.level <= chosenLevel
+                        ? 'dark'
+                        : 'light'
+                      : entityLevel.level <= chosenLevel
+                      ? 'danger'
+                      : 'light'
+                  }
+                  onClick={onClick}
+                  style={{ cursor: 'pointer', marginBottom: '10px' }}
+                >
+                  <Card.Body>
+                    <Card.Title>{`Level ${entityLevel.level}`}</Card.Title>
+                    {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
+                    {Boolean(entityLevel.description) && (
+                      <Card.Text>
+                        <Markdown>{entityLevel.description}</Markdown>
+                      </Card.Text>
+                    )}
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </Card.Body>
+        </Card>
+      </Modal.Body>
+    </Modal>
   );
 }
 

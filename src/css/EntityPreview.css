@@ -1,0 +1,14 @@
+.EntityPreviewCard {
+  cursor: pointer;
+}
+
+.EntityPreviewCard.chosen {
+  border: lightgray 1px solid;
+  color: lightgray;
+}
+
+.EntityPreviewCard:hover {
+  border: white solid 1px;
+  color: white;
+  transition: color linear 0.1s, border linear 0.1s;
+}
