@@ -35,41 +35,37 @@ function EntityList() {
       {Boolean(category.description) && (
         <Markdown>{category.description}</Markdown>
       )}
-      <Container>
-        <Row>
-          {/* Mapping over all subcategories to preserve order */}
-          {map(subCategories, (subCategory) => {
-            const currentEntities = entitiesBySubCategory[subCategory.key];
-            if (!currentEntities?.length) return null;
-            const currentEntitiesByKey = groupBy(currentEntities, 'key');
-            return (
-              <Row key={subCategory.label + 'Row'}>
-                <h3>{subCategory.label}</h3>
-                {Boolean(subCategory.description) && (
-                  <Markdown>{subCategory.description}</Markdown>
-                )}
-                {/* Mapping over all entities to preserve order */}
-                {map(entitiesByKey, (_, entityKey) => {
-                  const entity = (currentEntitiesByKey[entityKey] || [])[0];
-                  if (!entity) return null;
-                  return (
-                    <Col
-                      key={entity.key + 'Col'}
-                      style={{ maxWidth: '400px', minWidth: '300px' }}
-                    >
-                      <EntityPreview
-                        key={entity.key}
-                        entity={entity}
-                        choices={choices}
-                      />
-                    </Col>
-                  );
-                })}
-              </Row>
-            );
-          })}
-        </Row>
-      </Container>
+      {/* Mapping over all subcategories to preserve order */}
+      {map(subCategories, (subCategory) => {
+        const currentEntities = entitiesBySubCategory[subCategory.key];
+        if (!currentEntities?.length) return null;
+        const currentEntitiesByKey = groupBy(currentEntities, 'key');
+        return (
+          <Row key={subCategory.label + 'Row'}>
+            <h3>{subCategory.label}</h3>
+            {Boolean(subCategory.description) && (
+              <Markdown>{subCategory.description}</Markdown>
+            )}
+            {/* Mapping over all entities to preserve order */}
+            {map(entitiesByKey, (_, entityKey) => {
+              const entity = (currentEntitiesByKey[entityKey] || [])[0];
+              if (!entity) return null;
+              return (
+                <Col
+                  key={entity.key + 'Col'}
+                  style={{ maxWidth: '400px', minWidth: '300px' }}
+                >
+                  <EntityPreview
+                    key={entity.key}
+                    entity={entity}
+                    choices={choices}
+                  />
+                </Col>
+              );
+            })}
+          </Row>
+        );
+      })}
     </Container>
   );
 }

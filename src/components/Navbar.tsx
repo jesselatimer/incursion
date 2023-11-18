@@ -24,7 +24,11 @@ export default function Navbar() {
           </Link>
           {map(categoriesByKey, (category) => {
             return (
-              <Link to={`/category/${category.key}`} className="nav-link">
+              <Link
+                key={`navLink${category.key}`}
+                to={`/category/${category.key}`}
+                className="nav-link"
+              >
                 {category.label}
               </Link>
             );

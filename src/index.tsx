@@ -28,7 +28,6 @@ export interface EntityListArgs extends LoaderFunctionArgs {
 export const entityListLoader: LoaderFunction = ({
   params,
 }: EntityListArgs) => {
-  console.log('entityListLoader', params);
   return params || {};
 };
 
