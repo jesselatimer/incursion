@@ -140,6 +140,7 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
             }
             const selfPaths = result.Self.match(regex);
             if (!selfPaths || selfPaths.length < 1) {
+              console.error('Cannot parse Self', result);
               throw new Error('Cannot parse Self');
             }
             const pathToSelf = `${selfPaths[0].slice(1, -1)}.md`;
