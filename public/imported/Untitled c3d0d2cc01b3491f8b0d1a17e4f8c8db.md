@@ -1,0 +1,3 @@
+# Untitled
+
+A beautifully-carved wooden pipe. Smoke begins to curl from your mouth and nostrils as soon as you bring it to your lips. Inhaling through this pipe alters your thinking and perceptions. While smoking you become more meditative, less anxious, more capable of taking the long view, more strategic and insightful in planning, with a clearer memory. The effects linger for a short time. In addition, the smoke acts as a ward against small insects and weaker malign magic.

@@ -1,0 +1,7 @@
+# eaters_of_violent_intent_1
+
+Entity: eaters_of_violent_intent (eaters_of_violent_intent%2078cbbb246a564ff19dc36231c00f7e76.md)
+Self: eaters_of_violent_intent_1 (eaters_of_violent_intent_1%200a64006515c845ec9b987d3ddf8a5565.md)
+entityKey: eaters_of_violent_intent
+level: 1
+pointCost: 2

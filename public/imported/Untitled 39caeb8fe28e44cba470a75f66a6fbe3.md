@@ -1,0 +1,13 @@
+# Untitled
+
+You’re pretty sure that one’s a man and one’s a woman, which means they can’t technically be identical, but it sure is hard to tell them apart. They are attractive in an androgynous way, and are especially graceful. They have mischievous, verging on sadistic personalities, and take pleasure in being enigmatic; which is why you think it’s teasing when they pretend to be annoyed you can’t tell them apart. They don’t like being separated, and will often retreat into their own little world of just the two of them--perhaps a result of having to forge their own way since being orphaned by mysterious circumstances in the early days of the Incursion.
+
+Thaumaturgy: *Twin Talents (Smoke and Mirrors)*
+
+They have a inherent ability to communicate telepathically when they have line of sight to each other, and have a good sense of each other’s location when they aren’t in sight. An injury to one doesn’t literally injure the other, but it does distress them. It seems like they might be able to swap their other Talents, but it could also be that they pretend to do so to vex you. They draw geomantic aether, and their spells are cast alongside brief bursts of emotion felt by all within 15-20 feet.
+
+*Smoke*: This twin can create billowing clouds of cohesive, vision-obscuring smoke, which they can manipulate to a degree. They can do two main kinds: a black smog that chokes and burns (really cranked up it’s like less sticky tear gas); or a pastel one that smells pleasantly of flowers and causes a pleasureable confusion, dulls pain, and misleads the senses. Their conduit starts to be fully taxed at the point of filling a gymnasium, and there are limits to how tightly they can bind the smoke into a shape or move around, but they could, for instance, make a 10 foot diameter “snake” that stretches about a hundred yards. Both twins are completely immune to these smokes unless they desire to be affected, and can even see through them somewhat.
+
+*Mirrors*
+
+: This twin can cast spells to become supernaturally agile, with enhanced grace and reaction speed. When they are not being observed, this ability becomes much, much stronger, their movement preternaturally fast and quiet, their senses enhanced, and they can slither through spaces they normally couldn’t. They can conjure pairs of extremely sharp gleaming glass daggers which can also partially affect the spiritual. The daggers can be thrown and will cut through the air much faster than normal daggers would. The speed by which they can move and attack gives the illusion that they are in many places at once. This ability, when used to its full potential, fully taxes the twin in a matter of minutes.
