@@ -1,0 +1,9 @@
+# Untitled
+
+An obviously unnatural creature, the mount is a horse-sized conglomeration of warped flesh and bizarre machine. Though it has only a rudimentary personality, the mount is sapient, has a functioning understanding of the world and of tactics, and is adamantly loyal to you (will even follow suicidal orders).
+
+Natural Power (?): *Special Construction*
+
+The Mount is extremely strong and durable, a great climber, a fast runner (~140mph top speed), and a very fast swimmer (~300mph; it provides depth resistance and air). Its eyesight is not very high resolution, but it’s very sensitive to movement and light, and covers a wide field of vision. It doesn’t just have excellent hearing, but echolocation and full sonar underwater. It has a magnetic sense that means it can see true north, and can pick up electromagnetic waves, as well as produce radar pulses. It eats with a small secondary mouth in its chest region, and can gain nourishment from nearly anything that could act as fuel, such as wood, rotted food, or petroleum. Its healing power is extraordinarily complete: given appropriate materials it can reconstruct itself from anything short of death.
+
+At the front is a kind of orifice or slot sized such that a human can slide their legs into it. When they do so, the entrance cinches tight and synchronizes with the rider’s nervous system, allowing you to act as one, like a freakish centaur. When you two are linked, it is better than just each of you being an extension of each other: not only do you move naturally as one being, intuitively sharing senses and allowing you to control its strange body, but it acts in concert with you, sharing its own thoughts, lending you its experience, and even reacting to things you miss. The Mount can be “ridden” this way by others, but has noticeably reduced synchronization.

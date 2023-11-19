@@ -1,0 +1,7 @@
+# key_to_the_dancing_house_1
+
+Entity: key_to_the_dancing_house (key_to_the_dancing_house%200188fb8750704292ba79ae15ba25632d.md)
+Self: key_to_the_dancing_house_1 (key_to_the_dancing_house_1%204f0e446eb0084f5a8a623f3d89fce932.md)
+entityKey: key_to_the_dancing_house
+level: 1
+pointCost: 1

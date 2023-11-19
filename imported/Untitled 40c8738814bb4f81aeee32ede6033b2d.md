@@ -1,0 +1,3 @@
+# Untitled
+
+A plain-looking decanter with a hinged lid, about half a litre in size, all made of dull metal. The jar magically refills at a steady rate (approximately an hour till full) with an incredibly corrosive gel. The container is magical, but the gel, strangely, is not, despite its near supernatural destructive capability. Being purely physical, many magical protections are useless against it. Meanwhile, nearly nothing physical can withstand it. A good dousing with about half the container is easily enough to completely eat through a tank. Take care though, as the destruction often generates heat and choking, poisonous fumes. Even if you find a way to make magical containers that can hold it, outside of its jar the substance goes inert in a few minutes.
