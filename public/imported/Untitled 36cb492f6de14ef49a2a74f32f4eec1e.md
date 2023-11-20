@@ -1,0 +1,5 @@
+# Untitled
+
+*Baseline*
+
+Whenever thaumaturgy is used, it creates metaphysical pollution called “contamination”. These magical toxins accumulate both in the bodies of practitioners and in the land around them. The consequences can be far ranging and insidious, beginning with magically enhanced diseases, food that causes failing health and hallucinations, to strange monsters known as blight spectres. However, the rate of accumulation is slow, and meta-environmental advocacy organizations and government programs have spread the knowledge of how to cast magic in a safe way—though it takes ~10% more time and consumes ~10% more aether—and how to use tricks to cleanse the contamination from either places or people—though this is unpleasant, tiring, and thankless. Much like mundane pollution, it’s a concern, but a longer term one than most care to address.

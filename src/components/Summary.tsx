@@ -1,11 +1,12 @@
 import { useContext, useMemo } from 'react';
-import { DataContext, TrueMageContext } from './App';
+import { CategoryChoicesContext, DataContext, TrueMageContext } from './App';
 import Container from 'react-bootstrap/Container';
 import { Choice } from '../models/Choice';
 import { CategoryKey } from '../models/Category';
 import { groupBy, map } from 'lodash';
-import { Card, Col, Image, Row, Stack } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { calculatePoints } from '../utils/calculatePoints';
+import SummaryEntity from './SummaryEntity';
 
 function Summary({
   categoryChoices,
@@ -26,6 +27,9 @@ function Summary({
     () => groupBy(entitiesByKey, 'subCategory'),
     [dataByKey]
   );
+
+  const { setChoices } = useContext(CategoryChoicesContext);
+
   return (
     <>
       <h2 className="Summary-header">{trueMage.name}</h2>
@@ -94,35 +98,11 @@ function Summary({
                           [])[0];
                         if (!choice) return null;
                         return (
-                          <Row
-                            key={choice.entityKey + 'SummaryRow'}
-                            style={{
-                              alignItems: 'center',
-                              paddingBottom: '5px',
-                              paddingTop: '5px',
-                              margin: '0',
-                            }}
-                          >
-                            <Col sm={3} style={{ padding: 0 }}>
-                              <Image src={entity.imageUrl} thumbnail />
-                            </Col>
-                            <Col sm={9}>
-                              <Stack direction="vertical">
-                                <strong
-                                  style={{
-                                    whiteSpace: 'nowrap',
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                  }}
-                                >
-                                  {entity.label}
-                                  {entity.entityLevels.length > 1
-                                    ? `: ${choice.level}`
-                                    : ''}
-                                </strong>
-                              </Stack>
-                            </Col>
-                          </Row>
+                          <SummaryEntity
+                            entity={entity}
+                            choice={choice}
+                            choices={choices}
+                          />
                         );
                       })}
                     </div>
