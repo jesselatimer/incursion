@@ -1,0 +1,7 @@
+# langston_and_co_procurers_1
+
+Entity: langston_and_co_procurers (langston_and_co_procurers%200badd391afb94d7c935f0240bb307353.md)
+Self: langston_and_co_procurers_1 (langston_and_co_procurers_1%203ed46ac727b94a70bd4b7014fdf86aaf.md)
+entityKey: langston_and_co_procurers
+level: 1
+pointCost: 1

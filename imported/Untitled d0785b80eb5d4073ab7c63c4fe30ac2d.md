@@ -1,0 +1,3 @@
+# Untitled
+
+This shadowy figure will sometimes contact you and offer you missions. They vary considerably in difficulty, support, and rewards, but they are generally morally positive missions. They often directly or indirectly help against a Threat if you have one, and have good fringe benefits (knowledge, contacts, treasure, information), even apart from generous remuneration. As part of Charlie's network, you'll meet many other capable agents who may be open to working together on personal projects.

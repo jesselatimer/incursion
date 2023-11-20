@@ -1,0 +1,6 @@
+# Untitled
+
+Spells:
+
+- You can cast spells on objects to divine ownership, age, and purpose, and/or a general sense of an object's history. Aether and skill both improve accuracy and precision. Aether costs scale significantly at ranges greater than touch.
+- Your spells can alter some of the properties of an object. For example, you may bring to the forefront a sword's quality of hardness and sharpness, or draw forth the qualities of fragility and volatility in an enemy's gun. More abstract and subtle qualities demand more skill; while aether gives range and how much of the quality you are able to draw forth. The initial spell is less efficient the further from the object you are, with a moderate amount of aether unable to affect objects more than 5m away. A portion of your conduit is reserved for as long as the spell is in effect. The more disparate the quality is from the object, the more it reserves (eg. a metal object drawn towards 'hardness' is relatively cheap, a cloth robe drawn towards hardness is expensive).

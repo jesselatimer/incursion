@@ -1,0 +1,5 @@
+# Untitled
+
+Spells:
+
+- Your Absolute Atmosphere spells produce an aura around you; in this field, aether moves sluggishly and with more resistance. This both penalizes the power and saps duration from persistent magical effects, and makes it significantly more difficult to mold aether, which imposes both a skill penalty (reducing efficiency) and intrinsically demanding more aether for a given effect. Natural magical effects of various sorts are also weakened, and Spiritual beings and effects move sluggishly, as if through tar. By default the field’s shape is a flattened sphere centered on you, and typical strength casting produces a radius of 20m. Increased control can change the shape, and even make it malleable while you maintain it, but the field must always include you. More aether combined with skill can make the effect stronger. Casting these spells always tax you at least a small amount. Note: you and your magic are not immune to the effects of this spell!

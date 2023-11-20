@@ -1,6 +1,7 @@
 # sands_of_the_hourglass
 
 label: Sands of the Hourglass
+Image: sands_of_the_hourglass.jpg
 EntityLevels: sands_of_the_hourglass_1 (sands_of_the_hourglass_1%20974726b26562400fb3d7917161216fb1.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: pacts (pacts%20e9c9569ec3e64b25891abcc5da974a20.md)
