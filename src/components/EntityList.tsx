@@ -52,6 +52,7 @@ function EntityList() {
               if (!entity) return null;
               return (
                 <Col
+                  xs={4}
                   key={entity.key + 'Col'}
                   style={{ maxWidth: '400px', minWidth: '300px' }}
                 >

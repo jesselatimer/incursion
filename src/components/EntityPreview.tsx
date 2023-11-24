@@ -3,10 +3,15 @@ import { Entity as EntityModel } from '../models/Entity';
 import Markdown from './Markdown';
 import Card from 'react-bootstrap/Card';
 import { Choice } from '../models/Choice';
-import { DataContext } from './App';
-import { useContext, useMemo, useState } from 'react';
+import {
+  CategoryChoicesContext,
+  DataContext,
+  REQUIRED_ENTITY_KEYS,
+} from './App';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { calculatePoints } from '../utils/calculatePoints';
 import Entity from './Entity';
+import { Button, ButtonGroup, Stack } from 'react-bootstrap';
 
 function EntityPreview({
   entity,
@@ -19,11 +24,11 @@ function EntityPreview({
   const { categoriesByKey, pointTypesByKey, entitiesByKey, entityLevelsByKey } =
     dataByKey;
   const entityKey = entity.key;
+  const category = categoriesByKey[entity.category];
 
   const { choice, pointType, usesPoints, pointsUsed, pointsRemaining } =
     useMemo(() => {
       const choice = choices.find((choice) => choice.entityKey === entityKey);
-      const category = categoriesByKey[entity.category];
       const pointType = category.pointType
         ? pointTypesByKey[category.pointType]
         : null;
@@ -59,21 +64,57 @@ function EntityPreview({
     ? pointsRemaining >= pointsUsedAfterPurchasing - pointsUsed
     : true;
 
+  // TODO: remove duplication between this and Entity
+  const chosenLevel = choice?.level || 0;
+  const { setChoices } = useContext(CategoryChoicesContext);
+  const onClickSelect = useCallback(() => {
+    setChoices(
+      [
+        ...choices.filter((choice) => choice.entityKey !== entityKey),
+        { entityKey, level: chosenLevel + 1 },
+      ],
+      category.key
+    );
+  }, [setChoices, choices, choice, dataByKey]);
+
+  const onClickUnselect = useCallback(() => {
+    let level = chosenLevel > 1 ? chosenLevel - 1 : 0;
+    if (REQUIRED_ENTITY_KEYS[category.key]?.includes(entity.key) && level < 1) {
+      level = 1;
+    }
+    setChoices(
+      [
+        ...choices.filter((choice) => choice.entityKey !== entityKey),
+        {
+          entityKey: entity.key,
+          level,
+        },
+      ],
+      category.key
+    );
+  }, [setChoices, choices, choice, chosenLevel, dataByKey]);
+
   return (
     <>
       <Card
         className={choice ? 'EntityPreviewCard chosen' : 'EntityPreviewCard'}
         border={canBePurchased ? '' : 'danger'}
         style={{ marginBottom: '20px' }}
-        onClick={() => setShowModal(true)}
       >
-        <Card.Img variant="top" src={entity.imageUrl} />
+        <Card.Img
+          className="EntityPreviewImg"
+          variant="top"
+          src={entity.imageUrl}
+          onClick={() => setShowModal(true)}
+        />
         <Card.Body
+          className="EntityPreviewBody"
           style={{
             maxHeight: '400px',
             overflow: 'hidden',
             position: 'relative',
           }}
+          onClick={() => setShowModal(true)}
         >
           <Card.Title>{entity.label}</Card.Title>
           <div
@@ -99,6 +140,28 @@ function EntityPreview({
             Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
           </Card.Text>
         </Card.Body>
+        <Card.Footer>
+          <Stack direction="horizontal" gap={3}>
+            <Button
+              onClick={() => onClickUnselect()}
+              disabled={chosenLevel < 1}
+              variant="light"
+            >
+              -
+            </Button>
+            <div className="ms-auto">
+              Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
+            </div>
+            <Button
+              className="ms-auto"
+              onClick={() => onClickSelect()}
+              disabled={chosenLevel >= entity.entityLevels.length}
+              variant="light"
+            >
+              +
+            </Button>
+          </Stack>
+        </Card.Footer>
       </Card>
       <Entity
         entity={entity}
