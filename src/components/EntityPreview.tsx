@@ -98,7 +98,6 @@ function EntityPreview({
     <>
       <Card
         className={choice ? 'EntityPreviewCard chosen' : 'EntityPreviewCard'}
-        border={canBePurchased ? '' : 'danger'}
         style={{ marginBottom: '20px' }}
       >
         <Card.Img
@@ -156,7 +155,7 @@ function EntityPreview({
               className="ms-auto"
               onClick={() => onClickSelect()}
               disabled={chosenLevel >= entity.entityLevels.length}
-              variant="light"
+              variant={canBePurchased ? 'light' : 'danger'}
             >
               +
             </Button>
