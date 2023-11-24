@@ -6,8 +6,9 @@ import Col from 'react-bootstrap/Col';
 import { useContext, useMemo } from 'react';
 import { CategoryChoicesContext, DataContext } from './App';
 import Markdown from './Markdown';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { EntityListArgs } from '..';
+import { Nav, NavItem, Stack } from 'react-bootstrap';
 
 function EntityList() {
   const { subCategoriesByKey, categoriesByKey, entitiesByKey } =
@@ -31,7 +32,22 @@ function EntityList() {
   );
   return (
     <Container>
-      <h2>{category.label}</h2>
+      <Stack direction="horizontal">
+        <h2>{category.label}</h2>
+        <Nav>
+          {map(subCategories, (subCategory) => {
+            return (
+              <Link
+                key={`navLink${subCategory.key}`}
+                to={`/category/${category.key}#${subCategory.key}`}
+                className="nav-link"
+              >
+                {subCategory.label}
+              </Link>
+            );
+          })}
+        </Nav>
+      </Stack>
       {Boolean(category.description) && (
         <Markdown>{category.description}</Markdown>
       )}
@@ -41,7 +57,7 @@ function EntityList() {
         if (!currentEntities?.length) return null;
         const currentEntitiesByKey = groupBy(currentEntities, 'key');
         return (
-          <Row key={subCategory.label + 'Row'}>
+          <Row key={subCategory.label + 'Row'} id={subCategory.key}>
             <h3>{subCategory.label}</h3>
             {Boolean(subCategory.description) && (
               <Markdown>{subCategory.description}</Markdown>

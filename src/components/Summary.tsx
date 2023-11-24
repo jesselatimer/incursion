@@ -7,6 +7,8 @@ import { groupBy, map } from 'lodash';
 import { Card } from 'react-bootstrap';
 import { calculatePoints } from '../utils/calculatePoints';
 import SummaryEntity from './SummaryEntity';
+import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 function Summary({
   categoryChoices,
@@ -27,8 +29,6 @@ function Summary({
     () => groupBy(entitiesByKey, 'subCategory'),
     [dataByKey]
   );
-
-  const { setChoices } = useContext(CategoryChoicesContext);
 
   return (
     <>
@@ -61,7 +61,14 @@ function Summary({
               style={{ marginTop: '10px' }}
             >
               <Card.Header>
-                <Card.Title>{category.label}</Card.Title>
+                <Card.Title>
+                  <Link
+                    style={{ textDecoration: 'none' }}
+                    to={`category/${categoryKey}`}
+                  >
+                    {category.label}
+                  </Link>
+                </Card.Title>
                 <Card.Text>
                   {Boolean(pointType) && (
                     <span
@@ -91,7 +98,14 @@ function Summary({
                       key={subCategory.label + 'Summary'}
                       style={{ marginBottom: '10px' }}
                     >
-                      <h4>{subCategory.label}</h4>
+                      <h4>
+                        <HashLink
+                          style={{ textDecoration: 'none' }}
+                          to={`category/${categoryKey}#${subCategory.key}`}
+                        >
+                          {subCategory.label}
+                        </HashLink>
+                      </h4>
                       {/* Mapping over all entities to preserve order */}
                       {map(currentEntities, (entity) => {
                         const choice = (choicesByEntityKey[entity.key] ||

@@ -12,10 +12,11 @@ import { Entity, EntityKey } from '../models/Entity';
 import { SubCategory, SubCategoryKey } from '../models/SubCategory';
 import { EntityLevel, EntityLevelKey } from '../models/EntityLevel';
 import { PointType, PointTypeKey } from '../models/PointType';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
 import Summary from './Summary';
 import Navbar from './Navbar';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Image, Row } from 'react-bootstrap';
+import { HashLink } from 'react-router-hash-link';
 
 type TrueMageContext = {
   trueMage: TrueMage;
@@ -171,6 +172,24 @@ function App() {
         <CategoryChoicesContext.Provider
           value={{ setChoices, categoryChoices }}
         >
+          <ScrollRestoration />
+          <HashLink to="#">
+            <Image
+              src="/incursion/up-chevron.png"
+              roundedCircle
+              style={{
+                width: '35px',
+                height: '35px',
+                position: 'fixed',
+                bottom: '10px',
+                left: '10px',
+                zIndex: '10000000000000',
+                backgroundColor: 'white',
+                borderRadius: '999px',
+                padding: '5px',
+              }}
+            />
+          </HashLink>
           <div style={{ position: 'relative' }}>
             <Navbar />
             <Row style={{ padding: '20px' }}>
