@@ -10,7 +10,7 @@ import {
 import { useCallback, useContext, useMemo } from 'react';
 import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
-import { Modal } from 'react-bootstrap';
+import { CloseButton, Modal } from 'react-bootstrap';
 
 function Entity({
   entity,
@@ -99,6 +99,18 @@ function Entity({
 
   return (
     <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+      <CloseButton
+        onClick={() => setShowModal(false)}
+        style={{
+          position: 'absolute',
+          right: '10px',
+          top: '10px',
+          backgroundColor: 'white',
+          borderRadius: '99px',
+          zIndex: '1000000',
+          padding: '7px',
+        }}
+      />
       <Modal.Body style={{ padding: '0' }}>
         <Card
           border={choice ? 'light' : 'secondary'}
