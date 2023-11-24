@@ -1,10 +1,9 @@
 import { useContext, useMemo } from 'react';
-import { CategoryChoicesContext, DataContext, TrueMageContext } from './App';
-import Container from 'react-bootstrap/Container';
+import { DataContext, TrueMageContext } from './App';
 import { Choice } from '../models/Choice';
 import { CategoryKey } from '../models/Category';
 import { groupBy, map } from 'lodash';
-import { Card } from 'react-bootstrap';
+import { Accordion, Stack } from 'react-bootstrap';
 import { calculatePoints } from '../utils/calculatePoints';
 import SummaryEntity from './SummaryEntity';
 import { Link } from 'react-router-dom';
@@ -33,7 +32,8 @@ function Summary({
   return (
     <>
       <h2 className="Summary-header">{trueMage.name}</h2>
-      <Container
+      <Accordion
+        alwaysOpen
         className="SummaryFixed"
         style={{
           position: 'sticky',
@@ -41,6 +41,7 @@ function Summary({
           overflow: 'scroll',
           padding: '0',
           top: '0',
+          borderRadius: '0',
         }}
       >
         {map(categoriesByKey, (category, categoryKey) => {
@@ -56,20 +57,27 @@ function Summary({
             pointType?.key
           );
           return (
-            <Card
-              key={category.key + 'SummaryContainer'}
-              style={{ marginTop: '10px' }}
+            <Accordion.Item
+              key={category.key + 'SummaryAccordian'}
+              eventKey={categoryKey}
+              style={{ borderRadius: '0' }}
             >
-              <Card.Header>
-                <Card.Title>
-                  <Link
-                    style={{ textDecoration: 'none' }}
-                    to={`category/${categoryKey}`}
-                  >
-                    {category.label}
-                  </Link>
-                </Card.Title>
-                <Card.Text>
+              <Stack
+                direction="horizontal"
+                style={{
+                  padding: '15px 10px',
+                  backgroundColor: 'rgb(25, 25, 25)',
+                }}
+              >
+                <Stack>
+                  <h3>
+                    <Link
+                      style={{ textDecoration: 'none' }}
+                      to={`category/${categoryKey}`}
+                    >
+                      {category.label}
+                    </Link>
+                  </h3>
                   {Boolean(pointType) && (
                     <span
                       style={
@@ -81,9 +89,12 @@ function Summary({
                       {pointType?.label}: {pointsUsed}/{pointType?.maxPoints}
                     </span>
                   )}
-                </Card.Text>
-              </Card.Header>
-              <Card.Body>
+                </Stack>
+                <Accordion.Button
+                  style={{ width: 'fit-content', backgroundColor: 'inherit' }}
+                />
+              </Stack>
+              <Accordion.Body>
                 {/* Mapping over all subcategories to preserve order */}
                 {map(category.subCategories, (subCategoryKey) => {
                   const subCategory = subCategoriesByKey[subCategoryKey];
@@ -122,11 +133,11 @@ function Summary({
                     </div>
                   );
                 })}
-              </Card.Body>
-            </Card>
+              </Accordion.Body>
+            </Accordion.Item>
           );
         })}
-      </Container>
+      </Accordion>
     </>
   );
 }
