@@ -82,16 +82,16 @@ function EntityPreview({
     if (REQUIRED_ENTITY_KEYS[category.key]?.includes(entity.key) && level < 1) {
       level = 1;
     }
-    setChoices(
-      [
-        ...choices.filter((choice) => choice.entityKey !== entityKey),
-        {
-          entityKey: entity.key,
-          level,
-        },
-      ],
-      category.key
+    const newChoices = choices.filter(
+      (choice) => choice.entityKey !== entityKey
     );
+    if (level > 0) {
+      newChoices.push({
+        entityKey: entity.key,
+        level,
+      });
+    }
+    setChoices(newChoices, category.key);
   }, [setChoices, choices, choice, chosenLevel, dataByKey]);
 
   return (
