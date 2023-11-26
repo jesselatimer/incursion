@@ -16,3 +16,11 @@
   background: none;
   box-shadow: none;
 }
+
+.SummaryCardToggleButton img {
+  transition: transform 0.2s linear;
+}
+
+.SummaryCardToggleButton.collapsed img {
+  transform: rotate(180deg);
+}
