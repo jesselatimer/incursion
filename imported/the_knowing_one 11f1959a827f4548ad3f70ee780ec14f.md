@@ -1,6 +1,7 @@
 # the_knowing_one
 
 label: The Knowing One
+Image: the_knowing_one.jpg
 EntityLevels: the_knowing_one_1 (the_knowing_one_1%2002be4d4d1cf04ba68cdf938777048f17.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: contacts (contacts%204eddb36d43eb4799987d83f1d8a6777c.md)

@@ -1,0 +1,5 @@
+# Untitled
+
+Spells:
+
+- You can suppress or encourage certain emotional states in a subject or subjects. Aether demand is based on range, number of subjects, and strength of effect. Affecting yourself with these spells costs more than five times as much as affecting one person you’re touching. What counts as an emotion is hard to define, especially across personal or cultural boundaries; effects may be hard to predict when used on a particularly foriegn mind. You do not control the subject of emotions, so you could make someone bitter or depressed, but not specifically about themselves or an enemy; you can make somebody feel happy and proud, but what that feeling centers on (themselves, the person they’re watching, some unrelated subject they were just thinking about) is up to their state of mind. The effect is relative to their previous emotional state, everyone has sparks of different emotions at all times.
