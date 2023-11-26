@@ -117,29 +117,6 @@ function App() {
         return false;
       }
 
-      const usedPoints = calculatePoints(
-        newChoices,
-        dataByKey.entitiesByKey,
-        dataByKey.entityLevelsByKey,
-        pointType.key
-      );
-
-      if (usedPoints > pointType.maxPoints) {
-        const oldPoints = calculatePoints(
-          categoryChoices[categoryKey] || [],
-          dataByKey.entitiesByKey,
-          dataByKey.entityLevelsByKey,
-          pointType.key
-        );
-        setShowValidationError({
-          show: true,
-          message: `Not enough points to make selection. Current points: ${
-            showValidationError.show
-              ? ` ${oldPoints}/${pointType.maxPoints}`
-              : ''
-          }`,
-        });
-      }
       return true;
     },
     [dataByKey, categoryChoices]

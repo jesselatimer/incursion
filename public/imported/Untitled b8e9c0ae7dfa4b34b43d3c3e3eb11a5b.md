@@ -1,0 +1,6 @@
+# Untitled
+
+Spells:
+
+- You can cast a spell to transform yourself into a warlike form. When you transform, you will gain more muscular strength and power, increased stamina, a resistance to pain and fear, and an increase in impulsive rage and destructive instincts (which cannot be fully suppressed even with your mastery of anger). A typical expenditure lasts 20 minutes.
+- Additionally, you gain a number of enhancement spells that you can weave into the spell above that grant further abilities. With enough skill and/or aether, it is possible to gain all of the enhancements that don’t overlap. Possibilities: increased size (10%-ish in each dimension, 30%ish increase in strength, durability, and weight.); instinctive martial body control; instinctive understanding of ranged combat (cover, wind, leading a target, etc); thick, protective hide, loose like a honey badger’s; pangolin-like scales; urticating hairs; a pair of long suckered grappling tentacles; heavy blade like talons; sweeping ram-like horns; an extended muzzle with the bite pressure of a jaguar or hyena (could chew through rebar); incredibly powerful legs specially designed for huge leaps; longer, specially clawed legs and body shape allowing high burst speed; a long sweeping tail with a poisoned barb near the end; and others.

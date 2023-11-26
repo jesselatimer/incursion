@@ -1,6 +1,7 @@
 # the_dragons_teeth
 
 label: The Dragon’s Teeth
+Image: the_dragons_teeth.jpg
 EntityLevels: the_dragons_teeth_1 (the_dragons_teeth_1%2093d01877526246fdaf334ad61858690f.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: contacts (contacts%204eddb36d43eb4799987d83f1d8a6777c.md)

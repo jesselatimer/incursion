@@ -71,7 +71,9 @@ function SummaryCard({
             {Boolean(pointType) && (
               <span
                 style={
-                  pointsUsed > pointType!.maxPoints ? { color: 'red' } : {}
+                  pointsUsed > (pointType?.maxPoints || 0)
+                    ? { color: 'red' }
+                    : {}
                 }
               >
                 {pointType?.label}: {pointsUsed}/{pointType?.maxPoints}

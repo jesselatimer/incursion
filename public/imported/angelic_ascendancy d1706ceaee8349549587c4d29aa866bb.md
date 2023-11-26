@@ -1,6 +1,7 @@
 # angelic_ascendancy
 
 label: Angelic Ascendancy
+Image: angelic_ascendancy.jpg
 EntityLevels: angelic_ascendancy_1 (angelic_ascendancy_1%2069341a3de6644d52b8532a533762087b.md)
 Category: threats (threats%2029045fa2123d4dcdbd139368f1de703c.md)
 SubCategory: threats (threats%20b8a01851777f47ca8fd6dbd195719150.md)
