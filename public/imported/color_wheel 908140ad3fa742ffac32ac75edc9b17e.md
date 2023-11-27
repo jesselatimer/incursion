@@ -1,6 +1,7 @@
 # color_wheel
 
 label: Color Wheel
+Image: color_wheel.jpg
 EntityLevels: color_wheel_1 (color_wheel_1%2043288df7e7aa496aae2c3f3d4290b05a.md), color_wheel_2 (color_wheel_2%205db8973c63aa4c9b8ca2a6a24874111e.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)

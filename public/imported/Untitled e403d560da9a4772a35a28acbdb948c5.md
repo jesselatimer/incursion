@@ -1,0 +1,5 @@
+# Untitled
+
+Spells:
+
+- Cleromancy: you may cast spells that answer specific questions with a probability. You must use a source of randomness to cast the spell: drawing lots from an urn, tiles from a pouch, cards from a deck, or throwing dice, etc. Constraining a question costs aether (eg, "Will I find love within the next year?" is more expensive than "Will I ever find love?"). Of course, constraining the question also usually means the probability is lower too. You must have some appropriate connection to the subject of your spell, such as a photograph or a piece of it/them. If a cleromancy spell fails, you know it; otherwise, over enough castings, it is very well calibrated (cast 100 spells that give an 18% chance of something happening, it happened 17-19 of those times). Vaguer questions, less concrete subjects, poor skill in your method, and weak connections to your subject increase chances for failure.

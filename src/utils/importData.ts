@@ -136,6 +136,7 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
           async (acc, result) => {
             if (callback) result = callback(result);
             if (typeof result.Self !== 'string') {
+              console.log('no self', result);
               throw new Error('No Self');
             }
             const selfPaths = result.Self.match(regex);

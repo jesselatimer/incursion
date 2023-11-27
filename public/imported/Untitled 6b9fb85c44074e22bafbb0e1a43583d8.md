@@ -1,0 +1,3 @@
+# Untitled
+
+- The doorway of death now swings both ways at your touch. Call out with a spell and the strange death energy that lingers around corpses can animate and serve you, or become an incorporeal undead. Greater skill and larger quantities of aether can make stronger or unusual undead, sometimes with strange powers. You may animate them permanently by reserving some of your Capacity. Your skill places a limit on the cumulative intelligence of all undead you command at any given time.
