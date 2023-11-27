@@ -1,0 +1,12 @@
+# spatial_correlation_frame_realignment
+
+label: Spatial Correlation Frame Realignment
+EntityLevels: spatial_correlation_frame_realignment_1 (spatial_correlation_frame_realignment_1%2030218b471bd14bdab7a096d07efc58af.md), spatial_correlation_frame_realignment_2 (spatial_correlation_frame_realignment_2%2050d1b3cfafef4f8db1329821a23a8c53.md)
+Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
+SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)
+entityLevels: spatial_correlation_frame_realignment_1,spatial_correlation_frame_realignment_2
+category: talents
+subCategory: talents
+Self: spatial_correlation_frame_realignment (spatial_correlation_frame_realignment%20772367cb15c5416fad199a2516a87574.md)
+
+[](Untitled%2046cd72193c244c66b878b320526e849d.md)

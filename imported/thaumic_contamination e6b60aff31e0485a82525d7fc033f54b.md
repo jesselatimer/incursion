@@ -1,6 +1,7 @@
 # thaumic_contamination
 
 label: Thaumic Contamination
+Image: thaumic_contamination.jpg
 EntityLevels: thaumic_contamination_1 (thaumic_contamination_1%20d79f77fa1afb40bd96ff089d0e85fe24.md)
 Category: threats (threats%2029045fa2123d4dcdbd139368f1de703c.md)
 SubCategory: threats (threats%20b8a01851777f47ca8fd6dbd195719150.md)

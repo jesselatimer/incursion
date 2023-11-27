@@ -1,0 +1,5 @@
+# Untitled
+
+There are natural laws underlying matter, and to a Natural Philosopher, those laws have been laid bare. Your mystical insight into the nature of natural physical reality lets you cast spells to understand and change the shapes and physical properties of things.
+
+Inherent: You have a greatly improved ability to intuitively connect scholarly knowledge to real life observations; for instance, even an unlearned user of this Talent can assess dimensions and mass of an object with preternatural accuracy and speed; but knowledge of physics, chemistry, and/or biology gives you deep insight into properties like heat capacity, stress modulus, chemical composition, internal structure, metabolic details, and much more. This makes it easy for you to tell when something's physical properties have been altered by magic or rely on magic.

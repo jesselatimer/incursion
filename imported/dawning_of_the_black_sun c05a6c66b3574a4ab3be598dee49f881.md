@@ -1,6 +1,7 @@
 # dawning_of_the_black_sun
 
 label: Dawning of the Black Sun
+Image: dawning_of_the_black_sun.jpg
 EntityLevels: dawning_of_the_black_sun_1 (dawning_of_the_black_sun_1%2042ebcff31a8b4647b74c00b7e0144c67.md)
 Category: threats (threats%2029045fa2123d4dcdbd139368f1de703c.md)
 SubCategory: threats (threats%20b8a01851777f47ca8fd6dbd195719150.md)

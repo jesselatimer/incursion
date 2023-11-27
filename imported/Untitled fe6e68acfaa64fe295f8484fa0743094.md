@@ -1,0 +1,4 @@
+# Untitled
+
+- ^ Your control over the Loom increases dramatically. Your diagnostic spells are sufficiently granular to show you optimizations you could make to even healthy biological systems. Your medicinal spells are easier to fine-tune and layer with each other, and even many spells at once are unlikely to cause severe side-effects.
+- You can permanently alter many biological systems, which enables you to cure or inflict many physical disorders and a handful of mental ones (eg. cataracts, hearing damage, physical addictions, psychosis). Even with great power and skill it is difficult, but not impossible, to overcome the natural resistance of an unwilling target.
