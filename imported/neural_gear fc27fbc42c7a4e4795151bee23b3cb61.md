@@ -1,6 +1,7 @@
 # neural_gear
 
 label: Neural Gear
+Image: neural_gear.jpg
 EntityLevels: neural_gear_1 (neural_gear_1%207c53c8ead5e54b0d836905ea2ee16418.md), neural_gear_2 (neural_gear_2%20cbd374310cf941d48c923ad5ae457bdb.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)
