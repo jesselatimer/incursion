@@ -1,6 +1,7 @@
 # fell_hand
 
 label: Fell Hand
+Image: fell_hand.jpg
 EntityLevels: fell_hand_1 (fell_hand_1%202164b5c818c24f218a1949331cfaa080.md), fell_hand_2 (fell_hand_2%2049732c84680d4286b874871a368c5672.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)

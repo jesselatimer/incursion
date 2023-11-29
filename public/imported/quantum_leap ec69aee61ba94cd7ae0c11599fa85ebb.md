@@ -1,6 +1,7 @@
 # quantum_leap
 
 label: Quantum Leap
+Image: quantum_leap.jpg
 EntityLevels: quantum_leap_1 (quantum_leap_1%20b943fac874b04516837317e6cf6807e9.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)
