@@ -19,7 +19,7 @@ export default function Navbar() {
       <ReactNavbar.Toggle aria-controls="basic-ReactNavbar-nav" />
       <ReactNavbar.Collapse id="basic-ReactNavbar-nav">
         <Nav className="me-auto">
-          <Link to={'/setting'} className="nav-link">
+          <Link to="/setting" className="nav-link">
             Setting
           </Link>
           {map(categoriesByKey, (category) => {
@@ -33,6 +33,9 @@ export default function Navbar() {
               </Link>
             );
           })}
+          <Link to="/character" className="nav-link">
+            Character
+          </Link>
         </Nav>
       </ReactNavbar.Collapse>
     </ReactNavbar>

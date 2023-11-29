@@ -15,6 +15,7 @@ import EntityList from './components/EntityList';
 import { getDataFromImport } from './utils/importData';
 import Setting from './components/Setting';
 import Welcome from './components/Welcome';
+import CharacterPage from './components/CharacterPage';
 
 async function loader() {
   return await getDataFromImport();
@@ -51,6 +52,10 @@ const router = createBrowserRouter(
         {
           path: '/setting',
           element: <Setting />,
+        },
+        {
+          path: '/character',
+          element: <CharacterPage />,
         },
       ],
     },

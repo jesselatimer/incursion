@@ -169,14 +169,9 @@ function App() {
           </HashLink>
           <div style={{ position: 'relative' }}>
             <Navbar />
-            <Row style={{ padding: '20px' }}>
-              <Col>
-                <Outlet />
-              </Col>
-              <Col xs={4} style={{ maxWidth: '350px' }}>
-                <Summary categoryChoices={categoryChoices} />
-              </Col>
-            </Row>
+            <Container style={{ padding: '20px', margin: '0' }}>
+              <Outlet />
+            </Container>
             <ValidationToast
               showValidationError={showValidationError}
               setShowValidationError={setShowValidationError}

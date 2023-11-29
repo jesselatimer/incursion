@@ -10,8 +10,8 @@ import {
 } from './App';
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { calculatePoints } from '../utils/calculatePoints';
-import Entity from './Entity';
-import { Button, ButtonGroup, Stack } from 'react-bootstrap';
+import { Button, Stack } from 'react-bootstrap';
+import EntityModal from './EntityModal';
 
 function EntityPreview({
   entity,
@@ -162,7 +162,7 @@ function EntityPreview({
           </Stack>
         </Card.Footer>
       </Card>
-      <Entity
+      <EntityModal
         entity={entity}
         choices={choices}
         showModal={showModal}

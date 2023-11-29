@@ -9,6 +9,7 @@ import Markdown from './Markdown';
 import { Link, useLoaderData } from 'react-router-dom';
 import { EntityListArgs } from '..';
 import { Nav, NavItem, Stack } from 'react-bootstrap';
+import Summary from './Summary';
 
 function EntityList() {
   const { subCategoriesByKey, categoriesByKey, entitiesByKey } =
@@ -31,59 +32,66 @@ function EntityList() {
     (subCategoryKey) => subCategoriesByKey[subCategoryKey]
   );
   return (
-    <Container>
-      <Stack direction="horizontal">
-        <h2>{category.label}</h2>
-        <Nav>
+    <Row>
+      <Col>
+        <Container>
+          <Stack direction="horizontal">
+            <h2>{category.label}</h2>
+            <Nav>
+              {map(subCategories, (subCategory) => {
+                return (
+                  <Link
+                    key={`navLink${subCategory.key}`}
+                    to={`/category/${category.key}#${subCategory.key}`}
+                    className="nav-link"
+                  >
+                    {subCategory.label}
+                  </Link>
+                );
+              })}
+            </Nav>
+          </Stack>
+          {Boolean(category.description) && (
+            <Markdown>{category.description}</Markdown>
+          )}
+          {/* Mapping over all subcategories to preserve order */}
           {map(subCategories, (subCategory) => {
+            const currentEntities = entitiesBySubCategory[subCategory.key];
+            if (!currentEntities?.length) return null;
+            const currentEntitiesByKey = groupBy(currentEntities, 'key');
             return (
-              <Link
-                key={`navLink${subCategory.key}`}
-                to={`/category/${category.key}#${subCategory.key}`}
-                className="nav-link"
-              >
-                {subCategory.label}
-              </Link>
+              <Row key={subCategory.label + 'Row'} id={subCategory.key}>
+                <h3>{subCategory.label}</h3>
+                {Boolean(subCategory.description) && (
+                  <Markdown>{subCategory.description}</Markdown>
+                )}
+                {/* Mapping over all entities to preserve order */}
+                {map(entitiesByKey, (_, entityKey) => {
+                  const entity = (currentEntitiesByKey[entityKey] || [])[0];
+                  if (!entity) return null;
+                  return (
+                    <Col
+                      xs={4}
+                      key={entity.key + 'Col'}
+                      style={{ maxWidth: '400px', minWidth: '300px' }}
+                    >
+                      <EntityPreview
+                        key={entity.key}
+                        entity={entity}
+                        choices={choices}
+                      />
+                    </Col>
+                  );
+                })}
+              </Row>
             );
           })}
-        </Nav>
-      </Stack>
-      {Boolean(category.description) && (
-        <Markdown>{category.description}</Markdown>
-      )}
-      {/* Mapping over all subcategories to preserve order */}
-      {map(subCategories, (subCategory) => {
-        const currentEntities = entitiesBySubCategory[subCategory.key];
-        if (!currentEntities?.length) return null;
-        const currentEntitiesByKey = groupBy(currentEntities, 'key');
-        return (
-          <Row key={subCategory.label + 'Row'} id={subCategory.key}>
-            <h3>{subCategory.label}</h3>
-            {Boolean(subCategory.description) && (
-              <Markdown>{subCategory.description}</Markdown>
-            )}
-            {/* Mapping over all entities to preserve order */}
-            {map(entitiesByKey, (_, entityKey) => {
-              const entity = (currentEntitiesByKey[entityKey] || [])[0];
-              if (!entity) return null;
-              return (
-                <Col
-                  xs={4}
-                  key={entity.key + 'Col'}
-                  style={{ maxWidth: '400px', minWidth: '300px' }}
-                >
-                  <EntityPreview
-                    key={entity.key}
-                    entity={entity}
-                    choices={choices}
-                  />
-                </Col>
-              );
-            })}
-          </Row>
-        );
-      })}
-    </Container>
+        </Container>
+      </Col>
+      <Col xs={4} style={{ maxWidth: '350px' }}>
+        <Summary categoryChoices={categoryChoices} />
+      </Col>
+    </Row>
   );
 }
 

@@ -2,8 +2,8 @@ import { useContext, useMemo, useState } from 'react';
 import { CategoryChoicesContext, DataContext, TrueMageContext } from './App';
 import { Choice } from '../models/Choice';
 import { Col, Image, Row, Stack, CloseButton } from 'react-bootstrap';
-import Entity from './Entity';
 import { Entity as EntityType } from '../models/Entity';
+import EntityModal from './EntityModal';
 
 function Summary({
   entity,
@@ -65,7 +65,7 @@ function Summary({
           )}
         </Col>
       </Row>
-      <Entity
+      <EntityModal
         entity={entity}
         choices={choices}
         showModal={showModal}
