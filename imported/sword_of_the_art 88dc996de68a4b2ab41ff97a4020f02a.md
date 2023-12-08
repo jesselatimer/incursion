@@ -1,6 +1,7 @@
 # sword_of_the_art
 
 label: Sword of the Art
+Image: sword_of_the_art.jpg
 EntityLevels: sword_of_the_art_1 (sword_of_the_art_1%205fa13607c0fd4726836219aca4451d65.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)

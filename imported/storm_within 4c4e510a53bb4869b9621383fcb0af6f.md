@@ -1,6 +1,7 @@
 # storm_within
 
 label: Storm Within
+Image: storm_within.jpg
 EntityLevels: storm_within_1 (storm_within_1%206ea1743a2cce4c939ec50c128ee14126.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)

@@ -1,6 +1,7 @@
 # spatial_correlation_frame_realignment
 
 label: Spatial Correlation Frame Realignment
+Image: spatial_correlation_frame_reallignment.jpg
 EntityLevels: spatial_correlation_frame_realignment_1 (spatial_correlation_frame_realignment_1%2030218b471bd14bdab7a096d07efc58af.md), spatial_correlation_frame_realignment_2 (spatial_correlation_frame_realignment_2%2050d1b3cfafef4f8db1329821a23a8c53.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)
