@@ -1,6 +1,7 @@
 # trial_of_oblivion
 
 label: Trial of Oblivion
+Image: trial_of_oblivion.jpg
 EntityLevels: trial_of_oblivion_1 (trial_of_oblivion_1%20be62f9ecf1d742b3a86f7cc0f71a3980.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)

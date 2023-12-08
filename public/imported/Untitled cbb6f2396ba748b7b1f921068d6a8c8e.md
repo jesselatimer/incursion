@@ -1,0 +1,4 @@
+# Untitled
+
+- You learn a spell to mutate your incubation chamber. Microbes grown after casting lose their inherent restriction against harming their hosts. Not that your microbes must still physically enter your host; they cannot be absorbed by the skin, travel through the air, or become contagious.
+- ^ Your temporary and permanent spells of health can now cause equivalent harm. A sufficiently strong immune system or magical protections can diminish these effects, but against an undefended person you could blind with cataracts, cause liver failure, induce an allergic reaction, create psychosis, and much more.
