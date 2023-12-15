@@ -6,3 +6,5 @@ Subcategories: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)
 label: Talents
 pointType: talent_points
 subCategories: talents
+
+[](Untitled%20f006a72d8aea4416b3467c0c51ffae39.md)

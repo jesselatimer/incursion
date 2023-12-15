@@ -1,3 +1,3 @@
 # Untitled
 
-Sources are how you access aether. Drawing aether always has some cost, moderated by your Power and limited by your Capacity. You only have one conduit, so even if you have multiple Sources, tax has the same restricting impact on all of them.
+Every thaumaturge has at least one Source, a method of acquiring aether. Remember that for a True Mage, aether is aether, no matter the Source. You perform magic the same however you derived it; and even if you have multiple Sources, you only have one conduit, so tax and reservation is shared across all.
