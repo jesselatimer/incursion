@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
 import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
@@ -6,16 +6,14 @@ import { Category, CategoryKey } from '../models/Category';
 import { DEFAULT_TRUE_MAGE } from '../data';
 import { DataByKey } from '../utils/importData';
 import ValidationToast from './ValidationToast';
-import { calculatePoints } from '../utils/calculatePoints';
 import { every } from 'lodash';
 import { Entity, EntityKey } from '../models/Entity';
 import { SubCategory, SubCategoryKey } from '../models/SubCategory';
 import { EntityLevel, EntityLevelKey } from '../models/EntityLevel';
 import { PointType, PointTypeKey } from '../models/PointType';
 import { Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
-import Summary from './Summary';
 import Navbar from './Navbar';
-import { Button, Col, Container, Image, Row } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
 import { HashLink } from 'react-router-hash-link';
 
 type TrueMageContext = {
@@ -34,6 +32,7 @@ type DataContext = {
   entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
   pointTypesByKey: Record<PointTypeKey, PointType>;
   setting: string;
+  home: string;
 };
 const defaultDataContext: DataContext = {
   categoriesByKey: {},
@@ -42,6 +41,7 @@ const defaultDataContext: DataContext = {
   entityLevelsByKey: {},
   pointTypesByKey: {},
   setting: '',
+  home: '',
 };
 export const DataContext = createContext<DataContext>(defaultDataContext);
 

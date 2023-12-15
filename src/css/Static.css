@@ -1,0 +1,9 @@
+.home img,
+.setting img {
+  width: 45%;
+  float: right;
+  margin-left: 25px;
+  margin-bottom: 25px;
+  border: 1px solid white;
+  border-radius: 6px;
+}

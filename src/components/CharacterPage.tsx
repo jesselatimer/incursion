@@ -6,6 +6,7 @@ import { CategoryChoicesContext, DataContext } from './App';
 import { Stack } from 'react-bootstrap';
 
 // TODO: improve this component
+// TODO: Add character export
 function CharacterPage() {
   const { subCategoriesByKey, categoriesByKey, entitiesByKey } =
     useContext(DataContext);

@@ -13,7 +13,7 @@ import {
   EntityLevelSchema,
 } from '../models/EntityLevel';
 import { ZodType, z } from 'zod';
-import { reduce } from 'lodash';
+import { reduce, replace } from 'lodash';
 
 export type DataByKey = {
   categoriesByKey: Record<CategoryKey, Category>;
@@ -22,6 +22,7 @@ export type DataByKey = {
   entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
   pointTypesByKey: Record<PointTypeKey, PointType>;
   setting: string;
+  home: string;
 };
 
 export const getDataFromImport = async (): Promise<DataByKey> => {
@@ -102,11 +103,20 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
       };
     }
   );
+  const home = await fetch(
+    '/incursion/imported/Home fd3b42adc0dd41f093e3357f18eeb02a.md'
+  );
+  let homeText = await home.text();
 
   const setting = await fetch(
     '/incursion/imported/Setting 61b4b535ec174572a4419910929e7022.md'
   );
-  const settingText = await setting.text();
+  let settingText = await setting.text();
+
+  console.log('hometext', homeText);
+  [homeText, settingText] = [homeText, settingText].map((text) =>
+    text.replaceAll('jpg](', 'jpg](/incursion/imported/')
+  );
 
   return {
     categoriesByKey,
@@ -115,6 +125,7 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     entityLevelsByKey,
     pointTypesByKey,
     setting: settingText,
+    home: homeText,
   };
 };
 

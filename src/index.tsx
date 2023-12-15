@@ -14,7 +14,7 @@ import {
 import EntityList from './components/EntityList';
 import { getDataFromImport } from './utils/importData';
 import Setting from './components/Setting';
-import Welcome from './components/Welcome';
+import Home from './components/Home';
 import CharacterPage from './components/CharacterPage';
 
 async function loader() {
@@ -42,7 +42,7 @@ const router = createBrowserRouter(
       children: [
         {
           path: '/',
-          element: <Welcome />,
+          element: <Home />,
         },
         {
           path: pathNames.categoryKey,
