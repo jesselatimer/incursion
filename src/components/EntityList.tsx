@@ -8,7 +8,7 @@ import { CategoryChoicesContext, DataContext } from './App';
 import Markdown from './Markdown';
 import { Link, useLoaderData } from 'react-router-dom';
 import { EntityListArgs } from '..';
-import { Nav, NavItem, Stack } from 'react-bootstrap';
+import { Nav, Stack } from 'react-bootstrap';
 import Summary from './Summary';
 
 function EntityList() {

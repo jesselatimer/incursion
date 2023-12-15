@@ -113,7 +113,6 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
   );
   let settingText = await setting.text();
 
-  console.log('hometext', homeText);
   [homeText, settingText] = [homeText, settingText].map((text) =>
     text.replaceAll('jpg](', 'jpg](/incursion/imported/')
   );

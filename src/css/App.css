@@ -24,3 +24,29 @@
 .SummaryCardToggleButton.collapsed img {
   transform: rotate(180deg);
 }
+
+.container {
+  max-width: none;
+}
+
+table {
+  margin-bottom: 15px;
+}
+
+td,
+th {
+  border: 1px solid black;
+  padding: 8px 15px;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(30, 34, 38);
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  /* color: white; */
+  background-color: rgb(25, 25, 25);
+}
