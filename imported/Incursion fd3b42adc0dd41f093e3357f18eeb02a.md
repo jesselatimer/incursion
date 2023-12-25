@@ -1,8 +1,8 @@
-# Home
+# Incursion
 
 ![setting1.jpg](setting1.jpg)
 
-## Incursion - A Choose Your Own Adventure
+## Incursion: A Choose Your Own Adventure
 
 You have been bestowed the gift of thaumaturgy in a world similar but different to the one you know.
 
