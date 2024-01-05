@@ -20,7 +20,7 @@ export default function Navbar() {
       <ReactNavbar.Collapse id="basic-ReactNavbar-nav">
         <Nav className="me-auto">
           <Link to="/setting" className="nav-link">
-            Setting
+            System & Setting
           </Link>
           {map(categoriesByKey, (category) => {
             return (

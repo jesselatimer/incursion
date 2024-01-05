@@ -65,13 +65,13 @@ export type ValidationState =
     };
 
 export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
-  foundations: ['power', 'capacity'],
+  foundations: ['power', 'endurance'],
 };
 
 let initialChoices: Record<CategoryKey, Choice[]> = {
   foundations: [
     { entityKey: 'power', level: 1 },
-    { entityKey: 'capacity', level: 1 },
+    { entityKey: 'endurance', level: 1 },
   ],
 };
 const choicesFromStorageJson = localStorage.getItem(DEFAULT_TRUE_MAGE.name);

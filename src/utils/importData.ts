@@ -104,12 +104,12 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     }
   );
   const home = await fetch(
-    '/incursion/imported/Home fd3b42adc0dd41f093e3357f18eeb02a.md'
+    '/incursion/imported/Incursion fd3b42adc0dd41f093e3357f18eeb02a.md'
   );
   let homeText = await home.text();
 
   const setting = await fetch(
-    '/incursion/imported/Setting 61b4b535ec174572a4419910929e7022.md'
+    '/incursion/imported/System & Setting 61b4b535ec174572a4419910929e7022.md'
   );
   let settingText = await setting.text();
 
