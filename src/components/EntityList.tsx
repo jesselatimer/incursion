@@ -42,7 +42,7 @@ function EntityList() {
   return (
     <Row>
       <Col>
-        <Container>
+        <Container fluid>
           <Stack direction="horizontal">
             <h2>{category.label}</h2>
             <Nav>

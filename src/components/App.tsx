@@ -158,7 +158,7 @@ function App() {
           </HashLink>
           <div style={{ position: 'relative' }}>
             <Navbar />
-            <Container style={{ padding: '20px', margin: '0' }}>
+            <Container fluid style={{ padding: '20px', margin: '0' }}>
               <Outlet />
             </Container>
             <ValidationToast

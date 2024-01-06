@@ -1,9 +1,8 @@
 import { flatten, groupBy, map } from 'lodash';
-import Entity from './Entity';
 import Container from 'react-bootstrap/Container';
 import { useContext, useMemo } from 'react';
 import { CategoryChoicesContext, DataContext } from './App';
-import { Stack } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 // TODO: improve this component
 // TODO: Add character export
@@ -28,7 +27,8 @@ function CharacterPage() {
   }, [categoryChoices]);
 
   return (
-    <Container>
+    <Container fluid>
+      <h1>True Mage Summary</h1>
       {map(categoriesByKey, (category) => {
         const choices = categoryChoices[category.key];
         if (!choices?.length) return null;
@@ -36,31 +36,54 @@ function CharacterPage() {
         return (
           <>
             <h2>{category.label}</h2>
-            {/* Mapping over all subcategories to preserve order */}
-            {map(category.subCategories, (subCategoryKey) => {
-              const subCategory = subCategoriesByKey[subCategoryKey];
-              const entitiesForSubcategory =
-                entitiesBySubCategory[subCategoryKey];
-              return (
-                <div key={subCategory.label + 'div'} id={subCategory.key}>
-                  <h3>{subCategory.label}</h3>
-                  <Stack gap={3} style={{ marginBottom: '15px' }}>
-                    {/* Mapping over all entities to preserve order */}
-                    {map(entitiesForSubcategory, (entity) => {
-                      if (!allChoiceKeys.has(entity.key)) return null;
-                      return (
-                        <Entity
-                          key={entity.key}
-                          entity={entity}
-                          choices={choices}
-                          style={'list'}
-                        />
-                      );
-                    })}
-                  </Stack>
-                </div>
-              );
-            })}
+            <Row>
+              {/* Mapping over all subcategories to preserve order */}
+              {map(category.subCategories, (subCategoryKey) => {
+                const subCategory = subCategoriesByKey[subCategoryKey];
+                const entitiesForSubcategory =
+                  entitiesBySubCategory[subCategoryKey];
+                return (
+                  <Col
+                    key={subCategory.label + 'Col'}
+                    id={subCategory.key}
+                    xs={12 / Math.min(category.subCategories.length, 3)}
+                  >
+                    <h3>{subCategory.label}</h3>
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns:
+                          'repeat(auto-fill, minmax(28vw, 1fr))',
+                        gridGap: '1em',
+                      }}
+                    >
+                      {/* Mapping over all entities to preserve order */}
+                      {map(entitiesForSubcategory, (entity) => {
+                        if (!allChoiceKeys.has(entity.key)) return null;
+                        const choice = choices.find(
+                          (choice) => choice.entityKey === entity.key
+                        );
+                        if (!choice) return null;
+                        return (
+                          <Card>
+                            <Card.Header
+                              as="h5"
+                              style={{ textAlign: 'center' }}
+                            >
+                              {entity.label}
+                            </Card.Header>
+                            <Card.Img src={entity.imageUrl} />
+                            <Card.Footer style={{ textAlign: 'center' }}>
+                              Level {choice.level}/{entity.entityLevels.length}
+                            </Card.Footer>
+                          </Card>
+                        );
+                      })}
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
           </>
         );
       })}
