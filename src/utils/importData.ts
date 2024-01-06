@@ -14,6 +14,7 @@ import {
 } from '../models/EntityLevel';
 import { ZodType, z } from 'zod';
 import { reduce, replace } from 'lodash';
+import { Appendix, AppendixKey, AppendixSchema } from '../models/Appendix';
 
 export type DataByKey = {
   categoriesByKey: Record<CategoryKey, Category>;
@@ -21,6 +22,7 @@ export type DataByKey = {
   entitiesByKey: Record<EntityKey, Entity>;
   entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
   pointTypesByKey: Record<PointTypeKey, PointType>;
+  appendicesByKey: Record<AppendixKey, Appendix>;
   setting: string;
   home: string;
 };
@@ -38,6 +40,10 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
           rowCategory.subCategories &&
           typeof rowCategory.subCategories === 'string'
             ? rowCategory.subCategories.split(',')
+            : [],
+        appendices:
+          rowCategory.appendices && typeof rowCategory.appendices === 'string'
+            ? rowCategory.appendices.split(',')
             : [],
       };
     }
@@ -103,6 +109,14 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
       };
     }
   );
+
+  const appendicesByKey: Record<AppendixKey, Appendix> = await parseCsv<
+    typeof AppendixSchema
+  >(
+    '/incursion/imported/Appendices d3e0624b649b48e2970db9f9c83b3e27_all.csv',
+    AppendixSchema
+  );
+
   const home = await fetch(
     '/incursion/imported/Incursion fd3b42adc0dd41f093e3357f18eeb02a.md'
   );
@@ -123,6 +137,7 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     entitiesByKey,
     entityLevelsByKey,
     pointTypesByKey,
+    appendicesByKey,
     setting: settingText,
     home: homeText,
   };
@@ -146,7 +161,7 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
           async (acc, result) => {
             if (callback) result = callback(result);
             if (typeof result.Self !== 'string') {
-              console.log('no self', result);
+              console.error('no self', result);
               throw new Error('No Self');
             }
             const selfPaths = result.Self.match(regex);
@@ -156,17 +171,23 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
             }
             const pathToSelf = `${selfPaths[0].slice(1, -1)}.md`;
             const description = await fetchMarkdown(pathToSelf);
-            const parsedResult = parser.parse({
-              ...result,
-              description,
-            });
-            if (!parsedResult.key) {
-              throw new Error('key not found');
+            try {
+              const parsedResult = parser.parse({
+                ...result,
+                description,
+              });
+              if (!parsedResult.key) {
+                console.error('key not found', parsedResult);
+                throw new Error('key not found');
+              }
+              return {
+                ...(await acc),
+                [parsedResult.key]: parsedResult,
+              };
+            } catch (err) {
+              console.log('Error parsing', result);
+              throw err;
             }
-            return {
-              ...(await acc),
-              [parsedResult.key]: parsedResult,
-            };
           },
           Promise.resolve({} as Record<string, z.infer<SchemaType>>)
         );

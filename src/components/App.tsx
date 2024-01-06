@@ -2,15 +2,12 @@ import { createContext, useCallback, useState } from 'react';
 import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
-import { Category, CategoryKey } from '../models/Category';
+import { CategoryKey } from '../models/Category';
 import { DEFAULT_TRUE_MAGE } from '../data';
 import { DataByKey } from '../utils/importData';
 import ValidationToast from './ValidationToast';
 import { every } from 'lodash';
-import { Entity, EntityKey } from '../models/Entity';
-import { SubCategory, SubCategoryKey } from '../models/SubCategory';
-import { EntityLevel, EntityLevelKey } from '../models/EntityLevel';
-import { PointType, PointTypeKey } from '../models/PointType';
+import { EntityKey } from '../models/Entity';
 import { Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
 import Navbar from './Navbar';
 import { Container, Image } from 'react-bootstrap';
@@ -25,21 +22,14 @@ export const TrueMageContext = createContext<TrueMageContext>({
   setTrueMage: (_trueMage) => {},
 });
 
-type DataContext = {
-  categoriesByKey: Record<CategoryKey, Category>;
-  subCategoriesByKey: Record<SubCategoryKey, SubCategory>;
-  entitiesByKey: Record<EntityKey, Entity>;
-  entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
-  pointTypesByKey: Record<PointTypeKey, PointType>;
-  setting: string;
-  home: string;
-};
+type DataContext = DataByKey;
 const defaultDataContext: DataContext = {
   categoriesByKey: {},
   subCategoriesByKey: {},
   entitiesByKey: {},
   entityLevelsByKey: {},
   pointTypesByKey: {},
+  appendicesByKey: {},
   setting: '',
   home: '',
 };
@@ -100,7 +90,6 @@ function App() {
       const category = dataByKey.categoriesByKey[categoryKey];
       const pointTypeKey = category.pointType;
       if (!pointTypeKey) return true;
-      const pointType = dataByKey.pointTypesByKey[pointTypeKey];
 
       const chosenEntityKeys = new Set(
         newChoices.map((choice) => choice.entityKey)

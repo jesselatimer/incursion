@@ -12,8 +12,12 @@ import { Nav, Stack } from 'react-bootstrap';
 import Summary from './Summary';
 
 function EntityList() {
-  const { subCategoriesByKey, categoriesByKey, entitiesByKey } =
-    useContext(DataContext);
+  const {
+    subCategoriesByKey,
+    categoriesByKey,
+    entitiesByKey,
+    appendicesByKey,
+  } = useContext(DataContext);
   const { categoryChoices } = useContext(CategoryChoicesContext);
   const { categoryKey } = useLoaderData() as EntityListArgs['params'];
 
@@ -31,6 +35,10 @@ function EntityList() {
   const subCategories = category.subCategories.map(
     (subCategoryKey) => subCategoriesByKey[subCategoryKey]
   );
+  const appendices = category.appendices?.length
+    ? category.appendices.map((appendixKey) => appendicesByKey[appendixKey])
+    : undefined;
+
   return (
     <Row>
       <Col>
@@ -86,6 +94,11 @@ function EntityList() {
               </Row>
             );
           })}
+          {appendices?.length
+            ? map(appendices, (appendix) => {
+                return <Markdown>{appendix.description}</Markdown>;
+              })
+            : undefined}
         </Container>
       </Col>
       <Col xs={4} style={{ maxWidth: '350px' }}>
