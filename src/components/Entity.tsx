@@ -13,11 +13,9 @@ import { calculatePoints } from '../utils/calculatePoints';
 
 function Entity({
   entity,
-  choices,
   style,
 }: {
   entity: EntityModel;
-  choices: Choice[];
   style: 'list' | 'grid';
 }) {
   const dataByKey = useContext(DataContext);
@@ -25,7 +23,8 @@ function Entity({
     dataByKey;
   const entityKey = entity.key;
 
-  const { setChoices } = useContext(CategoryChoicesContext);
+  const { categoryChoices, setChoices } = useContext(CategoryChoicesContext);
+  const choices = categoryChoices[entity.category];
   const {
     choice,
     category,

@@ -164,7 +164,6 @@ function EntityPreview({
       </Card>
       <EntityModal
         entity={entity}
-        choices={choices}
         showModal={showModal}
         setShowModal={setShowModal}
       />
