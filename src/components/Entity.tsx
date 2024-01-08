@@ -1,7 +1,6 @@
 import { Entity as EntityModel } from '../models/Entity';
 import Markdown from './Markdown';
 import Card from 'react-bootstrap/Card';
-import { Choice } from '../models/Choice';
 import {
   DataContext,
   REQUIRED_ENTITY_KEYS,
@@ -11,13 +10,7 @@ import { useCallback, useContext, useMemo } from 'react';
 import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
 
-function Entity({
-  entity,
-  style,
-}: {
-  entity: EntityModel;
-  style: 'list' | 'grid';
-}) {
+function Entity({ entity }: { entity: EntityModel }) {
   const dataByKey = useContext(DataContext);
   const { categoriesByKey, pointTypesByKey, entitiesByKey, entityLevelsByKey } =
     dataByKey;
@@ -55,7 +48,15 @@ function Entity({
       pointsUsed,
       pointsRemaining: usesPoints ? pointType.maxPoints - pointsUsed : 0,
     };
-  }, [choices, dataByKey]);
+  }, [
+    choices,
+    categoriesByKey,
+    entitiesByKey,
+    entity,
+    entityKey,
+    entityLevelsByKey,
+    pointTypesByKey,
+  ]);
 
   const onClickSelect = useCallback(
     (level: number) => {
@@ -67,7 +68,7 @@ function Entity({
         category.key
       );
     },
-    [setChoices, choices, choice, dataByKey]
+    [setChoices, choices, category, entityKey]
   );
 
   const onClickUnselect = useCallback(() => {
@@ -91,39 +92,15 @@ function Entity({
         category.key
       );
     }
-  }, [setChoices, choices, choice, chosenLevel, dataByKey]);
+  }, [setChoices, choices, chosenLevel, category, entity, entityKey]);
 
   return (
-    <Card
-      border={choice ? 'light' : 'secondary'}
-      text={choice ? 'light' : ''}
-      style={
-        style === 'list'
-          ? {
-              display: 'flex',
-              flexDirection: 'row',
-            }
-          : {}
-      }
-    >
-      <Card.Img
-        variant="top"
-        src={entity.imageUrl}
-        style={
-          style === 'list'
-            ? {
-                height: '30%',
-                width: '30%',
-              }
-            : {}
-        }
-      />
+    <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
+      <Card.Img variant="top" src={entity.imageUrl} />
       <Card.Body>
         <Card.Title>{entity.label}</Card.Title>
         {Boolean(entity.description) && (
-          <Card.Text>
-            <Markdown>{entity.description}</Markdown>
-          </Card.Text>
+          <Markdown>{entity.description}</Markdown>
         )}
         <Card.Text>
           Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
@@ -193,9 +170,7 @@ function Entity({
                 <Card.Title>{`Level ${entityLevel.level}`}</Card.Title>
                 {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
                 {Boolean(entityLevel.description) && (
-                  <Card.Text>
-                    <Markdown>{entityLevel.description}</Markdown>
-                  </Card.Text>
+                  <Markdown>{entityLevel.description}</Markdown>
                 )}
               </Card.Body>
             </Card>

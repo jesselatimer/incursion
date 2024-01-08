@@ -13,17 +13,16 @@ import Navbar from './Navbar';
 import { Container, Image } from 'react-bootstrap';
 import { HashLink } from 'react-router-hash-link';
 
-type TrueMageContext = {
+type TrueMageContextType = {
   trueMage: TrueMage;
   setTrueMage: (trueMage: TrueMage) => void;
 };
-export const TrueMageContext = createContext<TrueMageContext>({
+export const TrueMageContext = createContext<TrueMageContextType>({
   trueMage: DEFAULT_TRUE_MAGE,
   setTrueMage: (_trueMage) => {},
 });
 
-type DataContext = DataByKey;
-const defaultDataContext: DataContext = {
+const defaultDataContext: DataByKey = {
   categoriesByKey: {},
   subCategoriesByKey: {},
   entitiesByKey: {},
@@ -33,17 +32,19 @@ const defaultDataContext: DataContext = {
   setting: '',
   home: '',
 };
-export const DataContext = createContext<DataContext>(defaultDataContext);
+export const DataContext = createContext<DataByKey>(defaultDataContext);
 
-type CategoryChoicesContext = {
+type CategoryChoicesContextType = {
   setChoices: (newChoices: Choice[], categoryKey: CategoryKey) => void;
   categoryChoices: Record<CategoryKey, Choice[]>;
 };
 
-export const CategoryChoicesContext = createContext<CategoryChoicesContext>({
-  setChoices: (_newChoices, _categoryKey) => {},
-  categoryChoices: {},
-});
+export const CategoryChoicesContext = createContext<CategoryChoicesContextType>(
+  {
+    setChoices: (_newChoices, _categoryKey) => {},
+    categoryChoices: {},
+  }
+);
 
 export type ValidationState =
   | {
@@ -108,7 +109,7 @@ function App() {
 
       return true;
     },
-    [dataByKey, categoryChoices]
+    [dataByKey]
   );
 
   const setChoices = useCallback(
@@ -124,12 +125,7 @@ function App() {
       localStorage.setItem(trueMage.name, JSON.stringify(newCategoryChoices));
       setAllChoicesByCategory(newCategoryChoices);
     },
-    [
-      dataByKey,
-      categoryChoices,
-      setAllChoicesByCategory,
-      setShowValidationError,
-    ]
+    [categoryChoices, setAllChoicesByCategory, validateNewChoices, trueMage]
   );
 
   return (

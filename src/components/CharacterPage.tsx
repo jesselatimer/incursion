@@ -2,15 +2,13 @@ import { flatten, groupBy, map } from 'lodash';
 import Container from 'react-bootstrap/Container';
 import { useContext, useMemo, useState } from 'react';
 import { CategoryChoicesContext, DataContext } from './App';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import EntityModal from './EntityModal';
 import { EntityKey } from '../models/Entity';
 
-// TODO: improve this component
 // TODO: Add character export
 function CharacterPage() {
-  const { subCategoriesByKey, categoriesByKey, entitiesByKey } =
-    useContext(DataContext);
+  const { categoriesByKey, entitiesByKey } = useContext(DataContext);
   const { categoryChoices } = useContext(CategoryChoicesContext);
 
   const entitiesBySubCategory = useMemo(
@@ -40,7 +38,10 @@ function CharacterPage() {
         if (!choices?.length) return null;
 
         return (
-          <div style={{ marginTop: '30px' }}>
+          <div
+            style={{ marginTop: '30px' }}
+            key={category.key + 'CharacterCategory'}
+          >
             <h2>{category.label}</h2>
             <div
               style={{
@@ -51,7 +52,6 @@ function CharacterPage() {
             >
               {/* Mapping over all subcategories to preserve order */}
               {map(category.subCategories, (subCategoryKey) => {
-                const subCategory = subCategoriesByKey[subCategoryKey];
                 const entitiesForSubcategory =
                   entitiesBySubCategory[subCategoryKey];
                 return map(entitiesForSubcategory, (entity) => {
@@ -64,6 +64,7 @@ function CharacterPage() {
                     <Card
                       onClick={() => setModalEntity(entity.key)}
                       style={{ cursor: 'pointer' }}
+                      key={entity.key + 'CharacterCard'}
                     >
                       <Card.Header as="h5" style={{ textAlign: 'center' }}>
                         {entity.label}

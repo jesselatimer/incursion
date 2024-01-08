@@ -46,7 +46,14 @@ function EntityPreview({
         pointsUsed,
         pointsRemaining: usesPoints ? pointType.maxPoints - pointsUsed : 0,
       };
-    }, [choices, dataByKey]);
+    }, [
+      choices,
+      entitiesByKey,
+      entityLevelsByKey,
+      category,
+      entityKey,
+      pointTypesByKey,
+    ]);
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -75,7 +82,7 @@ function EntityPreview({
       ],
       category.key
     );
-  }, [setChoices, choices, choice, dataByKey]);
+  }, [setChoices, choices, category, chosenLevel, entityKey]);
 
   const onClickUnselect = useCallback(() => {
     let level = chosenLevel > 1 ? chosenLevel - 1 : 0;
@@ -92,7 +99,7 @@ function EntityPreview({
       });
     }
     setChoices(newChoices, category.key);
-  }, [setChoices, choices, choice, chosenLevel, dataByKey]);
+  }, [setChoices, choices, chosenLevel, category, entity, entityKey]);
 
   return (
     <>
@@ -131,9 +138,7 @@ function EntityPreview({
           />
           <Card.Title></Card.Title>
           {Boolean(entity.description) && (
-            <Card.Text>
-              <Markdown>{entity.description}</Markdown>
-            </Card.Text>
+            <Markdown>{entity.description}</Markdown>
           )}
           <Card.Text>
             Level: {choice ? choice.level : 0}/{entity.entityLevels.length}

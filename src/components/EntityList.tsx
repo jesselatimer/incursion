@@ -23,7 +23,7 @@ function EntityList() {
 
   const entities = useMemo(
     () => filter(entitiesByKey, (entity) => entity.category === categoryKey),
-    [categoryKey]
+    [entitiesByKey, categoryKey]
   );
 
   if (!entities?.length) return null;
@@ -68,7 +68,10 @@ function EntityList() {
             if (!currentEntities?.length) return null;
             const currentEntitiesByKey = groupBy(currentEntities, 'key');
             return (
-              <Row key={subCategory.label + 'Row'} id={subCategory.key}>
+              <Row
+                key={subCategory.label + 'EntityListRow'}
+                id={subCategory.key}
+              >
                 <h3>{subCategory.label}</h3>
                 {Boolean(subCategory.description) && (
                   <Markdown>{subCategory.description}</Markdown>
@@ -80,7 +83,7 @@ function EntityList() {
                   return (
                     <Col
                       xs={4}
-                      key={entity.key + 'Col'}
+                      key={entity.key + 'EntityListCol'}
                       style={{ maxWidth: '400px', minWidth: '300px' }}
                     >
                       <EntityPreview
@@ -96,7 +99,11 @@ function EntityList() {
           })}
           {appendices?.length
             ? map(appendices, (appendix) => {
-                return <Markdown>{appendix.description}</Markdown>;
+                return (
+                  <Markdown key={appendix.key + 'EntityList'}>
+                    {appendix.description}
+                  </Markdown>
+                );
               })
             : undefined}
         </Container>

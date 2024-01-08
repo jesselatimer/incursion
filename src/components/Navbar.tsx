@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar as ReactNavbar, Container, Nav } from 'react-bootstrap';
+import { Navbar as ReactNavbar, Nav } from 'react-bootstrap';
 import { DataContext } from './App';
 import { map } from 'lodash';
 

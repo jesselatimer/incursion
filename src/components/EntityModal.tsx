@@ -1,12 +1,4 @@
 import { Entity as EntityModel } from '../models/Entity';
-import { Choice } from '../models/Choice';
-import {
-  DataContext,
-  REQUIRED_ENTITY_KEYS,
-  CategoryChoicesContext,
-} from './App';
-import { useCallback, useContext, useMemo } from 'react';
-import { calculatePoints } from '../utils/calculatePoints';
 import { CloseButton, Modal } from 'react-bootstrap';
 import Entity from './Entity';
 
@@ -34,7 +26,7 @@ function EntityModal({
         }}
       />
       <Modal.Body style={{ padding: '0' }}>
-        <Entity entity={entity} style={'grid'} />
+        <Entity entity={entity} />
       </Modal.Body>
     </Modal>
   );

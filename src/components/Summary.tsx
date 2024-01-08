@@ -33,7 +33,13 @@ function Summary({
         {map(categoriesByKey, (category) => {
           const choices = categoryChoices[category.key];
           if (!choices?.length) return null;
-          return <SummaryCard category={category} choices={choices} />;
+          return (
+            <SummaryCard
+              key={category.key + 'SummaryCard'}
+              category={category}
+              choices={choices}
+            />
+          );
         })}
       </Stack>
     </>

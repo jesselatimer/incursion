@@ -1,5 +1,5 @@
-import { useContext, useMemo, useState } from 'react';
-import { CategoryChoicesContext, DataContext, TrueMageContext } from './App';
+import { useContext, useState } from 'react';
+import { CategoryChoicesContext } from './App';
 import { Choice } from '../models/Choice';
 import { Col, Image, Row, Stack, CloseButton } from 'react-bootstrap';
 import { Entity as EntityType } from '../models/Entity';

@@ -1,5 +1,5 @@
 import { useContext, useMemo, useState } from 'react';
-import { DataContext, TrueMageContext } from './App';
+import { DataContext } from './App';
 import { Choice } from '../models/Choice';
 import { Category } from '../models/Category';
 import { groupBy, map } from 'lodash';
@@ -26,7 +26,7 @@ function SummaryCard({
 
   const entitiesBySubCategory = useMemo(
     () => groupBy(entitiesByKey, 'subCategory'),
-    [dataByKey]
+    [entitiesByKey]
   );
 
   const choicesByEntityKey = useMemo(
@@ -44,7 +44,7 @@ function SummaryCard({
         entityLevelsByKey,
         pointType?.key
       ),
-    [choices, entitiesByKey, entityLevelsByKey, category]
+    [choices, entitiesByKey, entityLevelsByKey, pointType]
   );
 
   const [collapsed, setCollapsed] = useState(false);
@@ -138,6 +138,7 @@ function SummaryCard({
                     if (!choice) return null;
                     return (
                       <SummaryEntity
+                        key={entity.key + 'SummaryEntity'}
                         entity={entity}
                         choice={choice}
                         choices={choices}
