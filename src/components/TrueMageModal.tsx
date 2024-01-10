@@ -1,6 +1,6 @@
 import { Button, Col, Modal, Row } from 'react-bootstrap';
 import { useContext, useState } from 'react';
-import { DataContext, TrueMageContext } from './App';
+import { TrueMageContext } from './App';
 import { createNewTrueMage, getTrueMagesFromStorage } from '../data';
 import { map } from 'lodash';
 import TrueMageModalRow from './TrueMageModalRow';

@@ -3,8 +3,6 @@ import {
   Col,
   Form,
   FormCheck,
-  FormControl,
-  FormText,
   Image,
   OverlayTrigger,
   Row,
@@ -20,7 +18,7 @@ import {
   updateTrueMage,
   deleteTrueMage,
 } from '../data';
-import { flatten, invert, map, update } from 'lodash';
+import { flatten, map } from 'lodash';
 import { CategoryKey } from '../models/Category';
 import { Choice } from '../models/Choice';
 import { TrueMage } from '../models/TrueMage';
