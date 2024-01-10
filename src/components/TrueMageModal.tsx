@@ -30,7 +30,7 @@ function TrueMageModal({
           <Col xs="1">
             <strong>ID</strong>
           </Col>
-          <Col xs="2">
+          <Col xs="3">
             <strong>Name</strong>
           </Col>
           <Col>

@@ -24,21 +24,17 @@ export const updateTrueMage = (trueMage: TrueMage) => {
   const { trueMages, currentTrueMage } = getTrueMagesFromStorage();
 
   let trueMageFromStorage = trueMages.find((tm) => trueMage.id === tm.id);
-  console.log('trueMageFromStorage', trueMageFromStorage);
   if (!trueMageFromStorage) {
-    console.log('adding true mage to storage');
     trueMageFromStorage = { ...trueMage };
     trueMages.push(trueMageFromStorage);
   }
 
-  if (trueMage.id !== currentTrueMage.id) {
-    console.log('setting true mage active');
+  if (trueMage.isActive && trueMage.id !== currentTrueMage.id) {
     currentTrueMage.isActive = false;
     trueMageFromStorage.isActive = true;
   }
 
   if (trueMage.name !== trueMageFromStorage.name) {
-    console.log('changing true mage name');
     trueMageFromStorage.name = trueMage.name;
   }
 
@@ -57,7 +53,6 @@ export const createNewTrueMage = () => {
     id: highestId + 1,
   };
 
-  console.log('newTrueMage', newTrueMage);
   updateTrueMage(newTrueMage);
   return newTrueMage;
 };

@@ -1,14 +1,17 @@
 import {
   Button,
   Col,
+  Form,
   FormCheck,
+  FormControl,
+  FormText,
   Image,
   OverlayTrigger,
   Row,
   Stack,
   Tooltip,
 } from 'react-bootstrap';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { DataContext, TrueMageContext } from './App';
 import {
   getTrueMagesFromStorage,
@@ -17,7 +20,7 @@ import {
   updateTrueMage,
   deleteTrueMage,
 } from '../data';
-import { flatten, map } from 'lodash';
+import { flatten, invert, map, update } from 'lodash';
 import { CategoryKey } from '../models/Category';
 import { Choice } from '../models/Choice';
 import { TrueMage } from '../models/TrueMage';
@@ -35,6 +38,9 @@ function TrueMageModalRow({
   const categoryChoices: Record<CategoryKey, Choice[]> =
     getChoicesFromLocalStorage(trueMage) || initialChoices;
   const flatChoices = flatten(Object.values(categoryChoices));
+
+  const [isEditingName, setIsEditingName] = useState(false);
+
   return (
     <Row
       style={{
@@ -58,7 +64,75 @@ function TrueMageModalRow({
         />
       </Col>
       <Col xs="1">{trueMage.id}</Col>
-      <Col xs="2">{trueMage.name}</Col>
+      <Col xs="3">
+        {isEditingName ? (
+          <Form
+            onSubmit={(event) => {
+              event.preventDefault();
+
+              const target = event.target as typeof event.target & {
+                name: { value: string };
+              };
+              const name = target.name.value;
+
+              updateTrueMage({
+                ...trueMage,
+                name,
+              });
+              setTrueMages(getTrueMagesFromStorage().trueMages);
+              setIsEditingName(false);
+            }}
+          >
+            <Form.Control
+              type="text"
+              name="name"
+              defaultValue={trueMage.name}
+            />
+            <Button
+              type="submit"
+              style={{
+                display: 'contents',
+              }}
+            >
+              <Image
+                src="/incursion/check.png"
+                style={{
+                  width: '12px',
+                  cursor: 'pointer',
+                  filter: 'invert()',
+                  marginLeft: '5px',
+                }}
+              />
+            </Button>
+            <Image
+              rounded
+              src="/incursion/cancel.png"
+              style={{
+                width: '12px',
+                cursor: 'pointer',
+                filter: 'invert()',
+                marginLeft: '5px',
+              }}
+              onClick={() => setIsEditingName(false)}
+            />
+          </Form>
+        ) : (
+          <>
+            {trueMage.name}
+            <Image
+              rounded
+              src="/incursion/edit.png"
+              style={{
+                width: '12px',
+                cursor: 'pointer',
+                filter: 'invert()',
+                marginLeft: '5px',
+              }}
+              onClick={() => setIsEditingName(true)}
+            />
+          </>
+        )}
+      </Col>
       <Col>
         <Stack direction="horizontal">
           {map(flatChoices, (choice) => {
