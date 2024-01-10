@@ -61,3 +61,12 @@ export const createNewTrueMage = () => {
   updateTrueMage(newTrueMage);
   return newTrueMage;
 };
+
+export const deleteTrueMage = (trueMage: TrueMage) => {
+  const { trueMages } = getTrueMagesFromStorage();
+  if (trueMage.isActive) return trueMages;
+
+  let filteredTrueMages = trueMages.filter((tm) => tm.id !== trueMage.id);
+  localStorage.setItem('trueMages', JSON.stringify(filteredTrueMages));
+  return filteredTrueMages;
+};

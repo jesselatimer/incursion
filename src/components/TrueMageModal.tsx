@@ -9,7 +9,7 @@ import {
   Stack,
   Tooltip,
 } from 'react-bootstrap';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { DataContext, TrueMageContext } from './App';
 import {
   createNewTrueMage,
@@ -17,6 +17,7 @@ import {
   initialChoices,
   getChoicesFromLocalStorage,
   updateTrueMage,
+  deleteTrueMage,
 } from '../data';
 import { flatten, map } from 'lodash';
 import { CategoryKey } from '../models/Category';
@@ -32,7 +33,8 @@ function TrueMageModal({
   const { entitiesByKey } = useContext(DataContext);
   const { setTrueMage } = useContext(TrueMageContext);
 
-  const { trueMages } = getTrueMagesFromStorage();
+  const { trueMages: trueMagesFromStorage } = getTrueMagesFromStorage();
+  const [trueMages, setTrueMages] = useState(trueMagesFromStorage);
 
   return (
     <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
@@ -54,6 +56,9 @@ function TrueMageModal({
           <Col>
             <strong>Choices</strong>
           </Col>
+          <Col xs="1">
+            <strong>Delete</strong>
+          </Col>
         </Row>
         {map(trueMages, (trueMage) => {
           const categoryChoices: Record<CategoryKey, Choice[]> =
@@ -66,7 +71,7 @@ function TrueMageModal({
               }}
             >
               {/* TODO: set buttons to select active true mage */}
-              <Col xs="1">
+              <Col xs="1" style={{ textAlign: 'center' }}>
                 <FormCheck
                   type="radio"
                   id={'checkbox-' + trueMage.id}
@@ -78,6 +83,7 @@ function TrueMageModal({
                       isActive: true,
                     });
                     setTrueMage(trueMage);
+                    setTrueMages(getTrueMagesFromStorage().trueMages);
                   }}
                 />
               </Col>
@@ -115,6 +121,26 @@ function TrueMageModal({
                   })}
                 </Stack>
               </Col>
+              <Col xs="1" style={{ textAlign: 'center' }}>
+                {!trueMage.isActive && (
+                  <Button
+                    variant="outline-danger"
+                    style={{
+                      borderRadius: '50%',
+                      width: '31px',
+                      height: '31px',
+                    }}
+                    size="sm"
+                    aria-label="Delete"
+                    onClick={() => {
+                      const updatedTrueMages = deleteTrueMage(trueMage);
+                      setTrueMages(updatedTrueMages);
+                    }}
+                  >
+                    X
+                  </Button>
+                )}
+              </Col>
             </Row>
           );
         })}
@@ -129,6 +155,7 @@ function TrueMageModal({
             onClick={() => {
               const trueMage = createNewTrueMage();
               setTrueMage(trueMage);
+              setTrueMages(getTrueMagesFromStorage().trueMages);
             }}
           >
             Create New
