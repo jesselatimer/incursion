@@ -17,7 +17,10 @@ function Entity({ entity }: { entity: EntityModel }) {
   const entityKey = entity.key;
 
   const { categoryChoices, setChoices } = useContext(CategoryChoicesContext);
-  const choices = categoryChoices[entity.category];
+  const choices = useMemo(
+    () => categoryChoices[entity.category] || [],
+    [categoryChoices, entity]
+  );
   const {
     choice,
     category,

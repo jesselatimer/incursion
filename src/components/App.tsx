@@ -3,7 +3,12 @@ import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
 import { CategoryKey } from '../models/Category';
-import { DEFAULT_TRUE_MAGE } from '../data';
+import {
+  DEFAULT_TRUE_MAGE,
+  getChoicesFromLocalStorage,
+  getTrueMagesFromStorage,
+  initialChoices,
+} from '../data';
 import { DataByKey } from '../utils/importData';
 import ValidationToast from './ValidationToast';
 import { every } from 'lodash';
@@ -21,6 +26,8 @@ export const TrueMageContext = createContext<TrueMageContextType>({
   trueMage: DEFAULT_TRUE_MAGE,
   setTrueMage: (_trueMage) => {},
 });
+
+const { currentTrueMage } = getTrueMagesFromStorage();
 
 const defaultDataContext: DataByKey = {
   categoriesByKey: {},
@@ -59,27 +66,20 @@ export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
   foundations: ['power', 'endurance'],
 };
 
-let initialChoices: Record<CategoryKey, Choice[]> = {
-  foundations: [
-    { entityKey: 'power', level: 1 },
-    { entityKey: 'endurance', level: 1 },
-  ],
-};
-const choicesFromStorageJson = localStorage.getItem(DEFAULT_TRUE_MAGE.name);
-if (choicesFromStorageJson) {
-  const choicesFromStorage: Record<CategoryKey, Choice[]> = JSON.parse(
-    choicesFromStorageJson
-  );
-  initialChoices = choicesFromStorage;
-}
-
 function App() {
   const dataByKey = useLoaderData() as DataByKey;
 
-  // TODO: implement multiple users (store each user in local storage, use state to set user)
-  const [trueMage, setTrueMage] = useState<TrueMage>(DEFAULT_TRUE_MAGE);
-  const [categoryChoices, setAllChoicesByCategory] =
-    useState<Record<CategoryKey, Choice[]>>(initialChoices);
+  const [trueMage, setTrueMage] = useState<TrueMage>(currentTrueMage);
+  const [categoryChoices, setAllChoicesByCategory] = useState<
+    Record<CategoryKey, Choice[]>
+  >(getChoicesFromLocalStorage(currentTrueMage) || initialChoices);
+
+  const setTrueMageAndChoices = useCallback((trueMage: TrueMage) => {
+    setTrueMage(trueMage);
+    setAllChoicesByCategory(
+      getChoicesFromLocalStorage(trueMage) || initialChoices
+    );
+  }, []);
 
   const [showValidationError, setShowValidationError] =
     useState<ValidationState>({
@@ -122,14 +122,19 @@ function App() {
       let newCategoryChoices = { ...categoryChoices };
       newCategoryChoices[categoryKey] = newChoices;
 
-      localStorage.setItem(trueMage.name, JSON.stringify(newCategoryChoices));
+      localStorage.setItem(
+        trueMage.id.toString(),
+        JSON.stringify(newCategoryChoices)
+      );
       setAllChoicesByCategory(newCategoryChoices);
     },
     [categoryChoices, setAllChoicesByCategory, validateNewChoices, trueMage]
   );
 
   return (
-    <TrueMageContext.Provider value={{ trueMage, setTrueMage }}>
+    <TrueMageContext.Provider
+      value={{ trueMage, setTrueMage: setTrueMageAndChoices }}
+    >
       <DataContext.Provider value={dataByKey}>
         <CategoryChoicesContext.Provider
           value={{ setChoices, categoryChoices }}
