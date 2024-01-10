@@ -1,7 +1,7 @@
 import { flatten, groupBy, map } from 'lodash';
 import Container from 'react-bootstrap/Container';
 import { useContext, useMemo, useState } from 'react';
-import { CategoryChoicesContext, DataContext } from './App';
+import { CategoryChoicesContext, DataContext, TrueMageContext } from './App';
 import { Card } from 'react-bootstrap';
 import EntityModal from './EntityModal';
 import { EntityKey } from '../models/Entity';
@@ -10,6 +10,7 @@ import { EntityKey } from '../models/Entity';
 function CharacterPage() {
   const { categoriesByKey, entitiesByKey } = useContext(DataContext);
   const { categoryChoices } = useContext(CategoryChoicesContext);
+  const { trueMage } = useContext(TrueMageContext);
 
   const entitiesBySubCategory = useMemo(
     () => groupBy(entitiesByKey, 'subCategory'),
@@ -32,7 +33,7 @@ function CharacterPage() {
 
   return (
     <Container fluid>
-      <h1>True Mage Summary</h1>
+      <h1>{trueMage.name}</h1>
       {map(categoriesByKey, (category) => {
         const choices = categoryChoices[category.key];
         if (!choices?.length) return null;
