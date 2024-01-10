@@ -18,7 +18,11 @@ function TrueMageModal({
   const [trueMages, setTrueMages] = useState(trueMagesFromStorage);
 
   return (
-    <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+    <Modal
+      show={showModal}
+      onHide={() => setShowModal(false)}
+      dialogClassName="modal-90w"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Select True Mage</Modal.Title>
       </Modal.Header>
@@ -42,7 +46,11 @@ function TrueMageModal({
         </Row>
         {map(trueMages, (trueMage) => {
           return (
-            <TrueMageModalRow trueMage={trueMage} setTrueMages={setTrueMages} />
+            <TrueMageModalRow
+              key={trueMage.id + 'TrueMageModalRow'}
+              trueMage={trueMage}
+              setTrueMages={setTrueMages}
+            />
           );
         })}
         <div

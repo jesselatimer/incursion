@@ -50,3 +50,8 @@ th {
   /* color: white; */
   background-color: rgb(25, 25, 25);
 }
+
+.modal-90w {
+  width: 90%;
+  max-width: 90%;
+}
