@@ -78,6 +78,10 @@ function TrueMageModalRow({
                 name,
               });
               setTrueMages(getTrueMagesFromStorage().trueMages);
+              setTrueMage({
+                ...trueMage,
+                name,
+              });
               setIsEditingName(false);
             }}
           >
