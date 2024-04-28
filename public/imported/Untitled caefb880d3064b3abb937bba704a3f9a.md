@@ -1,3 +1,3 @@
 # Untitled
 
-Though the magic to create magical items clearly exists in Post-Incursion Earth, some of these seem to be artifacts of the Incursion itself, either from the old world, or as a bizarre side-effect of the intersection. Eventually, research and development might match some of these items in specific degrees of ability or power, but many are also unique and will never be duplicated.
+Thaumaturges, other mages, and even nature can create items with magical power, but these items are each unique, perhaps born of the Incursion directly. They are fated to be with you, accidents or theft are less likely to take them, and if they are taken, coincidence and circumstance bend to bring you together again. This power is not absolute, and someone with enough determination and ability could keep them from you for a long time, or possibly destroy them. Of course intentionally gifting or selling them severs this bond.
