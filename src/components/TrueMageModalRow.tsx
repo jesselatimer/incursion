@@ -132,7 +132,7 @@ function TrueMageModalRow({
         )}
       </Col>
       <Col>
-        <Stack direction="horizontal">
+        <Stack direction="horizontal" style={{ flexWrap: 'wrap' }}>
           {map(flatChoices, (choice) => {
             const entity = entitiesByKey[choice.entityKey];
             const renderTooltip = (props: Record<string, any>) => (
