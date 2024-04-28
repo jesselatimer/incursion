@@ -1,3 +1,3 @@
 # Untitled
 
-These powerful companions will stick with you through thick or thin. Allies cost 2 bond points.
+Whether they're friends, compatriots fighting the same fight, or something more, Allies will stick with you through thick and thin. Perhaps they've been a part of your life for a while, or perhaps you just met in a wild coincidence. Any Threats you select, they are as key to facing them as you are. If special items are mentioned in an Ally's description, consider those Bonded to them. Allies each cost 2 bond points.
