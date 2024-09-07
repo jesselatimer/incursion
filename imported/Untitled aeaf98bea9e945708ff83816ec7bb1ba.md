@@ -1,3 +1,3 @@
 # Untitled
 
-Contacts are organizations or individuals that offer you special opportunities. They are probably favorably disposed towards you, but aren’t generally boon companions, and tend to aid you less directly than Allies. Contacts cost 1 bond point.
+Maybe somebody see something special in you, or maybe there's nepotism involved, but somehow you have a special position with a group, or rare access to a resource, one you'd never have without fate's hand on the scales. Each contact takes 1 Bond.
