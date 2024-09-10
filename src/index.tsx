@@ -17,6 +17,7 @@ import Setting from './components/Setting';
 import Home from './components/Home';
 import CharacterPage from './components/CharacterPage';
 import { Spinner } from 'react-bootstrap';
+import Glossary from './components/Glossary';
 
 async function loader() {
   return await getDataFromImport();
@@ -57,6 +58,10 @@ const router = createBrowserRouter(
         {
           path: '/character',
           element: <CharacterPage />,
+        },
+        {
+          path: '/glossary',
+          element: <Glossary />,
         },
       ],
     },

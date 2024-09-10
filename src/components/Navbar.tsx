@@ -1,6 +1,12 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar as ReactNavbar, Nav, Image } from 'react-bootstrap';
+import {
+  Navbar as ReactNavbar,
+  Nav,
+  Image,
+  NavDropdown,
+  DropdownItem,
+} from 'react-bootstrap';
 import { DataContext } from './App';
 import { map } from 'lodash';
 import TrueMageModal from './TrueMageModal';
@@ -35,8 +41,15 @@ export default function Navbar() {
             );
           })}
           <Link to="/character" className="nav-link">
-            Character
+            Character Summary
           </Link>
+          <NavDropdown title="Extra">
+            <DropdownItem href="#">
+              <Link to="/glossary" className="nav-link">
+                Glossary
+              </Link>
+            </DropdownItem>
+          </NavDropdown>
         </Nav>
       </ReactNavbar.Collapse>
       <Image
