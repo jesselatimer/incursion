@@ -1,3 +1,3 @@
 # Untitled
 
-Whether they're friends, compatriots fighting the same fight, or something more, Allies will stick with you through thick and thin. Perhaps they've been a part of your life for a while, or perhaps you just met in a wild coincidence. Any Threats you select, they are as key to facing them as you are. If special items are mentioned in an Ally's description, consider those Bonded to them. Allies each cost 2 bond points.
+Comrades fighting the same fight, friends, or something more. Met in random coincidence or part of your life for a while. Whatever the case, they will stay by you through thick and thin. Circumstances and mood conspire to facilitate deep understanding, but it *is* possible to offend them beyond tolerance; don't take them for granted. Any Threats you select later, they are as key to facing them as you are. If particular items are mentioned in an Ally's description, consider those Bonded to them. Each ally takes 2 Bonds.

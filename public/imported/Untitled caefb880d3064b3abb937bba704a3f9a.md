@@ -1,3 +1,3 @@
 # Untitled
 
-Thaumaturges, other mages, and even nature can create items with magical power, but these items are each unique, perhaps born of the Incursion directly. They are fated to be with you, accidents or theft are less likely to take them, and if they are taken, coincidence and circumstance bend to bring you together again. This power is not absolute, and someone with enough determination and ability could keep them from you for a long time, or possibly destroy them. Of course intentionally gifting or selling them severs this bond.
+Thaumaturges, other mages, and even nature can create things of magical power. But these are special, plausibly unique, possibly born of the Incursion directly. The pull of fate ties it to you, deterring loss or damage, but this protection isn't absolute. And of course intentionally giving one away severs the tie. Each artifact takes 1 Bond.
