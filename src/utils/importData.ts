@@ -24,7 +24,6 @@ export type DataByKey = {
   pointTypesByKey: Record<PointTypeKey, PointType>;
   appendicesByKey: Record<AppendixKey, Appendix>;
   setting: string;
-  home: string;
 };
 
 export const getDataFromImport = async (): Promise<DataByKey> => {
@@ -117,17 +116,12 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     AppendixSchema
   );
 
-  const home = await fetch(
-    '/incursion/imported/Incursion fd3b42adc0dd41f093e3357f18eeb02a.md'
-  );
-  let homeText = await home.text();
-
   const setting = await fetch(
     '/incursion/imported/System & Setting 61b4b535ec174572a4419910929e7022.md'
   );
   let settingText = await setting.text();
 
-  [homeText, settingText] = [homeText, settingText].map((text) =>
+  [settingText] = [settingText].map((text) =>
     text.replaceAll('jpg](', 'jpg](/incursion/imported/')
   );
 
@@ -139,7 +133,6 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     pointTypesByKey,
     appendicesByKey,
     setting: settingText,
-    home: homeText,
   };
 };
 

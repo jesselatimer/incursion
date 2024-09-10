@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 import '../css/App.css';
 import { TrueMage } from '../models/TrueMage';
 import { Choice } from '../models/Choice';
@@ -9,7 +9,7 @@ import {
   getTrueMagesFromStorage,
   initialChoices,
 } from '../data';
-import { DataByKey } from '../utils/importData';
+import { DataByKey, getDataFromImport } from '../utils/importData';
 import ValidationToast from './ValidationToast';
 import { every } from 'lodash';
 import { EntityKey } from '../models/Entity';
@@ -17,6 +17,7 @@ import { Outlet, ScrollRestoration, useLoaderData } from 'react-router-dom';
 import Navbar from './Navbar';
 import { Container, Image } from 'react-bootstrap';
 import { HashLink } from 'react-router-hash-link';
+import Home from './Home';
 
 type TrueMageContextType = {
   trueMage: TrueMage;
@@ -37,7 +38,6 @@ const defaultDataContext: DataByKey = {
   pointTypesByKey: {},
   appendicesByKey: {},
   setting: '',
-  home: '',
 };
 export const DataContext = createContext<DataByKey>(defaultDataContext);
 
@@ -67,7 +67,13 @@ export const REQUIRED_ENTITY_KEYS: Record<CategoryKey, EntityKey[]> = {
 };
 
 function App() {
-  const dataByKey = useLoaderData() as DataByKey;
+  const [dataByKey, setDataByKey] = useState<DataByKey>();
+
+  useEffect(() => {
+    getDataFromImport().then((data) => {
+      setDataByKey(data);
+    });
+  });
 
   const [trueMage, setTrueMage] = useState<TrueMage>(currentTrueMage);
   const [categoryChoices, setAllChoicesByCategory] = useState<
@@ -88,6 +94,8 @@ function App() {
 
   const validateNewChoices = useCallback(
     (newChoices: Choice[], categoryKey: CategoryKey) => {
+      if (!dataByKey) return true;
+
       const category = dataByKey.categoriesByKey[categoryKey];
       const pointTypeKey = category.pointType;
       if (!pointTypeKey) return true;
@@ -130,6 +138,17 @@ function App() {
     },
     [categoryChoices, setAllChoicesByCategory, validateNewChoices, trueMage]
   );
+
+  if (dataByKey === undefined) {
+    return (
+      <>
+        <Navbar />
+        <Container fluid style={{ padding: '20px', margin: '0' }}>
+          <Home />
+        </Container>
+      </>
+    );
+  }
 
   return (
     <TrueMageContext.Provider

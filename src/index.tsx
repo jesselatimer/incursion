@@ -12,16 +12,11 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import EntityList from './components/EntityList';
-import { getDataFromImport } from './utils/importData';
 import Setting from './components/Setting';
 import Home from './components/Home';
 import CharacterPage from './components/CharacterPage';
 import { Spinner } from 'react-bootstrap';
 import Glossary from './components/Glossary';
-
-async function loader() {
-  return await getDataFromImport();
-}
 
 const pathNames = { categoryKey: '/category/:categoryKey' } as const;
 export interface EntityListArgs extends LoaderFunctionArgs {
@@ -40,7 +35,6 @@ const router = createBrowserRouter(
       path: '/',
       element: <App />,
       // errorElement: <ErrorPage />,
-      loader,
       children: [
         {
           path: '/',
@@ -76,17 +70,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Spinner
-      animation="border"
-      variant="primary"
-      style={{
-        position: 'absolute',
-        left: 'calc(50% - 50px)',
-        top: '30%',
-        width: '100px',
-        height: '100px',
-      }}
-    />
     <RouterProvider router={router} />
   </React.StrictMode>
 );

@@ -10,6 +10,7 @@ export const EntitySchema = z.object({
   subCategory: z.string(),
   category: z.string(), // TODO: have both category and subcategory?
   entityLevels: z.array(z.string()).nonempty(),
+  unlockedFrom: z.string().optional(),
 });
 
 export type Entity = z.infer<typeof EntitySchema>;
