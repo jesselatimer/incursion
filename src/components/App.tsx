@@ -142,10 +142,12 @@ function App() {
   if (dataByKey === undefined) {
     return (
       <>
-        <Navbar />
-        <Container fluid style={{ padding: '20px', margin: '0' }}>
-          <Home />
-        </Container>
+        <DataContext.Provider value={dataByKey ?? defaultDataContext}>
+          <Navbar />
+          <Container fluid style={{ padding: '20px', margin: '0' }}>
+            <Home />
+          </Container>
+        </DataContext.Provider>
       </>
     );
   }

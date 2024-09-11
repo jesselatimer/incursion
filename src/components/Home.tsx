@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
   const dataByKey = useContext(DataContext);
+  const dataLoaded = dataByKey.setting !== '';
 
   return (
     <Container>
@@ -26,7 +27,7 @@ export default function Home() {
       <p>
         You can read about the <strong>new world and your new power</strong>{' '}
         under{' '}
-        {dataByKey ? (
+        {dataLoaded ? (
           <Link to="/setting">System & Setting</Link>
         ) : (
           'System & Setting'
@@ -36,7 +37,7 @@ export default function Home() {
       </p>
       <p>
         In{' '}
-        {dataByKey ? (
+        {dataLoaded ? (
           <Link to="/category/foundations">Foundations</Link>
         ) : (
           'Foundations'
@@ -46,13 +47,14 @@ export default function Home() {
         <strong>access power and cast magic</strong>.
       </p>
       <p>
-        In {dataByKey ? <Link to="/category/talents">Talents</Link> : 'Talents'}
-        , spend Talent points to{' '}
+        In{' '}
+        {dataLoaded ? <Link to="/category/talents">Talents</Link> : 'Talents'},
+        spend Talent points to{' '}
         <strong>enhance your repertoire of spells</strong> and gain passive
         benefits.
       </p>
       <p>
-        In {dataByKey ? <Link to="/category/bonds">Bonds</Link> : 'Bonds'},
+        In {dataLoaded ? <Link to="/category/bonds">Bonds</Link> : 'Bonds'},
         assign Bond points to gain <strong>magical Artifacts</strong>, make{' '}
         <strong>special Contacts</strong>, befriend{' '}
         <strong>powerful Allies</strong>, and forge{' '}
@@ -60,14 +62,14 @@ export default function Home() {
       </p>
       <p>
         Finally, you will have the chance to choose zero to two{' '}
-        {dataByKey ? <Link to="/category/threats">Threats</Link> : 'Threats'}.
+        {dataLoaded ? <Link to="/category/threats">Threats</Link> : 'Threats'}.
         Each one places you in the path of some{' '}
         <strong>grave risk to the world</strong>, but also grants you unique
         benefits to fight it, and rewards should you overcome.
       </p>
       <p>
         Once finished, you can{' '}
-        {dataByKey ? (
+        {dataLoaded ? (
           <Link to="/character">export your character</Link>
         ) : (
           'export your character'
@@ -85,12 +87,12 @@ export default function Home() {
           will be difficult to make meaningful choices without understanding how
           magic works. If you're ever confused about a term or concept, you can
           visit the{' '}
-          {dataByKey ? (
+          {dataLoaded ? (
             <Link to="/setting">System & Setting</Link>
           ) : (
             'System & Setting'
           )}{' '}
-          or {dataByKey ? <Link to="/glossary">Glossary</Link> : 'Glossary'}{' '}
+          or {dataLoaded ? <Link to="/glossary">Glossary</Link> : 'Glossary'}{' '}
           pages.
         </em>
       </p>
