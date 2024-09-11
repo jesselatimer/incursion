@@ -73,7 +73,7 @@ function App() {
     getDataFromImport().then((data) => {
       setDataByKey(data);
     });
-  });
+  }, []);
 
   const [trueMage, setTrueMage] = useState<TrueMage>(currentTrueMage);
   const [categoryChoices, setAllChoicesByCategory] = useState<
