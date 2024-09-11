@@ -15,7 +15,6 @@ import EntityList from './components/EntityList';
 import Setting from './components/Setting';
 import Home from './components/Home';
 import CharacterPage from './components/CharacterPage';
-import { Spinner } from 'react-bootstrap';
 import Glossary from './components/Glossary';
 
 const pathNames = { categoryKey: '/category/:categoryKey' } as const;
