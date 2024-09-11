@@ -171,7 +171,6 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
               console.error('no self', result);
               throw new Error('No Self');
             }
-            console.log(pathToSelf, result);
             const description = await fetchMarkdown(pathToSelf);
             const parsedResult = parser.parse({
               ...result,

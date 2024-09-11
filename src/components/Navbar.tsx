@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Navbar as ReactNavbar,
   Nav,
@@ -11,10 +11,13 @@ import {
 import { DataContext } from './App';
 import { map, size } from 'lodash';
 import TrueMageModal from './TrueMageModal';
+import { NavLink } from 'react-router-dom';
 
 export default function Navbar() {
   const { categoriesByKey } = useContext(DataContext);
   const [showTrueMageModal, setShowTrueMageModal] = useState(false);
+
+  const location = useLocation();
 
   return (
     <ReactNavbar
@@ -27,29 +30,42 @@ export default function Navbar() {
       </Link>
       {size(categoriesByKey) > 1 ? (
         <ReactNavbar.Collapse id="basic-ReactNavbar-nav">
-          <Nav className="me-auto">
-            <Link to="/setting" className="nav-link">
+          <Nav
+            className="me-auto"
+            variant="underline"
+            activeKey={location.pathname}
+          >
+            <NavLink to="/setting" event-key="/setting" className="nav-link">
               System & Setting
-            </Link>
+            </NavLink>
             {map(categoriesByKey, (category) => {
               return (
-                <Link
+                <NavLink
                   key={`navLink${category.key}`}
                   to={`/category/${category.key}`}
+                  event-key={`/category/${category.key}`}
                   className="nav-link"
                 >
                   {category.label}
-                </Link>
+                </NavLink>
               );
             })}
-            <Link to="/character" className="nav-link">
+            <NavLink
+              to="/character"
+              event-key="/character"
+              className="nav-link"
+            >
               Character Summary
-            </Link>
+            </NavLink>
             <NavDropdown title="Extra">
               <DropdownItem href="#">
-                <Link to="/glossary" className="nav-link">
+                <NavLink
+                  to="/glossary"
+                  event-key="/glossary"
+                  className="nav-link"
+                >
                   Glossary
-                </Link>
+                </NavLink>
               </DropdownItem>
             </NavDropdown>
           </Nav>
