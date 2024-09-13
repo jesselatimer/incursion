@@ -179,6 +179,13 @@ function Entity({ entity }: { entity: EntityModel }) {
             </Card>
           );
         })}
+        {entity.grants &&
+          map(entity.grants, (grantedKey) => {
+            const grantedEntity = entitiesByKey[grantedKey];
+            // TODO: fix spacing
+            // TODO: don't make it selectable
+            return <Entity entity={grantedEntity} />;
+          })}
       </Card.Body>
     </Card>
   );

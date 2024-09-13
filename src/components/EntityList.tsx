@@ -80,6 +80,7 @@ function EntityList() {
                 {map(entitiesByKey, (_, entityKey) => {
                   const entity = (currentEntitiesByKey[entityKey] || [])[0];
                   if (!entity) return null;
+                  if (entity.grantedBy) return null; // Granted by cannot be chosen
                   return (
                     <Col
                       xs={4}
