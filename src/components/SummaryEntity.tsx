@@ -4,6 +4,7 @@ import { Choice } from '../models/Choice';
 import { Col, Image, Row, Stack, CloseButton } from 'react-bootstrap';
 import { Entity as EntityType } from '../models/Entity';
 import EntityModal from './EntityModal';
+import { removeChoice } from '../data';
 
 function Summary({
   entity,
@@ -56,10 +57,12 @@ function Summary({
           {entity.subCategory !== 'potentials' && (
             <CloseButton
               onClick={() =>
-                setChoices(
-                  choices.filter((choice) => choice.entityKey !== entity.key),
-                  entity.category
-                )
+                removeChoice({
+                  choices,
+                  entityKey: entity.key,
+                  categoryKey: entity.category,
+                  setChoices,
+                })
               }
             />
           )}
