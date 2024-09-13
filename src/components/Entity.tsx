@@ -9,6 +9,7 @@ import {
 import { useCallback, useContext, useMemo } from 'react';
 import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
+import { addChoice, removeChoice } from '../data';
 
 function Entity({ entity }: { entity: EntityModel }) {
   const dataByKey = useContext(DataContext);
@@ -62,40 +63,27 @@ function Entity({ entity }: { entity: EntityModel }) {
   ]);
 
   const onClickSelect = useCallback(
-    (level: number) => {
-      setChoices(
-        [
-          ...choices.filter((choice) => choice.entityKey !== entityKey),
-          { entityKey, level },
-        ],
-        category.key
-      );
-    },
+    (level: number) =>
+      addChoice({
+        level,
+        choices,
+        entityKey,
+        categoryKey: category.key,
+        setChoices,
+      }),
     [setChoices, choices, category, entityKey]
   );
 
-  const onClickUnselect = useCallback(() => {
-    if (
-      REQUIRED_ENTITY_KEYS[category.key]?.includes(entity.key) &&
-      chosenLevel > 1
-    ) {
-      setChoices(
-        [
-          ...choices.filter((choice) => choice.entityKey !== entityKey),
-          {
-            entityKey: entity.key,
-            level: 1,
-          },
-        ],
-        category.key
-      );
-    } else {
-      setChoices(
-        choices.filter((choice) => choice.entityKey !== entityKey),
-        category.key
-      );
-    }
-  }, [setChoices, choices, chosenLevel, category, entity, entityKey]);
+  const onClickUnselect = useCallback(
+    () =>
+      removeChoice({
+        choices,
+        entityKey,
+        categoryKey: category.key,
+        setChoices,
+      }),
+    [setChoices, choices, category, entity, entityKey]
+  );
 
   return (
     <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>

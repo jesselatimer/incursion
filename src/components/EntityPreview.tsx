@@ -12,6 +12,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { calculatePoints } from '../utils/calculatePoints';
 import { Button, Stack } from 'react-bootstrap';
 import EntityModal from './EntityModal';
+import { addChoice, removeChoice } from '../data/choices';
 
 function EntityPreview({
   entity,
@@ -71,34 +72,42 @@ function EntityPreview({
     ? pointsRemaining >= pointsUsedAfterPurchasing - pointsUsed
     : true;
 
-  // TODO: remove duplication between this and Entity
   const chosenLevel = choice?.level || 0;
   const { setChoices } = useContext(CategoryChoicesContext);
-  const onClickSelect = useCallback(() => {
-    setChoices(
-      [
-        ...choices.filter((choice) => choice.entityKey !== entityKey),
-        { entityKey, level: chosenLevel + 1 },
-      ],
-      category.key
-    );
-  }, [setChoices, choices, category, chosenLevel, entityKey]);
+  const onClickIncrease = useCallback(
+    () =>
+      addChoice({
+        level: chosenLevel + 1,
+        choices,
+        entityKey,
+        categoryKey: category.key,
+        setChoices,
+      }),
+    [setChoices, choices, category, chosenLevel, entityKey]
+  );
 
-  const onClickUnselect = useCallback(() => {
+  const onClickDecrease = useCallback(() => {
     let level = chosenLevel > 1 ? chosenLevel - 1 : 0;
     if (REQUIRED_ENTITY_KEYS[category.key]?.includes(entity.key) && level < 1) {
       level = 1;
     }
-    const newChoices = choices.filter(
-      (choice) => choice.entityKey !== entityKey
-    );
+
     if (level > 0) {
-      newChoices.push({
-        entityKey: entity.key,
+      addChoice({
         level,
+        choices,
+        entityKey,
+        categoryKey: category.key,
+        setChoices,
+      });
+    } else {
+      removeChoice({
+        choices,
+        entityKey,
+        categoryKey: category.key,
+        setChoices,
       });
     }
-    setChoices(newChoices, category.key);
   }, [setChoices, choices, chosenLevel, category, entity, entityKey]);
 
   return (
@@ -147,7 +156,7 @@ function EntityPreview({
         <Card.Footer>
           <Stack direction="horizontal" gap={3}>
             <Button
-              onClick={() => onClickUnselect()}
+              onClick={() => onClickDecrease()}
               disabled={chosenLevel < 1}
               variant="light"
             >
@@ -158,7 +167,7 @@ function EntityPreview({
             </div>
             <Button
               className="ms-auto"
-              onClick={() => onClickSelect()}
+              onClick={() => onClickIncrease()}
               disabled={chosenLevel >= entity.entityLevels.length}
               variant={canBePurchased ? 'light' : 'danger'}
             >
