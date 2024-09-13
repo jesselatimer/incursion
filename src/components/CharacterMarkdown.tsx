@@ -7,6 +7,7 @@ import { TrueMage } from '../models/TrueMage';
 import { Category } from '../models/Category';
 import { Entity } from '../models/Entity';
 import { Choice } from '../models/Choice';
+import { copyTextToClipboard } from '../utils/clipboard';
 
 const createMarkdownToCopy = ({
   trueMage,
@@ -80,7 +81,7 @@ function CharacterMarkdown() {
       <Card.Body>
         <Button
           onClick={() =>
-            navigator.clipboard.writeText(
+            copyTextToClipboard(
               createMarkdownToCopy({
                 trueMage,
                 categoriesByKey,
