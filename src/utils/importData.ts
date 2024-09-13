@@ -65,6 +65,10 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
             rowEntity.entityLevels && typeof rowEntity.entityLevels === 'string'
               ? rowEntity.entityLevels.split(',')
               : [],
+          grants:
+            rowEntity.grants && typeof rowEntity.grants === 'string'
+              ? rowEntity.grants.split(',')
+              : [],
         };
       }
     ),
@@ -171,17 +175,17 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
               console.error('no self', result);
               throw new Error('No Self');
             }
-            const description = await fetchMarkdown(pathToSelf);
-            const parsedResult = parser.parse({
-              ...result,
-              description,
-            });
-            if (!parsedResult.key) {
-              console.error('key not found', parsedResult);
-              throw new Error('key not found');
-            }
-            resultsByKey[parsedResult.key] = parsedResult;
             try {
+              const description = await fetchMarkdown(pathToSelf);
+              const parsedResult = parser.parse({
+                ...result,
+                description,
+              });
+              if (!parsedResult.key) {
+                console.error('key not found', parsedResult);
+                throw new Error('key not found');
+              }
+              resultsByKey[parsedResult.key] = parsedResult;
             } catch (err) {
               console.log('Error parsing', result);
               throw err;
