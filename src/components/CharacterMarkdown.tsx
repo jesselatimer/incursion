@@ -1,5 +1,5 @@
-import { Button, Card, Col, Modal, Row } from 'react-bootstrap';
-import { useContext, useMemo, useState } from 'react';
+import { Button, Card } from 'react-bootstrap';
+import { useContext, useMemo } from 'react';
 import { CategoryChoicesContext, DataContext, TrueMageContext } from './App';
 import { flatten, forEach, groupBy, map } from 'lodash';
 import Markdown from 'react-markdown';
