@@ -64,27 +64,44 @@ function Entity({ entity }: { entity: EntityModel }) {
   ]);
 
   const onClickSelect = useCallback(
-    (level: number) =>
+    (level: number) => {
+      if (entity.grantedBy) return;
       addChoice({
         entityKey,
         level,
-      }),
+      });
+    },
     [addChoice, choices, category, entityKey]
   );
 
-  const onClickUnselect = useCallback(
-    () =>
-      removeChoice({
-        entityKey,
-      }),
-    [removeChoice, choices, category, entity, entityKey]
-  );
+  const onClickUnselect = useCallback(() => {
+    if (entity.grantedBy) return;
+    removeChoice({
+      entityKey,
+    });
+  }, [removeChoice, choices, category, entity, entityKey]);
+  console.log('entity.grants', entity.grants);
 
   return (
     <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
       <Card.Img variant="top" src={entity.imageUrl} />
       <Card.Body>
         <Card.Title>{entity.label}</Card.Title>
+        {entity.grantedBy && (
+          <Card.Subtitle>
+            Granted by: <em>{entitiesByKey[entity.grantedBy].label}</em>
+          </Card.Subtitle>
+        )}
+        {(entity.grants?.length || 0) > 0 && (
+          <Card.Subtitle>
+            Grants:{' '}
+            <em>
+              {(entity.grants || [])
+                .map((e) => entitiesByKey[e].label)
+                .join(', ')}
+            </em>
+          </Card.Subtitle>
+        )}
         {Boolean(entity.description) && (
           <Markdown>{entity.description}</Markdown>
         )}
@@ -150,7 +167,11 @@ function Entity({ entity }: { entity: EntityModel }) {
                   : 'light'
               }
               onClick={onClick}
-              style={{ cursor: 'pointer', marginBottom: '10px' }}
+              style={
+                entity.grantedBy
+                  ? { marginBottom: '10px' }
+                  : { cursor: 'pointer', marginBottom: '10px' }
+              }
             >
               <Card.Body>
                 <Card.Title>{`Level ${entityLevel.level}`}</Card.Title>
@@ -166,7 +187,6 @@ function Entity({ entity }: { entity: EntityModel }) {
           map(entity.grants, (grantedKey) => {
             const grantedEntity = entitiesByKey[grantedKey];
             // TODO: fix spacing
-            // TODO: don't make it selectable
             return <Entity entity={grantedEntity} />;
           })}
       </Card.Body>

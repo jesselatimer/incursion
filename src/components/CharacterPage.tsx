@@ -7,7 +7,6 @@ import EntityModal from './EntityModal';
 import { EntityKey } from '../models/Entity';
 import CharacterMarkdown from './CharacterMarkdown';
 
-// TODO: Add character export
 function CharacterPage() {
   const { categoriesByKey, entitiesByKey } = useContext(DataContext);
   const { categoryChoices } = useContext(CategoryChoicesContext);

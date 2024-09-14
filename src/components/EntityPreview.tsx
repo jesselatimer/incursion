@@ -75,16 +75,16 @@ function EntityPreview({
   const { addChoice, removeChoice, categoryChoices } = useContext(
     CategoryChoicesContext
   );
-  const onClickIncrease = useCallback(
-    () =>
-      addChoice({
-        entityKey,
-        level: chosenLevel + 1,
-      }),
-    [addChoice, choices, category, chosenLevel, entityKey]
-  );
+  const onClickIncrease = useCallback(() => {
+    if (entity.grantedBy) return;
+    addChoice({
+      entityKey,
+      level: chosenLevel + 1,
+    });
+  }, [addChoice, choices, category, chosenLevel, entityKey]);
 
   const onClickDecrease = useCallback(() => {
+    if (entity.grantedBy) return;
     let level = chosenLevel > 1 ? chosenLevel - 1 : 0;
     if (REQUIRED_ENTITY_KEYS[category.key]?.includes(entity.key) && level < 1) {
       level = 1;

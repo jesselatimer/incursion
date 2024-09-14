@@ -56,3 +56,7 @@ th {
   width: 90%;
   max-width: 90%;
 }
+
+.card-subtitle {
+  margin: 10px 0 10px 0;
+}

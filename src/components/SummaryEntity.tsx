@@ -51,13 +51,14 @@ function SummaryEntity({
           </Stack>
         </Col>
         <Col sm={1}>
-          {entity.subCategory !== 'potentials' && (
+          {entity.subCategory !== 'potentials' && !entity.grantedBy && (
             <CloseButton
-              onClick={() =>
+              onClick={() => {
+                if (entity.grantedBy) return;
                 removeChoice({
                   entityKey: entity.key,
-                })
-              }
+                });
+              }}
             />
           )}
         </Col>
