@@ -88,7 +88,15 @@ function CharacterPage() {
                             </Card.Header>
                             <Card.Img src={entity.imageUrl} />
                             <Card.Footer style={{ textAlign: 'center' }}>
-                              Level {choice.level}/{entity.entityLevels.length}
+                              <span>
+                                {entity.entityLevels.length > 1 && (
+                                  <>
+                                    Level {choice.level}/
+                                    {entity.entityLevels.length}{' '}
+                                  </>
+                                )}
+                                {entity.grantedBy ? 'Granted' : 'Selected'}
+                              </span>
                             </Card.Footer>
                           </Card>
                         );
