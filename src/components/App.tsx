@@ -148,7 +148,7 @@ function App() {
     const { entitiesByKey } = dataByKey;
 
     const entityToAdd = entitiesByKey[entityKey];
-    const currentChoices = categoryChoices[entityToAdd.category];
+    const currentChoices = categoryChoices[entityToAdd.category] ?? [];
     const newChoices = [
       ...currentChoices.filter((choice) => choice.entityKey !== entityKey),
       { entityKey, level },
@@ -201,13 +201,13 @@ function App() {
     if (!dataByKey) return {};
     const { entitiesByKey } = dataByKey;
     const entityToRemove = entitiesByKey[entityKey];
-    const choices = categoryChoices[entityToRemove.category];
+    const currentChoices = categoryChoices[entityToRemove.category] ?? [];
 
     let newChoices: Choice[];
     // If entity is required, just set it to minimum level
     if (REQUIRED_ENTITY_KEYS[entityToRemove.category]?.includes(entityKey)) {
       newChoices = [
-        ...choices.filter((choice) => choice.entityKey !== entityKey),
+        ...currentChoices.filter((choice) => choice.entityKey !== entityKey),
         {
           entityKey: entityKey,
           level: 1,
@@ -222,7 +222,7 @@ function App() {
         });
       });
 
-      newChoices = choices.filter(
+      newChoices = currentChoices.filter(
         (choice) => choice.entityKey !== entityToRemove.key
       );
     }

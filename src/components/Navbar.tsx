@@ -38,6 +38,7 @@ export default function Navbar() {
             <NavLink to="/setting" event-key="/setting" className="nav-link">
               System & Setting
             </NavLink>
+            {/* TODO: this isn't maintaining order */}
             {map(categoriesByKey, (category) => {
               return (
                 <NavLink
