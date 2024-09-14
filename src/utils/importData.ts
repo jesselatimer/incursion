@@ -193,13 +193,20 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
           })
         );
 
-        // Maintain order
+        // Maintain order which was messed up by parallel fetching
         const sortedResultsByKey: Record<string, z.infer<SchemaType>> = {};
+        const recordsToAddToEnd: z.infer<SchemaType>[] = [];
         results.data.forEach((result) => {
           if (!result.key || typeof result.key !== 'string')
             throw new Error('must have key');
+          // Move granted entities to the end
+          if (typeof result.grantedBy === 'string' && result.grantedBy !== '') {
+            recordsToAddToEnd.push(resultsByKey[result.key]);
+            return;
+          }
           sortedResultsByKey[result.key] = resultsByKey[result.key];
         });
+        recordsToAddToEnd.forEach((r) => (sortedResultsByKey[r.key] = r));
         resolve(sortedResultsByKey);
       },
       error: function (err) {
