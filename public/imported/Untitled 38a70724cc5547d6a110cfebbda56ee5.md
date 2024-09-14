@@ -1,0 +1,3 @@
+# Untitled
+
+You have become attuned with primordial nature itself. You are physically improved; gaining strength, speed, coordination, hardiness, and especially endurance and stamina; and the ceiling for these qualities is well above human. You have incredible intuition relating to wild places: you readily find and identify the safest shelters, quickest paths, heartiest food, and greatest natural treasures. You know how to fashion potent tools and elixirs from the bounty of the wilds.

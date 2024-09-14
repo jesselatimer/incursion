@@ -8,6 +8,8 @@ SubCategory: threats (threats%20b8a01851777f47ca8fd6dbd195719150.md)
 entityLevels: dawning_of_the_black_sun_1
 category: threats
 subCategory: threats
+Grants: reward_per_aspera_ad_astra (reward_per_aspera_ad_astra%2024b75735378a4457b9bd75edd4280902.md), boon_dawning_of_the_black_sun (boon_dawning_of_the_black_sun%208ce4dc226cbc43d2ad61fa906f0e4940.md)
+grants: reward_per_aspera_ad_astra,boon_dawning_of_the_black_sun
 Self: dawning_of_the_black_sun (dawning_of_the_black_sun%20c05a6c66b3574a4ab3be598dee49f881.md)
 
 [](Untitled%20a99058a66e8844f581e70fdfdeb672d7.md)

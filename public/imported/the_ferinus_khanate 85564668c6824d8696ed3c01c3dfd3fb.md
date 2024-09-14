@@ -8,6 +8,8 @@ SubCategory: threats (threats%20b8a01851777f47ca8fd6dbd195719150.md)
 entityLevels: the_ferinus_khanate_1
 category: threats
 subCategory: threats
+Grants: boon_ferinus_concord (boon_ferinus_concord%201016a1b75fdc80318330c50875aa717a.md), reward_chains_of_the_colossus (reward_chains_of_the_colossus%201016a1b75fdc8053b30fd91007b7003e.md), reward_exalted_steed (reward_exalted_steed%201016a1b75fdc80f3ba0cf001535f73f9.md)
+grants: boon_ferinus_concord,reward_chains_of_the_colossus,reward_exalted_steed
 Self: the_ferinus_khanate (the_ferinus_khanate%2085564668c6824d8696ed3c01c3dfd3fb.md)
 
 [](Untitled%20d0799133d9b24a28aa2573d13198e6e1.md)
