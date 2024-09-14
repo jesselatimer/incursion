@@ -1,0 +1,9 @@
+# boon_imposition_of_moral_order_1
+
+Entity: boon_imposition_of_moral_order (boon_imposition_of_moral_order%201016a1b75fdc80038c3ad2f2b9ae408e.md)
+Self: boon_imposition_of_moral_order_1 (boon_imposition_of_moral_order_1%2021dc0c1ff5a64f648721a5c62c004639.md)
+entityKey: boon_imposition_of_moral_order
+level: 1
+pointCost: 0
+
+[](Untitled%202b58f4bbb7a645f5b6215b04b57c1184.md)

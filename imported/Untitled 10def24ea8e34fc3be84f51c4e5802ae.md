@@ -13,41 +13,13 @@ The Khanate has enslaved many mystical beasts with great special powers, and wil
 
 *Boon*
 
-You gain the Talent the family uses to control magical beasts:
-
-### Ferinus Concord
-
-You have learned to move your soul in time to a strange harmonic, a vibration that stretches throughout the animal kingdom. This grants spells that allow you to communicate with and command most magical animals.
-
-Inherent: You gain an enhanced mundane awareness of all animals but particularly magical ones. You can empathize and communicate with them more easily.
-
-Spells:
-
-- You can find and identify magical beasts
-- You can communicate complex concepts to even animal-intelligence magical beasts, as either a telepathic message, or via an ability to make bestial noises that are somehow comprehensible to them.
-- You can permanently bond with an animal (this reserves some of your conduit). When you’re close enough to a bonded animal, you can both share some senses and crude concepts and plans. Costs scale with the power and intelligence of the animal. It is also more efficient if the beast agrees with it and benefits from it, but can be done against its will.
-- You can lay a compulsion on a bonded animal. This can include open-ended orders, and even complex strategies, despite the beast’s intelligence. Costs scale with the intelligence and willpower of the animal, and is *much* more aether efficient if the animal consents on some level.
+You gain the Talent the family uses to control magical beasts, **Ferinus Concord**.
 
 *Victory*
 
-You play an instrumental role in the sound defeat of the Empire, whether through direct combat action, espionage, support coordination, or other means.
+Condition: You play an instrumental role in the sound defeat of the Empire, whether through direct combat action, espionage, support coordination, or other means.
 
-You gain the following new Artifact and Ally. This is in addition to whatever mundane gratitude, recognition, or trophies you claim.
+In addition to whatever mundane gratitude, recognition, or trophies you claim, you gain:
 
-### Chains of the Colossus
-
-While wearing these heavy platinum chains, efficiency with Ferinus Concord is more than doubled.
-
-For defeating the slavers, you are granted the eternal gratitude of a powerful mythological mount. **Choose one** from this list to gain as an Ally:
-
-### Storm Griffon
-
-A highly intelligent, sapient flying monster with the forebody and wings of a thunderbird and the hindquarters of a lion. It has control over winds and storms. It can communicate telepathically with you. It is noble, fierce, and wise.
-
-### Great Wyrm
-
-A large, flightless reptilian creature related to dragons. Its forelimbs are wings, but it is only capable of gliding. It can breathe fire, tunnel through earth, and while not as intelligent as its more famous cousins, it is capable of actively enhancing and empowering your elemental spells. It is extremely difficult to harm.
-
-### Capricornus
-
-A half-goat, half-fish amphibious creature. Grants you the ability to breathe underwater whenever you’re within five kilometers. It is capable of safely swimming in excess of the speed of sound, and its horns are powerful, indestructible weapons. It can shed its horns at will, and inside you find ambrosia and nectar, capable of nourishing people and healing wounds. The horns grow back in a couple of days.
+- The Artifact **Chains of the Colossus**
+- The Ally **Exalted Steed**

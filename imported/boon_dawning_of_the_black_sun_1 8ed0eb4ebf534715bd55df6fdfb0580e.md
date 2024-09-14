@@ -1,0 +1,7 @@
+# boon_dawning_of_the_black_sun_1
+
+Entity: boon_dawning_of_the_black_sun (boon_dawning_of_the_black_sun%208ce4dc226cbc43d2ad61fa906f0e4940.md)
+Self: boon_dawning_of_the_black_sun_1 (boon_dawning_of_the_black_sun_1%208ed0eb4ebf534715bd55df6fdfb0580e.md)
+entityKey: boon_dawning_of_the_black_sun
+level: 1
+pointCost: 0

@@ -1,0 +1,7 @@
+# reward_chains_of_the_colossus_1
+
+Entity: reward_chains_of_the_colossus (reward_chains_of_the_colossus%201016a1b75fdc8053b30fd91007b7003e.md)
+Self: reward_chains_of_the_colossus_1 (reward_chains_of_the_colossus_1%201016a1b75fdc805fb182e497a2937c07.md)
+entityKey: reward_chains_of_the_colossus
+level: 1
+pointCost: 0

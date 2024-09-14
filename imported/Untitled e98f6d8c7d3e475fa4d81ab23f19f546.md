@@ -21,5 +21,5 @@ The unspeakable rituals include, among others:
 
 Once you gain enough knowledge of the cult, its members, its operations, and especially its rituals, you can Speak the Name of the Unaussprechlichen Kulten. This obliterates all access to their strange rituals forever. You have also probably exposed all or several of the highest ranking members (though many are well connected enough that they probably had a very soft landing).
 
-- You gain the contact: Cult Remnants. There were a lot of cult members who were not so deeply invested in it, but now they look to you for guidance. You can use or abuse this, or you can tell them to become a charitable organization. They’ll do it and well.
+- You gain the Contact **Cult Remnants**.
 - Naming the Cult gives you a sudden and invigorating boost to your magical abilities. You gain X foundation points, and X talent points.

@@ -1,0 +1,7 @@
+# reward_per_aspera_ad_astra_1
+
+Entity: reward_per_aspera_ad_astra (reward_per_aspera_ad_astra%2024b75735378a4457b9bd75edd4280902.md)
+Self: reward_per_aspera_ad_astra_1 (reward_per_aspera_ad_astra_1%2003133bac1afb49dfb659e8608e7e017a.md)
+entityKey: reward_per_aspera_ad_astra
+level: 1
+pointCost: 0
