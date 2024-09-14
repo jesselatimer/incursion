@@ -9,7 +9,6 @@ import {
 import { useCallback, useContext, useMemo } from 'react';
 import { map } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
-import { addChoice, removeChoice } from '../data';
 
 function Entity({ entity }: { entity: EntityModel }) {
   const dataByKey = useContext(DataContext);
@@ -17,7 +16,9 @@ function Entity({ entity }: { entity: EntityModel }) {
     dataByKey;
   const entityKey = entity.key;
 
-  const { categoryChoices, setChoices } = useContext(CategoryChoicesContext);
+  const { categoryChoices, addChoice, removeChoice } = useContext(
+    CategoryChoicesContext
+  );
   const choices = useMemo(
     () => categoryChoices[entity.category] || [],
     [categoryChoices, entity]
@@ -65,24 +66,18 @@ function Entity({ entity }: { entity: EntityModel }) {
   const onClickSelect = useCallback(
     (level: number) =>
       addChoice({
-        level,
-        choices,
         entityKey,
-        categoryKey: category.key,
-        setChoices,
+        level,
       }),
-    [setChoices, choices, category, entityKey]
+    [addChoice, choices, category, entityKey]
   );
 
   const onClickUnselect = useCallback(
     () =>
       removeChoice({
-        choices,
         entityKey,
-        categoryKey: category.key,
-        setChoices,
       }),
-    [setChoices, choices, category, entity, entityKey]
+    [removeChoice, choices, category, entity, entityKey]
   );
 
   return (

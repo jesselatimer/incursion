@@ -141,7 +141,6 @@ function SummaryCard({
                         key={entity.key + 'SummaryEntity'}
                         entity={entity}
                         choice={choice}
-                        choices={choices}
                       />
                     );
                   })}

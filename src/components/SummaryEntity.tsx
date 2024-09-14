@@ -1,21 +1,18 @@
 import { useContext, useState } from 'react';
-import { CategoryChoicesContext } from './App';
+import { CategoryChoicesContext, DataContext } from './App';
 import { Choice } from '../models/Choice';
 import { Col, Image, Row, Stack, CloseButton } from 'react-bootstrap';
 import { Entity as EntityType } from '../models/Entity';
 import EntityModal from './EntityModal';
-import { removeChoice } from '../data';
 
-function Summary({
+function SummaryEntity({
   entity,
   choice,
-  choices,
 }: {
   entity: EntityType;
   choice: Choice;
-  choices: Choice[];
 }) {
-  const { setChoices } = useContext(CategoryChoicesContext);
+  const { removeChoice } = useContext(CategoryChoicesContext);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
@@ -58,10 +55,7 @@ function Summary({
             <CloseButton
               onClick={() =>
                 removeChoice({
-                  choices,
                   entityKey: entity.key,
-                  categoryKey: entity.category,
-                  setChoices,
                 })
               }
             />
@@ -77,4 +71,4 @@ function Summary({
   );
 }
 
-export default Summary;
+export default SummaryEntity;

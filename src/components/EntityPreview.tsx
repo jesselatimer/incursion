@@ -12,7 +12,6 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { calculatePoints } from '../utils/calculatePoints';
 import { Button, Stack } from 'react-bootstrap';
 import EntityModal from './EntityModal';
-import { addChoice, removeChoice } from '../data/choices';
 
 function EntityPreview({
   entity,
@@ -73,17 +72,16 @@ function EntityPreview({
     : true;
 
   const chosenLevel = choice?.level || 0;
-  const { setChoices } = useContext(CategoryChoicesContext);
+  const { addChoice, removeChoice, categoryChoices } = useContext(
+    CategoryChoicesContext
+  );
   const onClickIncrease = useCallback(
     () =>
       addChoice({
-        level: chosenLevel + 1,
-        choices,
         entityKey,
-        categoryKey: category.key,
-        setChoices,
+        level: chosenLevel + 1,
       }),
-    [setChoices, choices, category, chosenLevel, entityKey]
+    [addChoice, choices, category, chosenLevel, entityKey]
   );
 
   const onClickDecrease = useCallback(() => {
@@ -94,21 +92,15 @@ function EntityPreview({
 
     if (level > 0) {
       addChoice({
-        level,
-        choices,
         entityKey,
-        categoryKey: category.key,
-        setChoices,
+        level,
       });
     } else {
       removeChoice({
-        choices,
         entityKey,
-        categoryKey: category.key,
-        setChoices,
       });
     }
-  }, [setChoices, choices, chosenLevel, category, entity, entityKey]);
+  }, [removeChoice, choices, chosenLevel, category, entity, entityKey]);
 
   return (
     <>

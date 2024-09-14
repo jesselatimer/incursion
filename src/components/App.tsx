@@ -42,13 +42,15 @@ const defaultDataContext: DataByKey = {
 export const DataContext = createContext<DataByKey>(defaultDataContext);
 
 type CategoryChoicesContextType = {
-  setChoices: (newChoices: Choice[], categoryKey: CategoryKey) => void;
+  addChoice: (options: { entityKey: string; level: number }) => void;
+  removeChoice: (options: { entityKey: string }) => void;
   categoryChoices: Record<CategoryKey, Choice[]>;
 };
 
 export const CategoryChoicesContext = createContext<CategoryChoicesContextType>(
   {
-    setChoices: (_newChoices, _categoryKey) => {},
+    addChoice: (_options: { entityKey: string; level: number }) => undefined,
+    removeChoice: (_options: { entityKey: string }) => undefined,
     categoryChoices: {},
   }
 );
@@ -121,14 +123,8 @@ function App() {
   );
 
   const setChoices = useCallback(
-    (newChoices: Choice[], categoryKey: CategoryKey) => {
-      const canMakeChoice = validateNewChoices(newChoices, categoryKey);
-      if (!canMakeChoice) {
-        return;
-      }
-
-      let newCategoryChoices = { ...categoryChoices };
-      newCategoryChoices[categoryKey] = newChoices;
+    (newCategoryChoices: Record<CategoryKey, Choice[]>) => {
+      console.log('newCategoryChoices', newCategoryChoices);
 
       localStorage.setItem(
         trueMage.id.toString(),
@@ -138,6 +134,122 @@ function App() {
     },
     [categoryChoices, setAllChoicesByCategory, validateNewChoices, trueMage]
   );
+
+  const addChoiceInternals = ({
+    entityKey,
+    level,
+    newCategoryChoices,
+  }: {
+    entityKey: string;
+    level: number;
+    newCategoryChoices: Record<CategoryKey, Choice[]>;
+  }) => {
+    if (!dataByKey) return {};
+    const { entitiesByKey } = dataByKey;
+
+    const entityToAdd = entitiesByKey[entityKey];
+    const currentChoices = categoryChoices[entityToAdd.category];
+    const newChoices = [
+      ...currentChoices.filter((choice) => choice.entityKey !== entityKey),
+      { entityKey, level },
+    ];
+
+    const canMakeChoice = validateNewChoices(newChoices, entityToAdd.category);
+    if (!canMakeChoice) {
+      // TODO something better here
+      throw new Error('cannot make this choice');
+    }
+
+    const entitiesGranted = entityToAdd.grants ?? [];
+    entitiesGranted.forEach((entityKey) => {
+      newCategoryChoices = addChoiceInternals({
+        entityKey,
+        level: 1,
+        newCategoryChoices,
+      });
+    });
+
+    return {
+      ...newCategoryChoices,
+      [entityToAdd.category]: newChoices,
+    };
+  };
+
+  const addChoice = ({
+    entityKey,
+    level,
+  }: {
+    entityKey: string;
+    level: number;
+  }) => {
+    let newCategoryChoices = { ...categoryChoices };
+    newCategoryChoices = addChoiceInternals({
+      entityKey,
+      level,
+      newCategoryChoices,
+    });
+    setChoices(newCategoryChoices);
+  };
+
+  const removeChoiceInternals = ({
+    entityKey,
+    newCategoryChoices,
+  }: {
+    entityKey: string;
+    newCategoryChoices: Record<CategoryKey, Choice[]>;
+  }) => {
+    if (!dataByKey) return {};
+    const { entitiesByKey } = dataByKey;
+    const entityToRemove = entitiesByKey[entityKey];
+    const choices = categoryChoices[entityToRemove.category];
+
+    let newChoices: Choice[];
+    // If entity is required, just set it to minimum level
+    if (REQUIRED_ENTITY_KEYS[entityToRemove.category]?.includes(entityKey)) {
+      newChoices = [
+        ...choices.filter((choice) => choice.entityKey !== entityKey),
+        {
+          entityKey: entityKey,
+          level: 1,
+        },
+      ];
+    } else {
+      const entitiesGranted = entityToRemove.grants ?? [];
+      entitiesGranted.forEach((entityKey) => {
+        newCategoryChoices = removeChoiceInternals({
+          entityKey,
+          newCategoryChoices,
+        });
+      });
+
+      newChoices = choices.filter(
+        (choice) => choice.entityKey !== entityToRemove.key
+      );
+    }
+
+    const canMakeChoice = validateNewChoices(
+      newChoices,
+      entityToRemove.category
+    );
+    if (!canMakeChoice) {
+      // TODO something better
+      throw new Error('cant validate choice');
+    }
+
+    return {
+      ...newCategoryChoices,
+      [entityToRemove.category]: newChoices,
+    };
+  };
+
+  const removeChoice = ({ entityKey }: { entityKey: string }) => {
+    let newCategoryChoices = { ...categoryChoices };
+    newCategoryChoices = removeChoiceInternals({
+      entityKey,
+      newCategoryChoices,
+    });
+    setChoices(newCategoryChoices);
+  };
 
   if (dataByKey === undefined) {
     return (
@@ -158,7 +270,7 @@ function App() {
     >
       <DataContext.Provider value={dataByKey}>
         <CategoryChoicesContext.Provider
-          value={{ setChoices, categoryChoices }}
+          value={{ removeChoice, addChoice, categoryChoices }}
         >
           <ScrollRestoration />
           <HashLink to="#">
