@@ -80,7 +80,6 @@ function Entity({ entity }: { entity: EntityModel }) {
       entityKey,
     });
   }, [removeChoice, choices, category, entity, entityKey]);
-  console.log('entity.grants', entity.grants);
 
   return (
     <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>

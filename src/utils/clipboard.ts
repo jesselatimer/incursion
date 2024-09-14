@@ -12,9 +12,7 @@ function fallbackCopyTextToClipboard(text: string) {
   textArea.select();
 
   try {
-    const successful = document.execCommand('copy');
-    const msg = successful ? 'successful' : 'unsuccessful';
-    console.log('Fallback: Copying text command was ' + msg);
+    document.execCommand('copy');
   } catch (err) {
     console.error('Fallback: Oops, unable to copy', err);
   }
@@ -29,9 +27,7 @@ export function copyTextToClipboard(text: string) {
   }
 
   navigator.clipboard.writeText(text).then(
-    function () {
-      console.log('Async: Copying to clipboard was successful!');
-    },
+    function () {},
     function (err) {
       console.error('Async: Could not copy text: ', err);
     }

@@ -124,8 +124,6 @@ function App() {
 
   const setChoices = useCallback(
     (newCategoryChoices: Record<CategoryKey, Choice[]>) => {
-      console.log('newCategoryChoices', newCategoryChoices);
-
       localStorage.setItem(
         trueMage.id.toString(),
         JSON.stringify(newCategoryChoices)
