@@ -9,7 +9,7 @@ export default function Home() {
   const dataLoaded = dataByKey.setting !== '';
 
   return (
-    <Container>
+    <Container fluid>
       <h1>Incursion: A Choose Your Own Adventure</h1>
       <Image
         src="/incursion/setting1.jpg"

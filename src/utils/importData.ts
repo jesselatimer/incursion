@@ -13,7 +13,7 @@ import {
   EntityLevelSchema,
 } from '../models/EntityLevel';
 import { ZodType, z } from 'zod';
-import { reduce } from 'lodash';
+import { orderBy, reduce } from 'lodash';
 import { Appendix, AppendixKey, AppendixSchema } from '../models/Appendix';
 
 export type DataByKey = {
@@ -192,7 +192,15 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
             }
           })
         );
-        resolve(resultsByKey);
+
+        // Maintain order
+        const sortedResultsByKey: Record<string, z.infer<SchemaType>> = {};
+        results.data.forEach((result) => {
+          if (!result.key || typeof result.key !== 'string')
+            throw new Error('must have key');
+          sortedResultsByKey[result.key] = resultsByKey[result.key];
+        });
+        resolve(sortedResultsByKey);
       },
       error: function (err) {
         throw err;
