@@ -1,7 +1,7 @@
 # the_little_girl
 
 label: The Little Girl
-Image: the_little_girl.jpg
+Image: the_little_girl.jpeg
 EntityLevels: the_little_girl_1 (the_little_girl_1%20fed58f7e309c404896427c754fc54a50.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: contacts (contacts%204eddb36d43eb4799987d83f1d8a6777c.md)

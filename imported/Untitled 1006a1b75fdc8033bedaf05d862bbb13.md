@@ -1,0 +1,5 @@
+# Untitled
+
+An eye within you has opened. Is it yours, or something else’s? This Talent grants powerful inherent abilities to your facility for visualization, and some related spells.
+
+Inherent: Your mind’s eye is greatly improved, gaining in resolution and recall, becoming almost hallucinatory in power. Note that if you have a “photographic memory”, you must remember to take photographs; you cannot, eg, think back to walking down a street and remember every license plate unless you were specifically looking at them at the time. Your Eye can be used as a memory and thinking aid by imagining lists, visualizing data, complex plans, or diagrams; such as a large cork board covered with notes, clippings and strings. Again, you can recall these images perfectly, but still need to read and review them at normal speed, ala very intuitive smart glasses. Have a care, memory and imagination are two sides of one coin, and if you forget what you’re doing you can fool yourself in high definition, making it harder, not easier, to tell truth from fiction.
