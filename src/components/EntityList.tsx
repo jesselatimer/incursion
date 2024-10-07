@@ -68,34 +68,39 @@ function EntityList() {
             if (!currentEntities?.length) return null;
             const currentEntitiesByKey = groupBy(currentEntities, 'key');
             return (
-              <Row
-                key={subCategory.label + 'EntityListRow'}
-                id={subCategory.key}
-              >
+              <>
                 <h3>{subCategory.label}</h3>
                 {Boolean(subCategory.description) && (
                   <Markdown>{subCategory.description}</Markdown>
                 )}
-                {/* Mapping over all entities to preserve order */}
-                {map(entitiesByKey, (_, entityKey) => {
-                  const entity = (currentEntitiesByKey[entityKey] || [])[0];
-                  if (!entity) return null;
-                  if (entity.grantedBy) return null; // Granted by cannot be chosen
-                  return (
-                    <Col
-                      xs={4}
-                      key={entity.key + 'EntityListCol'}
-                      style={{ maxWidth: '400px', minWidth: '300px' }}
-                    >
-                      <EntityPreview
-                        key={entity.key}
-                        entity={entity}
-                        choices={choices}
-                      />
-                    </Col>
-                  );
-                })}
-              </Row>
+                <Row
+                  key={subCategory.label + 'EntityListRow'}
+                  id={subCategory.key}
+                  xs={1}
+                  sm={2}
+                  md={2}
+                  lg={3}
+                >
+                  {/* Mapping over all entities to preserve order */}
+                  {map(entitiesByKey, (_, entityKey) => {
+                    const entity = (currentEntitiesByKey[entityKey] || [])[0];
+                    if (!entity) return null;
+                    if (entity.grantedBy) return null; // Granted by cannot be chosen
+                    return (
+                      <Col
+                        key={entity.key + 'EntityListCol'}
+                        // style={{ maxWidth: '400px', minWidth: '300px' }}
+                      >
+                        <EntityPreview
+                          key={entity.key}
+                          entity={entity}
+                          choices={choices}
+                        />
+                      </Col>
+                    );
+                  })}
+                </Row>
+              </>
             );
           })}
           {appendices?.length
@@ -109,7 +114,7 @@ function EntityList() {
             : undefined}
         </Container>
       </Col>
-      <Col xs={4} style={{ maxWidth: '350px' }}>
+      <Col xs={12} md={4} lg={4}>
         <Summary categoryChoices={categoryChoices} />
       </Col>
     </Row>

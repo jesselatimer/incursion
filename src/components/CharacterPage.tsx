@@ -55,15 +55,7 @@ function CharacterPage() {
                   <h2>{category.label}</h2>
                 </Card.Header>
                 <Card.Body>
-                  {/* TODO: Fix this grid on mobile */}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns:
-                        'repeat(auto-fill, minmax(15vw, 1fr))',
-                      gridGap: '1em',
-                    }}
-                  >
+                  <Row xs={1} sm={2} lg={3}>
                     {/* Mapping over all subcategories to preserve order */}
                     {map(category.subCategories, (subCategoryKey) => {
                       const entitiesForSubcategory =
@@ -75,34 +67,39 @@ function CharacterPage() {
                         );
                         if (!choice) return null;
                         return (
-                          <Card
-                            onClick={() => setModalEntity(entity.key)}
-                            style={{ cursor: 'pointer' }}
-                            key={entity.key + 'CharacterCard'}
-                          >
-                            <Card.Header
-                              as="h5"
-                              style={{ textAlign: 'center' }}
+                          <div style={{ padding: '0 10px 10px 10px' }}>
+                            <Card
+                              onClick={() => setModalEntity(entity.key)}
+                              style={{
+                                cursor: 'pointer',
+                                padding: '0',
+                              }}
+                              key={entity.key + 'CharacterCard'}
                             >
-                              {entity.label}
-                            </Card.Header>
-                            <Card.Img src={entity.imageUrl} />
-                            <Card.Footer style={{ textAlign: 'center' }}>
-                              <span>
-                                {entity.entityLevels.length > 1 && (
-                                  <>
-                                    Level {choice.level}/
-                                    {entity.entityLevels.length}{' '}
-                                  </>
-                                )}
-                                {entity.grantedBy ? 'Granted' : 'Selected'}
-                              </span>
-                            </Card.Footer>
-                          </Card>
+                              <Card.Header
+                                as="h5"
+                                style={{ textAlign: 'center' }}
+                              >
+                                {entity.label}
+                              </Card.Header>
+                              <Card.Img src={entity.imageUrl} />
+                              <Card.Footer style={{ textAlign: 'center' }}>
+                                <span>
+                                  {entity.entityLevels.length > 1 && (
+                                    <>
+                                      Level {choice.level}/
+                                      {entity.entityLevels.length}{' '}
+                                    </>
+                                  )}
+                                  {entity.grantedBy ? 'Granted' : 'Selected'}
+                                </span>
+                              </Card.Footer>
+                            </Card>
+                          </div>
                         );
                       });
                     })}
-                  </div>
+                  </Row>
                 </Card.Body>
               </Card>
             );
