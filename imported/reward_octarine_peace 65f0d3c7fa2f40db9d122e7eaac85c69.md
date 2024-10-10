@@ -1,7 +1,7 @@
 # reward_octarine_peace
 
 label: Reward: Octarine Peace
-Image: _f320e539-d93e-4a5a-a8ec-60b4e4b71529.jpeg
+Image: octarine_peace.jpg
 EntityLevels: reward_octarine_peace_1 (reward_octarine_peace_1%20a22bc32ee86d4461a96ef9e808f1ed5d.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: contacts (contacts%204eddb36d43eb4799987d83f1d8a6777c.md)
