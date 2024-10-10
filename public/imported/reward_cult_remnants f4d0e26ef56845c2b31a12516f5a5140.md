@@ -1,7 +1,7 @@
 # reward_cult_remnants
 
 label: Reward: Cult Remnants
-Image: _7c61b182-5290-4ae1-be9b-2f552f33710e.jpeg
+Image: cult_remnants.jpg
 EntityLevels: reward_cult_remnants_1 (reward_cult_remnants_1%20f78b7d4b30354a81bec69a7b9c34e558.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: contacts (contacts%204eddb36d43eb4799987d83f1d8a6777c.md)

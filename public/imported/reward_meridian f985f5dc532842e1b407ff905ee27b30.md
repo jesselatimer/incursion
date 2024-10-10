@@ -1,7 +1,7 @@
 # reward_meridian
 
 label: Reward: Meridian
-Image: _3c619437-5350-4603-aa04-ec656f0f35f6.jpeg
+Image: meridian.jpg
 EntityLevels: reward_meridian_1 (reward_meridian_1%2033b14494c4924d59b15d7b67b0b60a82.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: pacts (pacts%20e9c9569ec3e64b25891abcc5da974a20.md)

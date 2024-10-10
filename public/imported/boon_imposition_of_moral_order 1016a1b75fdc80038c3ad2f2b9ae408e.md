@@ -1,7 +1,7 @@
 # boon_imposition_of_moral_order
 
 label: Boon: Imposition of Moral Order
-Image: _eeb8bcdd-291f-4d86-9315-e3b4dcec24e0.jpeg
+Image: imposition_of_moral_order.jpg
 EntityLevels: boon_imposition_of_moral_order_1 (boon_imposition_of_moral_order_1%2021dc0c1ff5a64f648721a5c62c004639.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)

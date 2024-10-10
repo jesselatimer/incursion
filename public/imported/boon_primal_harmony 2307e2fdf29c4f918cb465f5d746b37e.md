@@ -1,7 +1,7 @@
 # boon_primal_harmony
 
 label: Boon: Primal Harmony
-Image: _67ed2d59-55e9-4a22-9cca-da8ae44c3c5a.jpeg
+Image: primal_harmony.jpg
 EntityLevels: boon_primal_harmony_1 (boon_primal_harmony_1%206bf554bf9123458fb7a0ab3649c054c8.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: pacts (pacts%20e9c9569ec3e64b25891abcc5da974a20.md)
