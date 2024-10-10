@@ -1,6 +1,7 @@
 # boon_dawning_of_the_black_sun
 
 label: Boon: Dawning of the Black Sun
+Image: _368d5657-886e-4ef9-ac35-162211d6886a.jpeg
 EntityLevels: boon_dawning_of_the_black_sun_1 (boon_dawning_of_the_black_sun_1%208ed0eb4ebf534715bd55df6fdfb0580e.md)
 Category: foundations (foundations%204d9ce68d973b4b4aa9877956db31ca34.md)
 SubCategory: potentials (potentials%203d3b9abb7f9c441680e23af1710b9009.md)

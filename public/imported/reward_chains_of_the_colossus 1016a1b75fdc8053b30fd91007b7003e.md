@@ -1,6 +1,7 @@
 # reward_chains_of_the_colossus
 
 label: Reward: Chains of the Colossus
+Image: _2851301d-1cfd-494b-a43a-30b07981a9d5.jpeg
 EntityLevels: reward_chains_of_the_colossus_1 (reward_chains_of_the_colossus_1%201016a1b75fdc805fb182e497a2937c07.md)
 Category: bonds (bonds%2036545fd230e3414ba3b7871631ad09bd.md)
 SubCategory: artifacts (artifacts%2009473eee62ea48c8a9249f92a9b133c4.md)

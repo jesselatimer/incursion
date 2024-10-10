@@ -1,6 +1,7 @@
 # boon_judging_eye
 
 label: Boon: Judging Eye
+Image: _4fd9252d-9610-44d7-a31b-5c3f9348fc68.jpeg
 EntityLevels: boon_judging_eye_1 (boon_judging_eye_1%203ac69838baf543e79e9f89eda2597b33.md)
 Category: talents (talents%2042a8cf28d58447ddaf6bbc9d8949ede2.md)
 SubCategory: talents (talents%20f28bb9684e6847b396b079167ef6dbbd.md)
