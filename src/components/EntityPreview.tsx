@@ -106,7 +106,7 @@ function EntityPreview({
     <>
       <Card
         className={choice ? 'EntityPreviewCard chosen' : 'EntityPreviewCard'}
-        style={{ marginBottom: '20px' }}
+        style={{ marginBottom: '20px', height: 'calc(100% - 20px)' }}
       >
         <Card.Img
           className="EntityPreviewImg"
