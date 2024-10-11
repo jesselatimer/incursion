@@ -190,34 +190,36 @@ function EntityLevel({
         {Boolean(entityLevel.description) && (
           <Markdown>{entityLevel.description}</Markdown>
         )}
-        <div className="d-grid gap-2">
-          <Button
-            size="lg"
-            onMouseEnter={() => setButtonIsHovered(true)}
-            onMouseLeave={() => setButtonIsHovered(false)}
-            variant={
-              canBePurchased
-                ? entityLevel.level <= chosenLevel
-                  ? 'light'
-                  : 'outline-light'
-                : entityLevel.level <= chosenLevel
-                ? 'danger'
-                : 'outline-danger'
-            }
-            onClick={onClick}
-            style={
-              entity.grantedBy
-                ? {
-                    marginBottom: '10px',
-                    pointerEvents: 'none',
-                    minHeight: '80px',
-                  }
-                : { marginBottom: '10px', minHeight: '80px' }
-            }
-          >
-            <Card.Text>{buttonText}</Card.Text>
-          </Button>
-        </div>
+        {!entity.grantedBy && (
+          <div className="d-grid gap-2">
+            <Button
+              size="lg"
+              onMouseEnter={() => setButtonIsHovered(true)}
+              onMouseLeave={() => setButtonIsHovered(false)}
+              variant={
+                canBePurchased
+                  ? entityLevel.level <= chosenLevel
+                    ? 'light'
+                    : 'outline-light'
+                  : entityLevel.level <= chosenLevel
+                  ? 'danger'
+                  : 'outline-danger'
+              }
+              onClick={onClick}
+              style={
+                entity.grantedBy
+                  ? {
+                      marginBottom: '10px',
+                      pointerEvents: 'none',
+                      minHeight: '80px',
+                    }
+                  : { marginBottom: '10px', minHeight: '80px' }
+              }
+            >
+              <Card.Text>{buttonText}</Card.Text>
+            </Button>
+          </div>
+        )}
       </Card.Body>
     </Card>
   );
