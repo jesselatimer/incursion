@@ -7,8 +7,9 @@ import {
   CategoryChoicesContext,
 } from './App';
 import { useCallback, useContext, useMemo } from 'react';
-import { map } from 'lodash';
+import { map, sortBy } from 'lodash';
 import { calculatePoints } from '../utils/calculatePoints';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 
 function Entity({ entity }: { entity: EntityModel }) {
   const dataByKey = useContext(DataContext);
@@ -105,10 +106,12 @@ function Entity({ entity }: { entity: EntityModel }) {
           <Markdown>{entity.description}</Markdown>
         )}
         <Card.Text>
+          {/* TODO: make this more intelligent based on type of entity */}
           Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
         </Card.Text>
         {map(entity.entityLevels, (levelKey) => {
           const entityLevel = entityLevelsByKey[levelKey];
+          if (entity.grantedBy && !entityLevel.description) return;
           const pointsUsedAfterPurchasingLevel = calculatePoints(
             [
               ...choices.filter((c) => c.entityKey !== entity.key),
@@ -138,56 +141,74 @@ function Entity({ entity }: { entity: EntityModel }) {
           return (
             <Card
               key={entityKey + entityLevel.level + 'EntityCard'}
-              border={
-                canBePurchased
-                  ? entityLevel.level <= chosenLevel
-                    ? 'secondary'
-                    : 'secondary'
-                  : entityLevel.level <= chosenLevel
-                  ? 'danger'
-                  : 'dark'
-              }
-              bg={
-                canBePurchased
-                  ? entityLevel.level <= chosenLevel
-                    ? 'light'
-                    : 'dark'
-                  : entityLevel.level <= chosenLevel
-                  ? 'light'
-                  : 'danger'
-              }
-              text={
-                canBePurchased
-                  ? entityLevel.level <= chosenLevel
-                    ? 'dark'
-                    : 'light'
-                  : entityLevel.level <= chosenLevel
-                  ? 'danger'
-                  : 'light'
-              }
-              onClick={onClick}
-              style={
-                entity.grantedBy
-                  ? { marginBottom: '10px' }
-                  : { cursor: 'pointer', marginBottom: '10px' }
-              }
+              border="dark"
+              style={{ marginBottom: '10px' }}
             >
               <Card.Body>
-                <Card.Title>{`Level ${entityLevel.level}`}</Card.Title>
-                {usesPoints && <Card.Text>{pointsToShow} points</Card.Text>}
                 {Boolean(entityLevel.description) && (
                   <Markdown>{entityLevel.description}</Markdown>
                 )}
+                <div className="d-grid gap-2">
+                  <Button
+                    size="lg"
+                    variant={
+                      canBePurchased
+                        ? entityLevel.level <= chosenLevel
+                          ? 'light'
+                          : 'outline-light'
+                        : entityLevel.level <= chosenLevel
+                        ? 'danger'
+                        : 'outline-danger'
+                    }
+                    onClick={onClick}
+                    style={
+                      entity.grantedBy
+                        ? {
+                            marginBottom: '10px',
+                            pointerEvents: 'none',
+                          }
+                        : { marginBottom: '10px' }
+                    }
+                  >
+                    <Card.Text>
+                      {!canBePurchased && entityLevel.level <= chosenLevel && (
+                        <>
+                          Invalid: Insufficient points for{' '}
+                          {`level ${entityLevel.level}`}
+                        </>
+                      )}
+                      {!canBePurchased && entityLevel.level > chosenLevel && (
+                        <>{`Level ${entityLevel.level}`}</>
+                      )}
+                      {canBePurchased && entityLevel.level > chosenLevel && (
+                        <>{`Level ${entityLevel.level}`}</>
+                      )}
+                      {canBePurchased && entityLevel.level <= chosenLevel && (
+                        <>{`Level ${entityLevel.level}`} selected</>
+                      )}
+                    </Card.Text>
+                    {usesPoints && pointsToShow != 0 && (
+                      <>
+                        {pointsToShow} {pointsToShow === 1 ? 'point' : 'points'}
+                      </>
+                    )}
+                  </Button>
+                </div>
               </Card.Body>
             </Card>
           );
         })}
-        {entity.grants &&
-          map(entity.grants, (grantedKey) => {
-            const grantedEntity = entitiesByKey[grantedKey];
-            // TODO: fix spacing
-            return <Entity entity={grantedEntity} />;
-          })}
+        {entity.grants && entity.grants.length > 0 && (
+          <>
+            <Card.Subtitle>Grants</Card.Subtitle>
+            <div className="d-grid gap-2">
+              {map(sortBy(entity.grants), (grantedKey) => {
+                const grantedEntity = entitiesByKey[grantedKey];
+                return <Entity entity={grantedEntity} />;
+              })}
+            </div>
+          </>
+        )}
       </Card.Body>
     </Card>
   );
