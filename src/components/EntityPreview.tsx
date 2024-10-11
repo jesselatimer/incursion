@@ -141,9 +141,6 @@ function EntityPreview({
           {Boolean(entity.description) && (
             <Markdown>{entity.description}</Markdown>
           )}
-          <Card.Text>
-            Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
-          </Card.Text>
         </Card.Body>
         <Card.Footer>
           <Stack direction="horizontal" gap={3}>
@@ -151,17 +148,35 @@ function EntityPreview({
               onClick={() => onClickDecrease()}
               disabled={chosenLevel < 1}
               variant="light"
+              style={chosenLevel === 0 ? { visibility: 'hidden' } : {}}
             >
               -
             </Button>
             <div className="ms-auto">
-              Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
+              <span>
+                {entity.entityLevels.length > 1 && (
+                  <>
+                    Level {choice ? choice.level : 0}/
+                    {entity.entityLevels.length}{' '}
+                  </>
+                )}
+                {entity.entityLevels.length === 1
+                  ? (choice ? choice.level : 0) > 0
+                    ? 'Selected'
+                    : 'Select'
+                  : ''}
+              </span>
             </div>
             <Button
               className="ms-auto"
               onClick={() => onClickIncrease()}
               disabled={chosenLevel >= entity.entityLevels.length}
               variant={canBePurchased ? 'light' : 'danger'}
+              style={
+                chosenLevel >= entity.entityLevels.length
+                  ? { visibility: 'hidden' }
+                  : {}
+              }
             >
               +
             </Button>

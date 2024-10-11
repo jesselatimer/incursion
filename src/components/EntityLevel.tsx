@@ -3,7 +3,7 @@ import { EntityLevel as EntityLevelModel } from '../models/EntityLevel';
 import Markdown from './Markdown';
 import Card from 'react-bootstrap/Card';
 import { DataContext, CategoryChoicesContext } from './App';
-import { useCallback, useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { calculatePoints } from '../utils/calculatePoints';
 import { Button } from 'react-bootstrap';
 
@@ -33,9 +33,15 @@ function EntityLevel({
     usesPoints,
     pointsUsed,
     pointsRemaining,
+    canBePurchased,
+    pointsToShow,
+    isSelected,
   } = useMemo(() => {
     const choice = choices.find((choice) => choice.entityKey === entityKey);
+    const chosenLevel = choice?.level || 0;
+
     const category = categoriesByKey[entity.category];
+
     const pointType = category.pointType
       ? pointTypesByKey[category.pointType]
       : null;
@@ -46,14 +52,43 @@ function EntityLevel({
       entityLevelsByKey,
       pointType?.key
     );
+    const pointsUsedAfterPurchasingLevel = calculatePoints(
+      [
+        ...choices.filter((c) => c.entityKey !== entity.key),
+        { entityKey: entity.key, level: entityLevel.level },
+      ],
+      entitiesByKey,
+      entityLevelsByKey,
+      pointType?.key
+    );
+    const pointsUsedWithoutThisChoice = calculatePoints(
+      [...choices.filter((c) => c.entityKey !== entity.key)],
+      entitiesByKey,
+      entityLevelsByKey,
+      pointType?.key
+    );
+    const pointsRemaining = usesPoints ? pointType.maxPoints - pointsUsed : 0;
+    const canBePurchased = usesPoints
+      ? pointsRemaining >= pointsUsedAfterPurchasingLevel - pointsUsed
+      : true;
+    const pointsToShow =
+      entityLevel.level === chosenLevel
+        ? pointsUsed - pointsUsedWithoutThisChoice
+        : pointsUsedAfterPurchasingLevel - pointsUsedWithoutThisChoice;
+    const isSelected = entityLevel.level <= chosenLevel;
+
     return {
       choice,
       category,
       pointType,
-      chosenLevel: choice?.level || 0,
+      chosenLevel,
       usesPoints,
       pointsUsed,
-      pointsRemaining: usesPoints ? pointType.maxPoints - pointsUsed : 0,
+      pointsRemaining,
+      pointsUsedAfterPurchasingLevel,
+      canBePurchased,
+      pointsToShow,
+      isSelected,
     };
   }, [
     choices,
@@ -83,32 +118,68 @@ function EntityLevel({
     });
   }, [removeChoice, choices, category, entity, entityKey]);
 
-  const pointsUsedAfterPurchasingLevel = calculatePoints(
-    [
-      ...choices.filter((c) => c.entityKey !== entity.key),
-      { entityKey: entity.key, level: entityLevel.level },
-    ],
-    entitiesByKey,
-    entityLevelsByKey,
-    pointType?.key
-  );
-  const pointsUsedWithoutThisChoice = calculatePoints(
-    [...choices.filter((c) => c.entityKey !== entity.key)],
-    entitiesByKey,
-    entityLevelsByKey,
-    pointType?.key
-  );
-  const canBePurchased = usesPoints
-    ? pointsRemaining >= pointsUsedAfterPurchasingLevel - pointsUsed
-    : true;
-  const pointsToShow =
-    entityLevel.level === chosenLevel
-      ? pointsUsed - pointsUsedWithoutThisChoice
-      : pointsUsedAfterPurchasingLevel - pointsUsedWithoutThisChoice;
-  const onClick =
-    entityLevel.level === chosenLevel
-      ? () => onClickUnselect()
-      : () => onClickSelect(entityLevel.level);
+  const onClick = useCallback(() => {
+    console.log('onClick');
+    if (entityLevel.level === chosenLevel) {
+      onClickUnselect();
+    } else {
+      onClickSelect(entityLevel.level);
+    }
+  }, [entityLevel, chosenLevel]);
+
+  const [buttonIsHovered, setButtonIsHovered] = useState(false);
+
+  const buttonText = useMemo(() => {
+    if (buttonIsHovered) {
+      if (entityLevel.level === chosenLevel) {
+        return 'Unselect';
+      } else {
+        if (!canBePurchased && !isSelected) {
+          return 'Make invalid selection';
+        }
+        return 'Select';
+      }
+    } else {
+      let str = '';
+      if (!isSelected) {
+        if (entity.grantedBy) {
+          str = `Granted by ${entity.grantedBy}`;
+        } else if (entity.entityLevels.length > 1) {
+          str = `Level ${entityLevel.level}`;
+        } else {
+          str = 'Select';
+        }
+      } else {
+        if (canBePurchased) {
+          if (entity.grantedBy) {
+            str = 'Granted';
+          } else if (entity.entityLevels.length > 1) {
+            str = `Level ${entityLevel.level} selected`;
+          } else {
+            str = 'Selected';
+          }
+        } else {
+          str = `Invalid: Insufficient points`;
+          if (entity.entityLevels.length > 1) {
+            str += ` for level ${entityLevel.level}`;
+          }
+        }
+      }
+      const pointsStr =
+        usesPoints && pointsToShow != 0
+          ? `${pointsToShow} ${pointsToShow === 1 ? 'point' : 'points'}`
+          : '';
+      return (
+        <>
+          {str}
+          <span style={{ fontSize: 'smaller', display: 'block' }}>
+            {pointsStr}
+          </span>
+        </>
+      );
+    }
+  }, [buttonIsHovered, isSelected]);
+
   return (
     <Card
       key={entityKey + entityLevel.level + 'EntityCard'}
@@ -122,6 +193,8 @@ function EntityLevel({
         <div className="d-grid gap-2">
           <Button
             size="lg"
+            onMouseEnter={() => setButtonIsHovered(true)}
+            onMouseLeave={() => setButtonIsHovered(false)}
             variant={
               canBePurchased
                 ? entityLevel.level <= chosenLevel
@@ -137,32 +210,12 @@ function EntityLevel({
                 ? {
                     marginBottom: '10px',
                     pointerEvents: 'none',
+                    minHeight: '80px',
                   }
-                : { marginBottom: '10px' }
+                : { marginBottom: '10px', minHeight: '80px' }
             }
           >
-            <Card.Text>
-              {!canBePurchased && entityLevel.level <= chosenLevel && (
-                <>
-                  Invalid: Insufficient points for{' '}
-                  {`level ${entityLevel.level}`}
-                </>
-              )}
-              {!canBePurchased && entityLevel.level > chosenLevel && (
-                <>{`Level ${entityLevel.level}`}</>
-              )}
-              {canBePurchased && entityLevel.level > chosenLevel && (
-                <>{`Level ${entityLevel.level}`}</>
-              )}
-              {canBePurchased && entityLevel.level <= chosenLevel && (
-                <>{`Level ${entityLevel.level}`} selected</>
-              )}
-            </Card.Text>
-            {usesPoints && pointsToShow != 0 && (
-              <>
-                {pointsToShow} {pointsToShow === 1 ? 'point' : 'points'}
-              </>
-            )}
+            <Card.Text>{buttonText}</Card.Text>
           </Button>
         </div>
       </Card.Body>

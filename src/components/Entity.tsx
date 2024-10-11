@@ -46,10 +46,6 @@ function Entity({ entity }: { entity: EntityModel }) {
         {Boolean(entity.description) && (
           <Markdown>{entity.description}</Markdown>
         )}
-        <Card.Text>
-          {/* TODO: make this more intelligent based on type of entity */}
-          Level: {choice ? choice.level : 0}/{entity.entityLevels.length}
-        </Card.Text>
         {map(entity.entityLevels, (levelKey) => {
           const entityLevel = entityLevelsByKey[levelKey];
           if (entity.grantedBy && !entityLevel.description) return;
