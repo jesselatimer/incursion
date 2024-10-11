@@ -125,12 +125,16 @@ function SummaryCard({
                   style={{ marginBottom: '10px' }}
                 >
                   <h4>
-                    <HashLink
-                      style={{ textDecoration: 'none' }}
-                      to={`category/${category.key}#${subCategory.key}`}
-                    >
-                      {subCategory.label}
-                    </HashLink>
+                    {subCategory.key === 'thaumaturgy' ? (
+                      <>{subCategory.label}</>
+                    ) : (
+                      <HashLink
+                        style={{ textDecoration: 'none' }}
+                        to={`category/${category.key}#${subCategory.key}`}
+                      >
+                        {subCategory.label}
+                      </HashLink>
+                    )}
                   </h4>
                   {/* Mapping over all entities to preserve order */}
                   {map(currentEntities, (entity) => {
