@@ -18,7 +18,7 @@ export default function GlossaryOverlay({
 
   return (
     <OverlayTrigger
-      placement="right"
+      placement="auto"
       delay={{ show: 250, hide: 400 }}
       overlay={renderTooltip}
     >
