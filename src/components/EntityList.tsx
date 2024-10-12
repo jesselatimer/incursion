@@ -47,6 +47,12 @@ function EntityList() {
             <h2>{category.label}</h2>
             <Nav>
               {map(subCategories, (subCategory) => {
+                const currentEntities = entitiesBySubCategory[subCategory.key];
+                const currentNonGrantedEntities = currentEntities.filter(
+                  (e) => !e.grantedBy
+                );
+                if (!currentNonGrantedEntities?.length) return null;
+
                 return (
                   <Link
                     key={`navLink${subCategory.key}`}
