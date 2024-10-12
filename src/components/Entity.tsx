@@ -24,7 +24,7 @@ function Entity({ entity }: { entity: EntityModel }) {
   }, [choices, entity, entityKey]);
 
   return (
-    <Card border={choice ? 'light' : 'secondary'} text={choice ? 'light' : ''}>
+    <Card border={choice ? 'light' : 'secondary'} text="light">
       <Card.Img variant="top" src={entity.imageUrl} />
       <Card.Body>
         <Card.Title>{entity.label}</Card.Title>

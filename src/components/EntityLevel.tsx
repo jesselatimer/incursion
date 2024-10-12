@@ -183,7 +183,14 @@ function EntityLevel({
   return (
     <Card
       key={entityKey + entityLevel.level + 'EntityCard'}
-      border="dark"
+      border={
+        Boolean(entityLevel.description)
+          ? isSelected
+            ? 'light'
+            : 'secondary'
+          : 'dark'
+      }
+      text="light"
       style={{ marginBottom: '10px' }}
     >
       <Card.Body>

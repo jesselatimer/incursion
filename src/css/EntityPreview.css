@@ -4,9 +4,12 @@
   transition: color linear 0.1s, border linear 0.1s;
 }
 
+.EntityPreviewCard {
+  color: lightgray;
+}
+
 .EntityPreviewCard.chosen {
   border: lightgray 1px solid;
-  color: lightgray;
 }
 
 .EntityPreviewImg:hover,
