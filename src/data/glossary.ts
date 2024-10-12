@@ -2,7 +2,7 @@ export const IN_WORLD_TERMS = {
   aether:
     'The amorphous metaphysical stuff that powers thaumaturgy, drawn up through conduits and expended in spells. Exists in many forms, and seems to be tied into the very fabric of the world.',
   aspect: "Any one of a thaumaturge's Source(s), Method(s), and Talent(s).",
-  'circe (C)':
+  circe:
     'A standardized unit of aether named for an ancient Greek sorceress. The smallest amount of aether necessary for a thaumaturge to affect the world. Typical usage is in kilocirces (kC) or megacirces (mC).',
   conduit:
     "A thaumaturge's means of accessing aether through a Source. Commonly thought of as a pipe that one draws magic through, with Endurance setting the initial diameter of this conduit and tax reducing it. It is slightly more accurate to say the conduit is the muscle one flexes to work magic, with Endurance determining endurance and tax acting as lactic build-up and glucose depletion.",
@@ -12,7 +12,7 @@ export const IN_WORLD_TERMS = {
     'A direct magical attack. Does not include attacks that create and direct mass or energy, nor attacks that summon. (e.g. Trial of Oblivion, some uses of Sortition, etc.)',
   'Incursion, The':
     'The historical event that shaped the current magical world, when the remnants of another world or dimension collided with ours.',
-  mage: 'A colloquial term for thaumaturge.',
+  // mage: 'A colloquial term for thaumaturge.',
   magic:
     'A poorly defined term, but including at least all acts of thaumaturgy.',
   'magical beast':
@@ -30,7 +30,7 @@ export const IN_WORLD_TERMS = {
     'A thaumaturge capable of arbitrarily mixing, matching, and acquiring new Sources, Methods, and Talents. Roughly 1 in 2000 thaumaturges is a true mage, ie, there are ~7000 true mages worldwide.',
   spell:
     'An individual act of thaumaturgy. Usually a trick or active Talent effect.',
-  'spirit/spiritual':
+  spirit:
     'A category of being including almost all non-corporeal magical entities, and magic or effects that specifically interact with them.',
 };
 
