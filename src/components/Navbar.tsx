@@ -23,10 +23,10 @@ export default function Navbar() {
     <ReactNavbar
       expand="md"
       className="bg-body-tertiary"
-      style={{ padding: '20px 30px' }}
+      style={{ padding: '10px 20px' }}
     >
       <Link to={'/'} className="navbar-brand">
-        Incursion
+        <Image src="/incursion/incursion_logo.png" height="40px" />
       </Link>
       {size(categoriesByKey) > 1 ? (
         <ReactNavbar.Collapse id="basic-ReactNavbar-nav">
