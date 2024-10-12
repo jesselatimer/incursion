@@ -65,7 +65,10 @@ function EntityList() {
           {/* Mapping over all subcategories to preserve order */}
           {map(subCategories, (subCategory) => {
             const currentEntities = entitiesBySubCategory[subCategory.key];
-            if (!currentEntities?.length) return null;
+            const currentNonGrantedEntities = currentEntities.filter(
+              (e) => !e.grantedBy
+            );
+            if (!currentNonGrantedEntities?.length) return null;
             const currentEntitiesByKey = groupBy(currentEntities, 'key');
             return (
               <>
