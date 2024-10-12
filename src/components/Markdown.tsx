@@ -3,6 +3,10 @@ import GlossaryOverlay from './GlossaryOverlay';
 import * as mdx from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime';
 
+function Null() {
+  return null;
+}
+
 function Markdown({
   children,
   className,
@@ -13,21 +17,20 @@ function Markdown({
   if (!children || typeof children !== 'string') return null;
 
   const markdownList = children.split(/([^a-zA-z])/);
-  console.log(markdownList);
   const modifiedMarkdown = markdownList.map((str: string) => {
-    if (
-      IN_WORLD_TERMS[str.toLowerCase() as keyof typeof IN_WORLD_TERMS] !==
-      undefined
-    ) {
-      return `<GlossaryOverlay variant="primary">${str}</GlossaryOverlay>`;
-    } else if (CYOA_TERMS[str as keyof typeof CYOA_TERMS] !== undefined) {
-      return `<GlossaryOverlay variant="primary">${str}</GlossaryOverlay>`;
+    const inWorldDescription =
+      IN_WORLD_TERMS[str.toLowerCase() as keyof typeof IN_WORLD_TERMS];
+    const cyoaDescription = CYOA_TERMS[str as keyof typeof CYOA_TERMS];
+    if (inWorldDescription !== undefined) {
+      return `<GlossaryOverlay variant="in-world" str="${str}" description={\`${inWorldDescription}\`}>${str}</GlossaryOverlay>`;
+    } else if (cyoaDescription !== undefined) {
+      return `<GlossaryOverlay variant="cyoa" str="${str}" description={\`${cyoaDescription}\`}>${str}</GlossaryOverlay>`;
     } else {
       return str;
     }
   });
 
-  const compiledMarkdown = mdx.compileSync(modifiedMarkdown.join(' '), {
+  const compiledMarkdown = mdx.compileSync(modifiedMarkdown.join(''), {
     outputFormat: 'function-body',
   });
 
@@ -41,6 +44,7 @@ function Markdown({
       className={className}
       components={{
         GlossaryOverlay,
+        h1: Null,
       }}
     />
   );

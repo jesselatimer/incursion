@@ -119,7 +119,6 @@ function EntityLevel({
   }, [removeChoice, choices, category, entity, entityKey]);
 
   const onClick = useCallback(() => {
-    console.log('onClick');
     if (entityLevel.level === chosenLevel) {
       onClickUnselect();
     } else {
