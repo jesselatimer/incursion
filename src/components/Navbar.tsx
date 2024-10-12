@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <ReactNavbar
-      expand="md"
+      expand="xl"
       className="bg-body-tertiary"
       style={{ padding: '10px 20px' }}
     >
@@ -34,6 +34,10 @@ export default function Navbar() {
             className="me-auto"
             variant="underline"
             activeKey={location.pathname}
+            style={{
+              alignItems: 'baseline',
+              justifyItems: 'center',
+            }}
           >
             <NavLink to="/setting" event-key="/setting" className="nav-link">
               System & Setting
