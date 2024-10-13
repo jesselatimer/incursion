@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { DataContext } from './App';
 import { Choice } from '../models/Choice';
 import { Category } from '../models/Category';
@@ -6,7 +6,7 @@ import { groupBy, map } from 'lodash';
 import { Card, Collapse, Image, Stack, ToggleButton } from 'react-bootstrap';
 import { calculatePoints } from '../utils/calculatePoints';
 import SummaryEntity from './SummaryEntity';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
 function SummaryCard({
@@ -47,7 +47,15 @@ function SummaryCard({
     [choices, entitiesByKey, entityLevelsByKey, pointType]
   );
 
-  const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
+
+  const [collapsed, setCollapsed] = useState(
+    location.pathname !== `/category/${category.key}`
+  );
+
+  useEffect(() => {
+    setCollapsed(location.pathname !== `/category/${category.key}`);
+  }, [location]);
 
   return (
     <Card>

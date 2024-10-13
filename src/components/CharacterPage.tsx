@@ -76,11 +76,12 @@ function CharacterPage() {
                               style={{
                                 cursor: 'pointer',
                                 padding: '0',
+                                height: '100%',
                               }}
                             >
                               <Card.Header
                                 as="h5"
-                                style={{ textAlign: 'center' }}
+                                style={{ textAlign: 'center', height: '100%' }}
                               >
                                 {entity.label}
                               </Card.Header>
