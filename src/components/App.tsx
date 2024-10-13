@@ -281,7 +281,7 @@ function App() {
                 position: 'fixed',
                 bottom: '10px',
                 left: '10px',
-                zIndex: '10000000000000',
+                zIndex: '999',
                 backgroundColor: 'white',
                 borderRadius: '999px',
                 padding: '5px',

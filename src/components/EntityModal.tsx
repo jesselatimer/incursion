@@ -13,18 +13,27 @@ function EntityModal({
 }) {
   return (
     <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
-      <CloseButton
-        onClick={() => setShowModal(false)}
+      <div
         style={{
           position: 'absolute',
-          right: '10px',
-          top: '10px',
-          backgroundColor: 'white',
-          borderRadius: '99px',
-          zIndex: '1000000',
-          padding: '7px',
+          right: '15px',
+          top: '15px',
+          height: '100%',
         }}
-      />
+      >
+        <CloseButton
+          onClick={() => setShowModal(false)}
+          style={{
+            position: 'sticky',
+            top: '15px',
+            backgroundColor: 'white',
+            borderRadius: '99px',
+            zIndex: '1000000',
+            padding: '7px',
+            opacity: '.75',
+          }}
+        />
+      </div>
       <Modal.Body style={{ padding: '0' }}>
         <Entity entity={entity} />
       </Modal.Body>
