@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { Button, ButtonProps, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function GlossaryOverlay({
   variant,

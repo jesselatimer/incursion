@@ -10,7 +10,7 @@ export default function Glossary() {
       {Object.entries(IN_WORLD_TERMS).map(([key, value]) => {
         return (
           <p>
-            <strong>{key}</strong>: {value}
+            <strong>{key}</strong>: {value.description}
           </p>
         );
       })}
@@ -18,7 +18,7 @@ export default function Glossary() {
       {Object.entries(CYOA_TERMS).map(([key, value]) => {
         return (
           <p>
-            <strong>{key}</strong>: {value}
+            <strong>{key}</strong>: {value.description}
           </p>
         );
       })}
