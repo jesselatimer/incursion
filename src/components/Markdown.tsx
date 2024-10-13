@@ -4,6 +4,7 @@ import GlossaryOverlay from './GlossaryOverlay';
 import * as mdx from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime';
 import { useMemo } from 'react';
+import remarkGfm from 'remark-gfm';
 
 function Null() {
   return null;
@@ -50,6 +51,7 @@ function Markdown({
 
     const compiledMarkdown = mdx.compileSync(modifiedMarkdown.join(''), {
       outputFormat: 'function-body',
+      remarkPlugins: [remarkGfm],
     });
 
     const { default: CompiledMarkdown } = mdx.runSync(
