@@ -19,8 +19,11 @@ function Markdown({
   children: React.ReactNode;
   className?: string;
 }) {
-  const Markdown = useMemo(() => {
+  const CompiledMarkdown = useMemo(() => {
     if (!children || typeof children !== 'string') return null;
+
+    const usedKeys = new Set();
+
     const markdownList = children.split(/([^a-zA-z])/);
     const modifiedMarkdown = markdownList.map((str: string) => {
       const inWorldDescription =
@@ -32,9 +35,13 @@ function Markdown({
       const cyoaDescription =
         CYOA_TERMS[str as keyof typeof CYOA_TERMS]?.description ??
         CYOA_TERMS_BY_PLURAL[str as keyof typeof CYOA_TERMS]?.description;
-      if (inWorldDescription !== undefined) {
+      if (usedKeys.has(str.toLowerCase())) {
+        return str;
+      } else if (inWorldDescription !== undefined) {
+        usedKeys.add(str.toLowerCase());
         return `<GlossaryOverlay variant="in-world" str="${str}" description={\`${inWorldDescription}\`}>${str}</GlossaryOverlay>`;
       } else if (cyoaDescription !== undefined) {
+        usedKeys.add(str.toLowerCase());
         return `<GlossaryOverlay variant="cyoa" str="${str}" description={\`${cyoaDescription}\`}>${str}</GlossaryOverlay>`;
       } else {
         return str;
@@ -45,19 +52,22 @@ function Markdown({
       outputFormat: 'function-body',
     });
 
-    const { default: Markdown } = mdx.runSync(String(compiledMarkdown), {
-      ...runtime,
-      Fragment: 'fragment',
-    });
+    const { default: CompiledMarkdown } = mdx.runSync(
+      String(compiledMarkdown),
+      {
+        ...runtime,
+        Fragment: 'fragment',
+      }
+    );
 
-    return Markdown;
+    return CompiledMarkdown;
   }, []);
 
-  if (!Markdown) return null;
+  if (!CompiledMarkdown) return null;
 
   return (
     <div className={className}>
-      <Markdown
+      <CompiledMarkdown
         components={{
           GlossaryOverlay,
           h1: Null,
