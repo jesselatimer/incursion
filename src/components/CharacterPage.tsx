@@ -67,14 +67,16 @@ function CharacterPage() {
                         );
                         if (!choice) return null;
                         return (
-                          <div style={{ padding: '0 10px 10px 10px' }}>
+                          <div
+                            key={entity.key + 'CharacterCard'}
+                            style={{ padding: '0 10px 10px 10px' }}
+                          >
                             <Card
                               onClick={() => setModalEntity(entity.key)}
                               style={{
                                 cursor: 'pointer',
                                 padding: '0',
                               }}
-                              key={entity.key + 'CharacterCard'}
                             >
                               <Card.Header
                                 as="h5"

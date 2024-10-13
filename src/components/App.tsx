@@ -37,7 +37,7 @@ const defaultDataContext: DataByKey = {
   entityLevelsByKey: {},
   pointTypesByKey: {},
   appendicesByKey: {},
-  setting: '',
+  setting: undefined,
 };
 export const DataContext = createContext<DataByKey>(defaultDataContext);
 

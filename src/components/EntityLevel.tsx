@@ -194,7 +194,9 @@ function EntityLevel({
     >
       <Card.Body>
         {Boolean(entityLevel.description) && (
-          <Markdown>{entityLevel.description}</Markdown>
+          <Markdown key={entityLevel.key}>
+            {entityLevel.compiledDescription}
+          </Markdown>
         )}
         {!entity.grantedBy && (
           <div className="d-grid gap-2">

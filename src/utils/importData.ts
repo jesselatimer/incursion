@@ -1,4 +1,8 @@
 import Papa from 'papaparse';
+import * as mdx from '@mdx-js/mdx';
+import type { MDXContent } from 'mdx/types';
+import * as runtime from 'react/jsx-runtime';
+import remarkGfm from 'remark-gfm';
 import { Category, CategoryKey, CategorySchema } from '../models/Category';
 import { PointType, PointTypeKey, PointTypeSchema } from '../models/PointType';
 import { EntityKey, Entity, EntitySchema } from '../models/Entity';
@@ -13,8 +17,14 @@ import {
   EntityLevelSchema,
 } from '../models/EntityLevel';
 import { ZodType, z } from 'zod';
-import { orderBy, reduce } from 'lodash';
+import { reduce } from 'lodash';
 import { Appendix, AppendixKey, AppendixSchema } from '../models/Appendix';
+import {
+  IN_WORLD_TERMS,
+  IN_WORLD_TERMS_BY_PLURAL,
+  CYOA_TERMS,
+  CYOA_TERMS_BY_PLURAL,
+} from '../data/glossary';
 
 export type DataByKey = {
   categoriesByKey: Record<CategoryKey, Category>;
@@ -23,7 +33,7 @@ export type DataByKey = {
   entityLevelsByKey: Record<EntityLevelKey, EntityLevel>;
   pointTypesByKey: Record<PointTypeKey, PointType>;
   appendicesByKey: Record<AppendixKey, Appendix>;
-  setting: string;
+  setting?: MDXContent;
 };
 
 export const getDataFromImport = async (): Promise<DataByKey> => {
@@ -123,6 +133,11 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     text.replaceAll('jpg](', 'jpg](/incursion/imported/')
   );
 
+  const compiledSetting = compileDescription({
+    description: settingText,
+    compiledDescription: undefined,
+  })?.compiledDescription;
+
   return {
     categoriesByKey,
     subCategoriesByKey,
@@ -130,7 +145,7 @@ export const getDataFromImport = async (): Promise<DataByKey> => {
     entityLevelsByKey,
     pointTypesByKey,
     appendicesByKey,
-    setting: settingText,
+    setting: compiledSetting,
   };
 };
 
@@ -177,7 +192,7 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
             }
             try {
               const description = await fetchMarkdown(pathToSelf);
-              const parsedResult = parser.parse({
+              const parsedResult: z.infer<SchemaType> = parser.parse({
                 ...result,
                 description,
               });
@@ -185,7 +200,9 @@ async function parseCsv<SchemaType extends ZodType<any, any, any>>(
                 console.error('key not found', parsedResult);
                 throw new Error('key not found');
               }
-              resultsByKey[parsedResult.key] = parsedResult;
+              const compiledResult =
+                compileDescription<z.infer<SchemaType>>(parsedResult);
+              resultsByKey[parsedResult.key] = compiledResult;
             } catch (err) {
               console.log('Error parsing', result);
               throw err;
@@ -237,3 +254,59 @@ async function fetchMarkdown(pathToSelf: string): Promise<string | undefined> {
     throw e;
   }
 }
+
+const compileDescription = <T extends Object>(currentResult: T) => {
+  if (
+    !(
+      'description' in currentResult &&
+      currentResult.description &&
+      typeof currentResult.description === 'string'
+    )
+  )
+    return currentResult;
+
+  const usedKeys = new Set();
+
+  const markdownList = currentResult.description.split(/([^a-zA-z])/);
+  const modifiedMarkdown = markdownList.map((str: string) => {
+    const inWorld =
+      IN_WORLD_TERMS[str.toLowerCase() as keyof typeof IN_WORLD_TERMS];
+    const inWorldPlural =
+      IN_WORLD_TERMS_BY_PLURAL[
+        str.toLowerCase() as keyof typeof IN_WORLD_TERMS
+      ];
+    const cyoa = CYOA_TERMS[str as keyof typeof CYOA_TERMS];
+    const cyoaPlural = CYOA_TERMS_BY_PLURAL[str as keyof typeof CYOA_TERMS];
+
+    const isPlural = Boolean(inWorldPlural || cyoaPlural);
+    const keyToAdd = isPlural
+      ? (inWorldPlural?.singular ?? cyoaPlural.singular).toLowerCase()
+      : str.toLowerCase();
+
+    if (usedKeys.has(keyToAdd)) {
+      return str;
+    } else if (inWorld || inWorldPlural) {
+      const description = inWorld?.description ?? inWorldPlural.description;
+      usedKeys.add(keyToAdd);
+      return `<GlossaryOverlay variant="in-world" str="${str}" description={\`${description}\`}>${str}</GlossaryOverlay>`;
+    } else if (cyoa || cyoaPlural) {
+      const description = cyoa?.description ?? cyoaPlural.description;
+      usedKeys.add(keyToAdd);
+      return `<GlossaryOverlay variant="cyoa" str="${str}" description={\`${description}\`}>${str}</GlossaryOverlay>`;
+    } else {
+      return str;
+    }
+  });
+
+  const compiledMarkdown = mdx.compileSync(modifiedMarkdown.join(''), {
+    outputFormat: 'function-body',
+    remarkPlugins: [remarkGfm],
+  });
+
+  const { default: CompiledMarkdown } = mdx.runSync(String(compiledMarkdown), {
+    ...runtime,
+    Fragment: 'fragment',
+  });
+
+  return { ...currentResult, compiledDescription: CompiledMarkdown };
+};

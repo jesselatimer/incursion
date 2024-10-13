@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
   const dataByKey = useContext(DataContext);
-  const dataLoaded = dataByKey.setting !== '';
+  const dataLoaded = dataByKey.setting !== undefined;
 
   return (
     <Container fluid>

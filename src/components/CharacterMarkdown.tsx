@@ -102,7 +102,7 @@ function CharacterMarkdown() {
             border: '1px gray solid',
           }}
         >
-          <Markdown>
+          <Markdown key="characterSummary">
             {createMarkdownToCopy({
               trueMage,
               categoriesByKey,

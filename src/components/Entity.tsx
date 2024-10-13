@@ -44,7 +44,7 @@ function Entity({ entity }: { entity: EntityModel }) {
           </Card.Subtitle>
         )}
         {Boolean(entity.description) && (
-          <Markdown>{entity.description}</Markdown>
+          <Markdown key={entity.key}>{entity.compiledDescription}</Markdown>
         )}
         {map(entity.entityLevels, (levelKey) => {
           const entityLevel = entityLevelsByKey[levelKey];

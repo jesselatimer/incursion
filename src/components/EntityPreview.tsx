@@ -139,7 +139,7 @@ function EntityPreview({
           />
           <Card.Title></Card.Title>
           {Boolean(entity.description) && (
-            <Markdown>{entity.description}</Markdown>
+            <Markdown key={entity.key}>{entity.compiledDescription}</Markdown>
           )}
         </Card.Body>
         <Card.Footer>

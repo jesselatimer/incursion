@@ -66,7 +66,9 @@ function EntityList() {
             </Nav>
           </Stack>
           {Boolean(category.description) && (
-            <Markdown>{category.description}</Markdown>
+            <Markdown key={category.key}>
+              {category.compiledDescription}
+            </Markdown>
           )}
           {/* Mapping over all subcategories to preserve order */}
           {map(subCategories, (subCategory) => {
@@ -77,10 +79,12 @@ function EntityList() {
             if (!currentNonGrantedEntities?.length) return null;
             const currentEntitiesByKey = groupBy(currentEntities, 'key');
             return (
-              <>
+              <div key={subCategory.key + 'EntityList'}>
                 <h3>{subCategory.label}</h3>
                 {Boolean(subCategory.description) && (
-                  <Markdown>{subCategory.description}</Markdown>
+                  <Markdown key={subCategory.key}>
+                    {subCategory.compiledDescription}
+                  </Markdown>
                 )}
                 <Row
                   key={subCategory.label + 'EntityListRow'}
@@ -109,14 +113,14 @@ function EntityList() {
                     );
                   })}
                 </Row>
-              </>
+              </div>
             );
           })}
           {appendices?.length
             ? map(appendices, (appendix) => {
                 return (
                   <Markdown key={appendix.key + 'EntityList'}>
-                    {appendix.description}
+                    {appendix.compiledDescription}
                   </Markdown>
                 );
               })
