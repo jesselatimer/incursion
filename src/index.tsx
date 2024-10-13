@@ -9,6 +9,7 @@ import {
   LoaderFunctionArgs,
   ParamParseKey,
   Params,
+  redirect,
   RouterProvider,
 } from 'react-router-dom';
 import EntityList from './components/EntityList';
@@ -25,6 +26,10 @@ export interface EntityListArgs extends LoaderFunctionArgs {
 export const entityListLoader: LoaderFunction = ({
   params,
 }: EntityListArgs) => {
+  if (!params.categoryKey) {
+    // TODO: don't hardcode this
+    return redirect('/category/foundations');
+  }
   return params || {};
 };
 
@@ -47,6 +52,11 @@ const router = createBrowserRouter(
         {
           path: '/setting',
           element: <Setting />,
+        },
+        {
+          path: '/build',
+          element: <EntityList />,
+          loader: entityListLoader,
         },
         {
           path: '/character',
