@@ -8,6 +8,7 @@ import { calculatePoints } from '../utils/calculatePoints';
 import SummaryEntity from './SummaryEntity';
 import { Link, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import useWindowDimensions from '../utils/useWindowDimensions';
 
 function SummaryCard({
   category,
@@ -48,14 +49,30 @@ function SummaryCard({
   );
 
   const location = useLocation();
+  const windowDimensions = useWindowDimensions();
 
-  const [collapsed, setCollapsed] = useState(
-    location.pathname !== `/category/${category.key}`
+  const [collapsed, setCollapsed] = useState(true);
+
+  const [hidden, setHidden] = useState(
+    windowDimensions.width >= 768
+      ? location.pathname !== `/category/${category.key}`
+      : true
   );
 
   useEffect(() => {
-    setCollapsed(location.pathname !== `/category/${category.key}`);
+    setHidden(location.pathname !== `/category/${category.key}`);
+    // On mobile this element is at the top and defaulting to open is bad UX.
+    // On destop it's on the side and it's better to default open
+    if (windowDimensions.width < 768) {
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
+    }
   }, [location]);
+
+  if (hidden) {
+    return null;
+  }
 
   return (
     <Card>

@@ -26,7 +26,7 @@ function SummaryEntity({
           margin: '0',
         }}
       >
-        <Col sm={3} style={{ padding: 0 }}>
+        <Col xs={3} style={{ padding: 0 }}>
           <Image
             src={entity.imageUrl}
             thumbnail
@@ -36,7 +36,7 @@ function SummaryEntity({
             }}
           />
         </Col>
-        <Col sm={7}>
+        <Col xs={7}>
           <Stack direction="vertical">
             <strong
               style={{
@@ -50,7 +50,7 @@ function SummaryEntity({
             </strong>
           </Stack>
         </Col>
-        <Col sm={1}>
+        <Col xs={1}>
           {entity.subCategory !== 'potentials' && !entity.grantedBy && (
             <CloseButton
               onClick={() => {

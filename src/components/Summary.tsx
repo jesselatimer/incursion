@@ -14,35 +14,28 @@ function Summary({
   const dataByKey = useContext(DataContext);
   const { categoriesByKey } = dataByKey;
 
-  const { trueMage } = useContext(TrueMageContext);
-
   return (
-    <>
-      <h2 className="Summary-header">{trueMage.name}</h2>
-      <Stack
-        className="SummaryFixed"
-        gap={3}
-        style={{
-          position: 'sticky',
-          maxHeight: '100vh',
-          overflow: 'scroll',
-          top: '0',
-          padding: '10px 0',
-        }}
-      >
-        {map(categoriesByKey, (category) => {
-          const choices = categoryChoices[category.key];
-          if (!choices?.length) return null;
-          return (
-            <SummaryCard
-              key={category.key + 'SummaryCard'}
-              category={category}
-              choices={choices}
-            />
-          );
-        })}
-      </Stack>
-    </>
+    <Stack
+      className="SummaryFixed"
+      gap={3}
+      style={{
+        position: 'sticky',
+        maxHeight: '100vh',
+        overflow: 'scroll',
+        top: '10px',
+      }}
+    >
+      {map(categoriesByKey, (category) => {
+        const choices = categoryChoices[category.key];
+        return (
+          <SummaryCard
+            key={category.key + 'SummaryCard'}
+            category={category}
+            choices={choices}
+          />
+        );
+      })}
+    </Stack>
   );
 }
 

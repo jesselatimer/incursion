@@ -97,6 +97,7 @@ export default function Navbar() {
           />
         )}
         <ReactNavbar.Toggle aria-controls="basic-ReactNavbar-nav" />
+        {/* TODO: have name of current mage shown here */}
         <TrueMageModal
           setShowModal={setShowTrueMageModal}
           showModal={showTrueMageModal}

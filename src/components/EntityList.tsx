@@ -41,7 +41,7 @@ function EntityList() {
     : undefined;
 
   return (
-    <Row>
+    <Row className="EntityList">
       <Col>
         <Navbar expand={true} style={{ padding: '0' }}>
           <Navbar.Collapse id="basic-ReactNavbar-nav">
@@ -182,7 +182,7 @@ function EntityList() {
             : undefined}
         </Container>
       </Col>
-      <Col xs={12} md={4} lg={4}>
+      <Col xs={12} md={4} lg={4} className="SummaryWrapper">
         <Summary categoryChoices={categoryChoices} />
       </Col>
     </Row>

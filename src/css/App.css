@@ -17,6 +17,18 @@
   box-shadow: none;
 }
 
+@media (width < 768px) {
+  .SummaryWrapper {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+  .EntityList {
+    flex-direction: column-reverse;
+    gap: 15px;
+  }
+}
+
 .SummaryCardToggleButton img {
   transition: transform 0.2s linear;
 }
