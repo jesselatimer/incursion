@@ -26,7 +26,7 @@ function Summary({
       }}
     >
       {map(categoriesByKey, (category) => {
-        const choices = categoryChoices[category.key];
+        const choices = categoryChoices[category.key] ?? [];
         return (
           <SummaryCard
             key={category.key + 'SummaryCard'}
